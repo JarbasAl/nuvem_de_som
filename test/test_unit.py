@@ -105,22 +105,21 @@ class TestParseTrack:
 # ---------------------------------------------------------------------------
 
 class TestHTMLSearchTracksKeySet:
-    """All track dicts from HTML backend must have the canonical key schema."""
-
-    CANONICAL_KEYS = {"title", "url", "artist", "artist_url", "image", "duration", "track_id", "user_id"}
+    """All track results from HTML backend must be mediavocab Release objects."""
 
     def _fake_soup_h2(self, href="/user/track", text="Track Title"):
         from bs4 import BeautifulSoup
         html = f'<h2><a href="{href}">{text}</a></h2>'
         return BeautifulSoup(html, "html.parser")
 
-    def test_search_tracks_canonical_keys(self):
+    def test_search_tracks_returns_release(self):
+        from mediavocab import Release
         sc = SoundCloudHTML()
         soup = self._fake_soup_h2()
         with patch.object(SoundCloudHTML, "_get_soup", return_value=soup):
             results = list(sc.search_tracks("test", limit=1))
         assert results, "expected at least one result"
-        assert set(results[0].keys()) == self.CANONICAL_KEYS
+        assert isinstance(results[0], Release)
 
     def test_search_tracks_missing_values_are_empty(self):
         sc = SoundCloudHTML()
@@ -128,10 +127,9 @@ class TestHTMLSearchTracksKeySet:
         with patch.object(SoundCloudHTML, "_get_soup", return_value=soup):
             results = list(sc.search_tracks("test", limit=1))
         t = results[0]
-        assert t["artist"] == ""
-        assert t["artist_url"] == ""
-        assert t["image"] == ""
-        assert t["duration"] is None
+        assert t.work.credits == []
+        assert t.image == ""
+        assert t.work.runtime is None
 
 
 # ---------------------------------------------------------------------------

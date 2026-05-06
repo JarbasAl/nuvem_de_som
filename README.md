@@ -2,6 +2,8 @@
 
 SoundCloud search, stream, and download client. Three independent backends, one orchestrator, one terminal app.
 
+Returns [`mediavocab`](https://github.com/OpenVoiceOS/mediavocab) `Release` and `Entity` objects for typed, structured metadata.
+
 ## Install
 
 ```bash
@@ -36,13 +38,18 @@ sc = SoundCloudAPI()     # API only — full metadata, no yt-dlp required
 sc = SoundCloudHTML()    # HTML scraper — no extra deps
 sc = SoundCloudYTDLP()   # yt-dlp only
 
-# Search
-for t in sc.search_tracks("nuclear chill", limit=5):
-    print(t["title"], t["artist"], t["duration"])  # duration in seconds
+# Search tracks → mediavocab.Release objects
+for release in sc.search_tracks("nuclear chill", limit=5):
+    artist = release.work.credits[0].entity.name if release.work.credits else ""
+    print(release.work.title, artist, release.work.runtime)  # runtime in seconds
 
 # Browse an artist or set page
-for t in sc.get_tracks("https://soundcloud.com/acidkid", limit=50):
-    print(t["title"])
+for release in sc.get_tracks("https://soundcloud.com/acidkid", limit=50):
+    print(release.work.title, release.uri)
+
+# Search artists → mediavocab.Entity objects
+for entity in sc.search_people("acidkid", limit=5):
+    print(entity.name, entity.extra.get("artist_url"))
 
 # Resolve a direct stream URL (no yt-dlp)
 url = sc.resolve_stream("https://soundcloud.com/acidkid/piratech-nuclear-chill")
@@ -54,17 +61,27 @@ path = sc.download_track("https://soundcloud.com/acidkid/piratech-nuclear-chill"
 sc.download_playlist("https://soundcloud.com/acidkid", output_dir="~/Music")
 ```
 
-All track dicts share the same schema regardless of backend:
+### Return types at a glance
+
+**`Release`** — from `search_tracks`, `get_tracks`, `resolve_track`, `search_sets`:
 
 ```python
-{
-    "title":      str,        # track title
-    "url":        str,        # SoundCloud permalink
-    "artist":     str,        # display name ("" when not available)
-    "artist_url": str,        # profile URL  ("" when not available)
-    "image":      str,        # artwork URL  ("" when not available)
-    "duration":   int | None, # seconds      (None when not available)
-}
+release.uri                          # SoundCloud permalink
+release.image                        # artwork URL
+release.work.title                   # track title
+release.work.runtime                 # duration in seconds (float or None)
+release.work.credits[0].entity.name  # artist display name (if available)
+release.work.extra.get("artist_url") # artist profile URL
+release.work.external_ids            # {"soundcloud_track_id": "...", "soundcloud_user_id": "..."}
+```
+
+**`Entity`** — from `search_people`, `resolve_user`:
+
+```python
+entity.name                          # display name
+entity.extra.get("artist_url")       # profile URL
+entity.extra.get("image")            # avatar URL
+entity.external_ids                  # {"soundcloud_user_id": "..."}
 ```
 
 ## Backends

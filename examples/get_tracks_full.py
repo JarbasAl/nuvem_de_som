@@ -15,7 +15,8 @@ limit = int(sys.argv[2]) if len(sys.argv) > 2 else 200
 
 sc = SoundCloud()
 print(f"Fetching tracks for: {url}  (limit={limit})\n")
-for i, track in enumerate(sc.get_tracks(url, limit=limit), 1):
-    duration = f"  [{int(track['duration']//60)}:{int(track['duration']%60):02d}]" if track.get("duration") else ""
-    print(f"{i:3}. {track['title']}{duration}")
-    print(f"     {track['url']}")
+for i, release in enumerate(sc.get_tracks(url, limit=limit), 1):
+    rt = release.work.runtime
+    duration = f"  [{int(rt // 60)}:{int(rt % 60):02d}]" if rt is not None else ""
+    print(f"{i:3}. {release.work.title}{duration}")
+    print(f"     {release.uri}")

@@ -26,7 +26,8 @@ Quick start::
     sc = SoundCloudYTDLP()   # yt-dlp only
 
     for t in sc.search_tracks("nuclear chill", limit=5):
-        print(t["title"], t["artist"])
+        # t is a mediavocab.Release; t.work is a mediavocab.Work
+        print(t.work.title, t.work.credits[0].entity.name if t.work.credits else "")
 
     # SoundCloudAPI.download_* uses only requests (no yt-dlp).
     # SoundCloudYTDLP.download_* uses yt-dlp (pip install nuvem_de_som[yt-dlp]).
@@ -35,16 +36,22 @@ Quick start::
     sc.download_track("https://soundcloud.com/user/track", output_dir="~/Music")
     sc.download_playlist("https://soundcloud.com/user", output_dir="~/Music")
 
-All track dicts share the same schema regardless of backend::
+All track methods return ``mediavocab.Release`` objects::
 
-    {
-        "title": str,
-        "url": str,            # SoundCloud permalink
-        "artist": str,         # display name ("" when not available)
-        "artist_url": str,     # profile URL ("" when not available)
-        "image": str,          # artwork URL ("" when not available)
-        "duration": int|None,  # seconds, None when not available
-    }
+    release.uri          # SoundCloud permalink
+    release.image        # artwork URL
+    release.work.title   # track title
+    release.work.runtime # duration in seconds (float or None)
+    release.work.credits[0].entity.name  # artist display name
+    release.work.external_ids["soundcloud_track_id"]
+    release.work.external_ids["soundcloud_user_id"]
+
+People/user methods return ``mediavocab.Entity`` objects::
+
+    entity.name          # display name
+    entity.extra["artist_url"]
+    entity.extra["image"]
+    entity.external_ids["soundcloud_user_id"]
 """
 
 from __future__ import annotations
@@ -59,6 +66,12 @@ from typing import Iterator
 
 import requests
 from bs4 import BeautifulSoup
+
+from mediavocab import (
+    Entity, EntityRef, EntityKind,
+    Credit, CreditSection, RelationRole,
+    Release, Work, MediaType, StreamMode,
+)
 
 log = logging.getLogger(__name__)
 
@@ -133,6 +146,99 @@ def _empty_track(url: str = "") -> dict:
             "duration": None}
 
 
+def _track_dict_to_release(d: dict) -> Release:
+    """Convert an internal track dict to a mediavocab Release."""
+    external_ids: dict[str, str] = {}
+    if d.get("track_id") is not None:
+        external_ids["soundcloud_track_id"] = str(d["track_id"])
+    if d.get("user_id") is not None:
+        external_ids["soundcloud_user_id"] = str(d["user_id"])
+
+    credits: list[Credit] = []
+    if d.get("artist"):
+        artist_ref = EntityRef(
+            name=d["artist"],
+            kind=EntityKind.PERSON,
+            external_ids=({"soundcloud_user_id": str(d["user_id"])}
+                          if d.get("user_id") is not None else {}),
+        )
+        credits.append(Credit(
+            entity=artist_ref,
+            role="artist",
+            relation_role=RelationRole.PERFORMER,
+            section=CreditSection.PRINCIPAL,
+        ))
+
+    work = Work(
+        title=d.get("title") or "",
+        media_type=MediaType.MUSIC,
+        runtime=float(d["duration"]) if d.get("duration") is not None else None,
+        credits=credits,
+        external_ids=external_ids,
+        extra=({"artist_url": d["artist_url"]} if d.get("artist_url") else {}),
+    )
+    return Release(
+        work=work,
+        uri=d.get("url") or "",
+        image=d.get("image") or "",
+        stream_mode=StreamMode.ON_DEMAND,
+        external_ids=external_ids,
+    )
+
+
+def _user_dict_to_entity(d: dict) -> Entity:
+    """Convert an internal user/artist dict to a mediavocab Entity."""
+    external_ids: dict[str, str] = {}
+    if d.get("user_id") is not None:
+        external_ids["soundcloud_user_id"] = str(d["user_id"])
+    return Entity(
+        name=d.get("artist") or "",
+        kind=EntityKind.PERSON,
+        external_ids=external_ids,
+        extra=({"artist_url": d["artist_url"], "image": d.get("image") or ""}
+               if d.get("artist_url") else {"image": d.get("image") or ""}),
+    )
+
+
+def _set_dict_to_release(d: dict) -> Release:
+    """Convert an internal playlist/set dict to a mediavocab Release."""
+    external_ids: dict[str, str] = {}
+    if d.get("playlist_id") is not None:
+        external_ids["soundcloud_playlist_id"] = str(d["playlist_id"])
+    if d.get("user_id") is not None:
+        external_ids["soundcloud_user_id"] = str(d["user_id"])
+
+    credits: list[Credit] = []
+    if d.get("artist"):
+        artist_ref = EntityRef(
+            name=d["artist"],
+            kind=EntityKind.PERSON,
+            external_ids=({"soundcloud_user_id": str(d["user_id"])}
+                          if d.get("user_id") is not None else {}),
+        )
+        credits.append(Credit(
+            entity=artist_ref,
+            role="artist",
+            relation_role=RelationRole.CREATOR,
+            section=CreditSection.PRINCIPAL,
+        ))
+
+    work = Work(
+        title=d.get("title") or "",
+        media_type=MediaType.MUSIC,
+        credits=credits,
+        external_ids=external_ids,
+        extra=({"artist_url": d["artist_url"]} if d.get("artist_url") else {}),
+    )
+    return Release(
+        work=work,
+        uri=d.get("url") or "",
+        image=d.get("image") or "",
+        stream_mode=StreamMode.ON_DEMAND,
+        external_ids=external_ids,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Abstract base
 # ---------------------------------------------------------------------------
@@ -140,36 +246,29 @@ def _empty_track(url: str = "") -> dict:
 class SoundCloudBase(ABC):
     """Abstract interface — one class per backend, all methods required.
 
-    Every track dict yielded by any subclass has exactly these keys::
-
-        title, url, artist, artist_url, image, duration
-
-    Missing values are empty string (str keys) or None (duration).
+    All public methods return mediavocab objects:
+    - track methods yield ``Release`` (with ``Work`` embedded)
+    - people/user methods yield or return ``Entity``
+    - set methods yield ``Release``
     """
 
     # -- required ------------------------------------------------------------
 
     @abstractmethod
-    def search_tracks(self, query: str, limit: int = 10) -> Iterator[dict]:
-        """Yield track dicts matching *query*."""
+    def search_tracks(self, query: str, limit: int = 10) -> Iterator[Release]:
+        """Yield Release objects matching *query*."""
 
     @abstractmethod
-    def search_people(self, query: str, limit: int = 10) -> Iterator[dict]:
-        """Yield artist/user dicts matching *query*.
-
-        Each dict has: ``artist``, ``artist_url``, ``image``.
-        """
+    def search_people(self, query: str, limit: int = 10) -> Iterator[Entity]:
+        """Yield Entity objects matching *query*."""
 
     @abstractmethod
-    def search_sets(self, query: str, limit: int = 10) -> Iterator[dict]:
-        """Yield playlist/set dicts matching *query*.
-
-        Each dict has: ``title``, ``url``, ``artist``, ``artist_url``, ``image``.
-        """
+    def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
+        """Yield Release objects for playlists/sets matching *query*."""
 
     @abstractmethod
-    def get_tracks(self, url: str, limit: int = 200) -> Iterator[dict]:
-        """Yield track dicts for an artist profile or set URL."""
+    def get_tracks(self, url: str, limit: int = 200) -> Iterator[Release]:
+        """Yield Release objects for an artist profile or set URL."""
 
     @abstractmethod
     def resolve_stream(self, track_url: str, prefer: str = "progressive") -> str | None:
@@ -186,27 +285,16 @@ class SoundCloudBase(ABC):
         """
 
     @abstractmethod
-    def resolve_user(self, profile_url: str) -> dict | None:
-        """Resolve a profile URL.
-
-        Returns a dict with ``artist``, ``artist_url``, ``image``, and
-        ``user_id`` (numeric SoundCloud user id, when the backend can
-        recover it), or ``None``.
-        """
+    def resolve_user(self, profile_url: str) -> Entity | None:
+        """Resolve a profile URL to an Entity, or ``None``."""
 
     @abstractmethod
-    def resolve_track(self, track_url: str) -> dict | None:
-        """Resolve a track permalink URL to its full track dict.
-
-        Same shape as ``_parse_track`` / ``search_tracks`` items —
-        ``title``, ``url``, ``artist``, ``artist_url``, ``image``,
-        ``duration``, ``track_id``, ``user_id``. Returns ``None`` when
-        the URL doesn't resolve to a track.
-        """
+    def resolve_track(self, track_url: str) -> Release | None:
+        """Resolve a track permalink URL to a Release, or ``None``."""
 
     # -- concrete shared -----------------------------------------------------
 
-    def search(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search(self, query: str, limit: int = 10) -> Iterator[Release]:
         """Combined search: artist tracks + set tracks + direct track search."""
         for person in self.search_people(query, limit=3):
             url = person.get("artist_url") or person.get("url") or ""
@@ -266,32 +354,32 @@ class SoundCloudAPI(SoundCloudBase):
             "user_id": user.get("id"),
         }
 
-    def search_tracks(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_tracks(self, query: str, limit: int = 10) -> Iterator[Release]:
         data = self._call(
             "https://api-v2.soundcloud.com/search/tracks", q=query, limit=limit
         )
         for t in data.get("collection") or []:
-            yield self._parse_track(t)
+            yield _track_dict_to_release(self._parse_track(t))
 
-    def search_people(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_people(self, query: str, limit: int = 10) -> Iterator[Entity]:
         data = self._call(
             "https://api-v2.soundcloud.com/search/users", q=query, limit=limit
         )
         for u in data.get("collection") or []:
-            yield {
+            yield _user_dict_to_entity({
                 "artist": u.get("username") or "",
                 "artist_url": u.get("permalink_url") or "",
                 "image": u.get("avatar_url") or "",
                 "user_id": u.get("id"),
-            }
+            })
 
-    def search_sets(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
         data = self._call(
             "https://api-v2.soundcloud.com/search/playlists", q=query, limit=limit
         )
         for p in data.get("collection") or []:
             user = p.get("user") or {}
-            yield {
+            yield _set_dict_to_release({
                 "title": p.get("title") or "",
                 "url": p.get("permalink_url") or "",
                 "artist": user.get("username") or "",
@@ -299,9 +387,9 @@ class SoundCloudAPI(SoundCloudBase):
                 "image": p.get("artwork_url") or user.get("avatar_url") or "",
                 "playlist_id": p.get("id"),
                 "user_id": user.get("id"),
-            }
+            })
 
-    def get_tracks(self, url: str, limit: int = 200) -> Iterator[dict]:
+    def get_tracks(self, url: str, limit: int = 200) -> Iterator[Release]:
         resource = self._call("https://api-v2.soundcloud.com/resolve", url=url)
         kind = resource.get("kind")
         collected = 0
@@ -316,7 +404,7 @@ class SoundCloudAPI(SoundCloudBase):
                 for t in page.get("collection") or []:
                     if collected >= limit:
                         return
-                    yield self._parse_track(t, artist_url=artist_url)
+                    yield _track_dict_to_release(self._parse_track(t, artist_url=artist_url))
                     collected += 1
                 next_href = page.get("next_href")
 
@@ -328,7 +416,7 @@ class SoundCloudAPI(SoundCloudBase):
                 if not t.get("title"):
                     log.debug("get_tracks: skipping untitled track in playlist %s", url)
                     continue
-                yield self._parse_track(t, artist_url=artist_url)
+                yield _track_dict_to_release(self._parse_track(t, artist_url=artist_url))
                 collected += 1
 
         else:
@@ -363,29 +451,29 @@ class SoundCloudAPI(SoundCloudBase):
             log.debug("resolve_stream failed for %s: %s", track_url, exc)
         return None
 
-    def resolve_user(self, profile_url: str) -> dict | None:
-        """Resolve a profile URL to display name + avatar via API v2."""
+    def resolve_user(self, profile_url: str) -> Entity | None:
+        """Resolve a profile URL to an Entity via API v2."""
         try:
             u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
             if u.get("kind") != "user":
                 return None
-            return {
+            return _user_dict_to_entity({
                 "artist": u.get("username") or "",
                 "artist_url": u.get("permalink_url") or profile_url,
                 "image": u.get("avatar_url") or "",
                 "user_id": u.get("id"),
-            }
+            })
         except Exception as exc:
             log.debug("resolve_user failed for %s: %s", profile_url, exc)
             return None
 
-    def resolve_track(self, track_url: str) -> dict | None:
-        """Resolve a track URL to its full track dict via API v2."""
+    def resolve_track(self, track_url: str) -> Release | None:
+        """Resolve a track URL to a Release via API v2."""
         try:
             t = self._call("https://api-v2.soundcloud.com/resolve", url=track_url)
             if t.get("kind") != "track":
                 return None
-            return self._parse_track(t)
+            return _track_dict_to_release(self._parse_track(t))
         except Exception as exc:
             log.debug("resolve_track failed for %s: %s", track_url, exc)
             return None
@@ -475,11 +563,11 @@ class SoundCloudAPI(SoundCloudBase):
         tracks = list(self.get_tracks(playlist_url))
         if not tracks:
             return []
-        # Use artist name from first track for the sub-folder
-        artist = tracks[0].get("artist") or "SoundCloud"
+        first_credits = tracks[0].work.credits
+        artist = (first_credits[0].entity.name if first_credits else None) or "SoundCloud"
         dest_dir = Path(output_dir).expanduser() / self._safe_filename(artist)
         return self.download_tracks(
-            (t["url"] for t in tracks), output_dir=str(dest_dir), verbose=verbose
+            (t.uri for t in tracks), output_dir=str(dest_dir), verbose=verbose
         )
 
 
@@ -525,7 +613,7 @@ class SoundCloudHTML(SoundCloudBase):
         h, mins, s = (int(x or 0) for x in m.groups())
         return h * 3600 + mins * 60 + s
 
-    def search_tracks(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_tracks(self, query: str, limit: int = 10) -> Iterator[Release]:
         soup = self._get_soup(
             "https://soundcloud.com/search/sounds?q=" + urllib.parse.quote(query)
         )
@@ -535,7 +623,7 @@ class SoundCloudHTML(SoundCloudBase):
             a = h2.find("a")
             if not a:
                 continue
-            yield {
+            yield _track_dict_to_release({
                 "title": a.get_text(strip=True),
                 "url": self._abs(a.get("href", "")),
                 "artist": "",
@@ -544,9 +632,9 @@ class SoundCloudHTML(SoundCloudBase):
                 "duration": None,
                 "track_id": None,
                 "user_id": None,
-            }
+            })
 
-    def search_people(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_people(self, query: str, limit: int = 10) -> Iterator[Entity]:
         soup = self._get_soup(
             "https://soundcloud.com/search/people?q=" + urllib.parse.quote(query)
         )
@@ -557,14 +645,14 @@ class SoundCloudHTML(SoundCloudBase):
             if not a:
                 continue
             href = self._abs(a.get("href", ""))
-            yield {
+            yield _user_dict_to_entity({
                 "artist": a.get_text(strip=True),
                 "artist_url": href,
                 "image": "",
                 "user_id": None,
-            }
+            })
 
-    def search_sets(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
         soup = self._get_soup(
             "https://soundcloud.com/search/sets?q=" + urllib.parse.quote(query)
         )
@@ -575,7 +663,7 @@ class SoundCloudHTML(SoundCloudBase):
             if not a:
                 continue
             href = self._abs(a.get("href", ""))
-            yield {
+            yield _set_dict_to_release({
                 "title": a.get_text(strip=True),
                 "url": href,
                 "artist": "",
@@ -583,9 +671,9 @@ class SoundCloudHTML(SoundCloudBase):
                 "image": "",
                 "playlist_id": None,
                 "user_id": None,
-            }
+            })
 
-    def get_tracks(self, url: str, limit: int = 20) -> Iterator[dict]:
+    def get_tracks(self, url: str, limit: int = 20) -> Iterator[Release]:
         """Scrape tracks from an artist or set page.
 
         Extracts title, URL, artist, artist_url, and duration from the
@@ -618,7 +706,7 @@ class SoundCloudHTML(SoundCloudBase):
                 duration = self._parse_duration(
                     dur_meta.get("content") if dur_meta else None
                 )
-                yield {
+                yield _track_dict_to_release({
                     "title": title,
                     "url": track_href,
                     "artist": artist_name,
@@ -627,7 +715,7 @@ class SoundCloudHTML(SoundCloudBase):
                     "duration": duration,
                     "track_id": None,
                     "user_id": None,
-                }
+                })
                 collected += 1
             except Exception as exc:
                 log.debug("HTML get_tracks parse error: %s", exc)
@@ -644,7 +732,7 @@ class SoundCloudHTML(SoundCloudBase):
             "Use SoundCloudAPI (no extra deps) or SoundCloudYTDLP."
         )
 
-    def resolve_user(self, profile_url: str) -> dict | None:
+    def resolve_user(self, profile_url: str) -> Entity | None:
         """Scrape display name and avatar from a profile page via Open Graph / JSON-LD."""
         import json as _json  # noqa: PLC0415
         try:
@@ -669,13 +757,13 @@ class SoundCloudHTML(SoundCloudBase):
 
             if not artist:
                 return None
-            return {"artist": artist, "artist_url": profile_url,
-                    "image": image or "", "user_id": None}
+            return _user_dict_to_entity({"artist": artist, "artist_url": profile_url,
+                                         "image": image or "", "user_id": None})
         except Exception as exc:
             log.debug("HTML resolve_user failed for %s: %s", profile_url, exc)
             return None
 
-    def resolve_track(self, track_url: str) -> dict | None:
+    def resolve_track(self, track_url: str) -> Release | None:
         """Best-effort scrape of a track page — no numeric ids.
 
         SoundCloud doesn't expose the track id in plain HTML in a stable
@@ -694,7 +782,7 @@ class SoundCloudHTML(SoundCloudBase):
         soup = self._get_soup(track_url)
         og_title = soup.find("meta", property="og:title")
         title = og_title.get("content", "").strip() if og_title else ""
-        return {
+        return _track_dict_to_release({
             "title": title,
             "url": track_url,
             "artist": meta.get("artist") or "",
@@ -703,7 +791,7 @@ class SoundCloudHTML(SoundCloudBase):
             "duration": None,
             "track_id": None,
             "user_id": None,
-        }
+        })
 
     # -- HTML-specific helpers -----------------------------------------------
 
@@ -731,18 +819,41 @@ class SoundCloudHTML(SoundCloudBase):
                 artist = tag.get_text(strip=True)
         return {k: v for k, v in {"artist": artist, "image": image}.items() if v}
 
-    def search_tracks_enriched(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_tracks_enriched(self, query: str, limit: int = 10) -> Iterator[Release]:
         """search_tracks with artist + image added (one extra HTTP request per track).
 
         Prefer ``SoundCloudAPI.search_tracks()`` when full metadata is needed
         without extra requests.
         """
-        for info in self.search_tracks(query, limit=limit):
+        for release in self.search_tracks(query, limit=limit):
             try:
-                info.update(self.get_track_meta(info["url"]))
+                meta = self.get_track_meta(release.uri)
+                artist = meta.get("artist") or ""
+                image = meta.get("image") or ""
+                if artist and not release.work.credits:
+                    artist_ref = EntityRef(name=artist, kind=EntityKind.PERSON)
+                    credits = [Credit(entity=artist_ref, role="artist",
+                                      relation_role=RelationRole.PERFORMER,
+                                      section=CreditSection.PRINCIPAL)]
+                    release = Release(
+                        work=Work(
+                            title=release.work.title,
+                            media_type=release.work.media_type,
+                            runtime=release.work.runtime,
+                            credits=credits,
+                            external_ids=release.work.external_ids,
+                            extra=release.work.extra,
+                        ),
+                        uri=release.uri,
+                        image=image or release.image,
+                        stream_mode=release.stream_mode,
+                        external_ids=release.external_ids,
+                    )
+                elif image and not release.image:
+                    release = release.model_copy(update={"image": image})
             except Exception as exc:
-                log.debug("Enrichment failed for %s: %s", info.get("url"), exc)
-            yield info
+                log.debug("Enrichment failed for %s: %s", release.uri, exc)
+            yield release
 
 
 # Keep old name as alias for backwards compatibility
@@ -796,26 +907,26 @@ class SoundCloudYTDLP(SoundCloudBase):
             "user_id": None,
         }
 
-    def search_tracks(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_tracks(self, query: str, limit: int = 10) -> Iterator[Release]:
         with self._ydl() as ydl:
             info = ydl.extract_info(f"scsearch{limit}:{query}", download=False) or {}
         for entry in info.get("entries") or []:
-            yield self._entry_to_track(entry)
+            yield _track_dict_to_release(self._entry_to_track(entry))
 
-    def search_people(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_people(self, query: str, limit: int = 10) -> Iterator[Entity]:
         # yt-dlp has no people search endpoint
         return iter([])
 
-    def search_sets(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
         # yt-dlp has no set search endpoint
         return iter([])
 
-    def get_tracks(self, url: str, limit: int = 200) -> Iterator[dict]:
+    def get_tracks(self, url: str, limit: int = 200) -> Iterator[Release]:
         with self._ydl({"playlistend": limit}) as ydl:
             info = ydl.extract_info(url, download=False) or {}
         artist_url = url if "/sets/" not in url else ""
         for entry in info.get("entries") or []:
-            yield self._entry_to_track(entry, artist_url=artist_url)
+            yield _track_dict_to_release(self._entry_to_track(entry, artist_url=artist_url))
 
     def resolve_stream(self, track_url: str, prefer: str = "progressive") -> str | None:
         """Resolve stream URL via yt-dlp full extraction."""
@@ -838,7 +949,7 @@ class SoundCloudYTDLP(SoundCloudBase):
             log.debug("yt-dlp resolve_stream failed for %s: %s", track_url, exc)
             return None
 
-    def resolve_user(self, profile_url: str) -> dict | None:
+    def resolve_user(self, profile_url: str) -> Entity | None:
         """Resolve user metadata via yt-dlp channel extraction."""
         try:
             yt_dlp = _ydl_import()
@@ -848,19 +959,19 @@ class SoundCloudYTDLP(SoundCloudBase):
             uploader = info.get("uploader") or info.get("channel") or ""
             if not uploader:
                 return None
-            return {
+            return _user_dict_to_entity({
                 "artist": uploader,
                 "artist_url": profile_url,
                 "image": info.get("thumbnail") or "",
                 "user_id": info.get("uploader_id") or None,
-            }
+            })
         except ImportError:
             raise
         except Exception as exc:
             log.debug("yt-dlp resolve_user failed for %s: %s", profile_url, exc)
             return None
 
-    def resolve_track(self, track_url: str) -> dict | None:
+    def resolve_track(self, track_url: str) -> Release | None:
         """Resolve a track URL via yt-dlp metadata extraction.
 
         Backends without a v2 ``/resolve`` endpoint fall back to yt-dlp's
@@ -884,7 +995,7 @@ class SoundCloudYTDLP(SoundCloudBase):
             track_id = int(track_id) if track_id is not None else None
         except (TypeError, ValueError):
             pass
-        return {
+        return _track_dict_to_release({
             "title": info.get("title") or "",
             "url": info.get("webpage_url") or track_url,
             "artist": info.get("uploader") or info.get("artist") or "",
@@ -893,7 +1004,7 @@ class SoundCloudYTDLP(SoundCloudBase):
             "duration": info.get("duration"),
             "track_id": track_id,
             "user_id": info.get("uploader_id") or None,
-        }
+        })
 
     # -- download ------------------------------------------------------------
 
@@ -1004,16 +1115,16 @@ class SoundCloud(SoundCloudBase):
                 continue
         return None
 
-    def search_tracks(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_tracks(self, query: str, limit: int = 10) -> Iterator[Release]:
         yield from self._try_each("search_tracks", query, limit=limit)
 
-    def search_people(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_people(self, query: str, limit: int = 10) -> Iterator[Entity]:
         yield from self._try_each("search_people", query, limit=limit)
 
-    def search_sets(self, query: str, limit: int = 10) -> Iterator[dict]:
+    def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
         yield from self._try_each("search_sets", query, limit=limit)
 
-    def get_tracks(self, url: str, limit: int = 200) -> Iterator[dict]:
+    def get_tracks(self, url: str, limit: int = 200) -> Iterator[Release]:
         yield from self._try_each("get_tracks", url, limit=limit)
 
     def resolve_stream(self, track_url: str, prefer: str = "progressive") -> str | None:
@@ -1021,10 +1132,10 @@ class SoundCloud(SoundCloudBase):
             raise ValueError(f"prefer must be 'progressive' or 'hls'; got {prefer!r}")
         return self._try_each_value("resolve_stream", track_url, prefer=prefer)
 
-    def resolve_user(self, profile_url: str) -> dict | None:
+    def resolve_user(self, profile_url: str) -> Entity | None:
         return self._try_each_value("resolve_user", profile_url)
 
-    def resolve_track(self, track_url: str) -> dict | None:
+    def resolve_track(self, track_url: str) -> Release | None:
         return self._try_each_value("resolve_track", track_url)
 
     # -- downloads (API first, yt-dlp fallback) ------------------------------
