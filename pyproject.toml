@@ -33,3 +33,4 @@ include = ["nuvem_de_som*"]
 markers = [
     "integration: tests that hit live network endpoints (deselect with -m 'not integration')",
 ]
+addopts = "-m 'not integration'"
