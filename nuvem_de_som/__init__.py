@@ -437,11 +437,11 @@ class SoundCloudBase(ABC):
     def search(self, query: str, limit: int = 10) -> Iterator[Release]:
         """Combined search: artist tracks + set tracks + direct track search."""
         for person in self.search_people(query, limit=3):
-            url = person.get("artist_url") or person.get("url") or ""
+            url = person.extra.get("artist_url") or ""
             if url:
                 yield from self.get_tracks(url, limit=5)
         for pl in self.search_sets(query, limit=3):
-            url = pl.get("url") or ""
+            url = pl.uri or ""
             if url:
                 yield from self.get_tracks(url, limit=5)
         yield from self.search_tracks(query, limit=limit)
@@ -1001,27 +1001,19 @@ class SoundCloudHTML(SoundCloudBase):
                 meta = self.get_track_meta(release.uri)
                 artist = meta.get("artist") or ""
                 image = meta.get("image") or ""
+                updates: dict = {}
                 if artist and not release.work.credits:
                     artist_ref = EntityRef(name=artist, kind=EntityKind.PERSON)
-                    credits = [Credit(entity=artist_ref, role="artist",
-                                      relation_role=RelationRole.PERFORMER,
-                                      section=CreditSection.PRINCIPAL)]
-                    release = Release(
-                        work=Work(
-                            title=release.work.title,
-                            media_type=release.work.media_type,
-                            runtime=release.work.runtime,
-                            credits=credits,
-                            external_ids=release.work.external_ids,
-                            extra=release.work.extra,
-                        ),
-                        uri=release.uri,
-                        image=image or release.image,
-                        stream_mode=release.stream_mode,
-                        external_ids=release.external_ids,
+                    new_credits = [Credit(entity=artist_ref, role="artist",
+                                         relation_role=RelationRole.PERFORMER,
+                                         section=CreditSection.PRINCIPAL)]
+                    updates["work"] = release.work.model_copy(
+                        update={"credits": new_credits}
                     )
-                elif image and not release.image:
-                    release = release.model_copy(update={"image": image})
+                if image and not release.image:
+                    updates["image"] = image
+                if updates:
+                    release = release.model_copy(update=updates)
             except Exception as exc:
                 log.debug("Enrichment failed for %s: %s", release.uri, exc)
             yield release
@@ -1158,9 +1150,7 @@ class SoundCloudYTDLP(SoundCloudBase):
         except Exception as exc:
             log.debug("yt-dlp resolve_track failed for %s: %s", track_url, exc)
             return None
-        if not info or info.get("extractor_key", "").lower().startswith("soundcloud") is False:
-            # Pass-through other extractors too — caller asked us to resolve.
-            pass
+        # Pass-through other extractors too — caller asked us to resolve.
         track_id = info.get("id")
         try:
             track_id = int(track_id) if track_id is not None else None
