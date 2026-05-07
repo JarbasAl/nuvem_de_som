@@ -154,9 +154,16 @@ def _parse_transcodings(transcodings: list[dict]) -> tuple[str, str]:
     """
     if not transcodings:
         return "", ""
-    # Prefer hq, then sq, then anything.
+    # Prefer progressive protocol so codec/bitrate describe the directly
+    # playable stream rather than an HLS variant.
+    progressive = [
+        t for t in transcodings
+        if ((t.get("format") or {}).get("protocol") or "").lower() == "progressive"
+    ]
+    pool = progressive or transcodings
+    # Within the pool, prefer hq, then sq, then anything.
     rank = {"hq": 0, "sq": 1}
-    ordered = sorted(transcodings,
+    ordered = sorted(pool,
                      key=lambda t: rank.get((t.get("quality") or "").lower(), 9))
     best = ordered[0]
     fmt = best.get("format") or {}

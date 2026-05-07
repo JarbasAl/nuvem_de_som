@@ -12,7 +12,7 @@ SoundCloudBase  (abstract)
 └── SoundCloud       — orchestrator subclass, tries API → yt-dlp → HTML
 ```
 
-All backends implement the same interface.  All public methods return
+All backends implement the same interface. Metadata retrieval methods return
 [`mediavocab`](https://github.com/OpenVoiceOS/mediavocab) objects:
 
 - **track methods** (`search_tracks`, `get_tracks`, `resolve_track`) yield/return `mediavocab.Release`
