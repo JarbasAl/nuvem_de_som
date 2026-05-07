@@ -184,7 +184,7 @@ class TestClientIdThreadSafety:
         _invalidate_client_id()
         fetch_count = {"n": 0}
 
-        def counting_fetch():
+        def counting_fetch(*args, **kwargs):
             fetch_count["n"] += 1
             return "fakeclientid00000000000000000001"
 

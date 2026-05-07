@@ -11,7 +11,36 @@ pip install nuvem_de_som           # search + stream (no yt-dlp)
 pip install "nuvem_de_som[yt-dlp]" # adds yt-dlp for download & stream fallback
 pip install "nuvem_de_som[cli]"    # adds the nds terminal app
 pip install "nuvem_de_som[yt-dlp,cli]"  # everything
+pip install "nuvem_de_som[stealth]"     # adds curl_cffi for browser-impersonating HTTP
 ```
+
+### Stealth transport (`curl_cffi`)
+
+SoundCloud's API and HTML endpoints are increasingly bot-defended (TLS/JA3 and
+HTTP/2 fingerprinting). To preempt blocks, install the `[stealth]` extra and
+opt in via env var:
+
+```bash
+pip install "nuvem_de_som[stealth]"
+NUVEM_TRANSPORT=curl_cffi python -m yourapp
+```
+
+When `NUVEM_TRANSPORT=curl_cffi` is set and `curl_cffi` is importable,
+`SoundCloudAPI`, `SoundCloudHTML`, and the `SoundCloud` orchestrator default
+to a `curl_cffi.requests.Session(impersonate="chrome")` for every request.
+Otherwise they fall back transparently to the stdlib `requests.Session`.
+
+You can also inject any compatible session directly:
+
+```python
+from curl_cffi import requests as cffi_requests
+from nuvem_de_som import SoundCloudAPI
+
+sc = SoundCloudAPI(session=cffi_requests.Session(impersonate="chrome120"))
+```
+
+Note: `SoundCloudYTDLP` uses yt-dlp internally for its HTTP traffic and does
+**not** honour an injected session — yt-dlp manages its own networking.
 
 ## Terminal app — `nds`
 

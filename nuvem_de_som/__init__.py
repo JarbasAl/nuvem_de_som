@@ -67,6 +67,8 @@ from typing import Iterator
 import requests
 from bs4 import BeautifulSoup
 
+from nuvem_de_som.transport import default_session
+
 from mediavocab import (
     Appearance,
     Entity, EntityRef, EntityKind,
@@ -192,14 +194,15 @@ _SC_HEADERS = {
 }
 
 
-def _fetch_client_id() -> str:
+def _fetch_client_id(session=None) -> str:
     """Extract SoundCloud API client_id from their bundled JS files."""
-    resp = requests.get("https://soundcloud.com/", timeout=10, headers=_SC_HEADERS)
+    s = session if session is not None else requests
+    resp = s.get("https://soundcloud.com/", timeout=10, headers=_SC_HEADERS)
     resp.raise_for_status()
     script_urls = re.findall(r'<script[^>]+src="(https://[^"]+\.js[^"]*)"', resp.text)
     for src in reversed(script_urls):  # last bundles contain app config
         try:
-            js = requests.get(src, timeout=10).text
+            js = s.get(src, timeout=10).text
             for pat in _CLIENT_ID_PATTERNS:
                 m = re.search(pat, js)
                 if m:
@@ -210,11 +213,11 @@ def _fetch_client_id() -> str:
     raise RuntimeError("Could not extract SoundCloud client_id from JS bundles")
 
 
-def _get_client_id() -> str:
+def _get_client_id(session=None) -> str:
     global _CLIENT_ID
     with _CLIENT_ID_LOCK:
         if not _CLIENT_ID:
-            _CLIENT_ID = _fetch_client_id()
+            _CLIENT_ID = _fetch_client_id(session=session)
         return _CLIENT_ID
 
 
@@ -457,13 +460,19 @@ class SoundCloudAPI(SoundCloudBase):
     Full metadata (display name, artwork, duration) in a single call per query.
     Requires only ``requests`` — no yt-dlp for search, listing, or stream
     resolution.  Stream resolution uses the transcodings endpoint natively.
+
+    Pass ``session=`` to inject a custom HTTP session (e.g. ``curl_cffi``
+    for browser impersonation).  Defaults to :func:`transport.default_session`.
     """
+
+    def __init__(self, session=None):
+        self.session = session if session is not None else default_session()
 
     def _call(self, endpoint: str, **params) -> dict:
         """Call an API v2 endpoint; refresh client_id automatically on 401/403."""
         for attempt in range(2):
-            cid = _get_client_id()
-            resp = requests.get(
+            cid = _get_client_id(session=self.session)
+            resp = self.session.get(
                 endpoint,
                 params={"client_id": cid, **params},
                 timeout=10,
@@ -699,8 +708,8 @@ class SoundCloudAPI(SoundCloudBase):
         dest = out / fname
 
         log.debug("Downloading %s → %s", track_url, dest)
-        with requests.get(stream_url, stream=True, timeout=60,
-                          headers=_SC_HEADERS) as r:
+        with self.session.get(stream_url, stream=True, timeout=60,
+                              headers=_SC_HEADERS) as r:
             r.raise_for_status()
             with open(dest, "wb") as f:
                 for chunk in r.iter_content(chunk_size=65536):
@@ -760,11 +769,16 @@ class SoundCloudHTML(SoundCloudBase):
 
     All track dicts always include the canonical key set; missing values are
     empty string or ``None`` for duration.
+
+    Pass ``session=`` to inject a custom HTTP session (e.g. ``curl_cffi``
+    for browser impersonation).  Defaults to :func:`transport.default_session`.
     """
 
-    @staticmethod
-    def _get_soup(url: str) -> BeautifulSoup:
-        resp = requests.get(url, timeout=10, headers=_SC_HEADERS)
+    def __init__(self, session=None):
+        self.session = session if session is not None else default_session()
+
+    def _get_soup(self, url: str) -> BeautifulSoup:
+        resp = self.session.get(url, timeout=10, headers=_SC_HEADERS)
         resp.raise_for_status()
         return BeautifulSoup(resp.content, "html.parser")
 
@@ -1241,13 +1255,18 @@ class SoundCloud(SoundCloudBase):
     - ``SoundCloudAPI()``    — full metadata, no yt-dlp
     - ``SoundCloudHTML()``   — HTML scraper, no extra deps
     - ``SoundCloudYTDLP()``  — yt-dlp backed stream resolution
+
+    Pass ``session=`` to inject a custom HTTP session for the API and HTML
+    backends.  Note: :class:`SoundCloudYTDLP` uses yt-dlp internally and
+    does NOT honour an injected session.
     """
 
-    def __init__(self):
+    def __init__(self, session=None):
+        self.session = session if session is not None else default_session()
         self._chain: list[SoundCloudBase] = [
-            SoundCloudAPI(),
+            SoundCloudAPI(session=self.session),
             SoundCloudYTDLP(),
-            SoundCloudHTML(),
+            SoundCloudHTML(session=self.session),
         ]
 
     def _try_each(self, method: str, *args, **kwargs) -> Iterator[dict]:

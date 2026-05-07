@@ -14,6 +14,7 @@ dependencies = ["bs4", "requests", "mediavocab>=0.1.0,<0.2"]
 [project.optional-dependencies]
 yt-dlp = ["yt-dlp"]
 cli = ["click"]
+stealth = ["curl-cffi"]
 test = ["pytest", "vcrpy", "pytest-vcr"]
 
 [project.scripts]
