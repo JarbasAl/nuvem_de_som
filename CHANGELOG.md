@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.4.0 — unreleased
+
+### mediavocab integration
+
+- `mediavocab` is now a **hard runtime dependency**. SoundCloud results are emitted as canonical mediavocab `Work` / `Release` / `Entity` models alongside the existing dict surface.
+
+### Added
+
+- **License** — SoundCloud's free-text license field is mapped to SPDX identifiers (e.g. `cc-by-4.0` → `CC-BY-4.0`) and stamped on the emitted `Release` so `parsed_license.is_open()` works end-to-end.
+- **Genres** — `tag_list` is parsed and surfaced as `content_genres` on the `Work`.
+- **Audio technicals** — `codec` and `bitrate` are pulled out of SoundCloud's `transcodings` array (HLS / progressive variants) and attached to each `Release` it emits.
+- **Tracklists** — DJ sets and playlists now populate `Work.tracklist` so the full track sequence round-trips through mediavocab.
+- **Country** — uploader country is sourced from the SoundCloud user profile and surfaced on the emitted `Entity`.
+- **release_date** — validated through `IsoDate` on the way out, rejecting malformed SoundCloud date strings instead of silently propagating them.
+
+### Changed
+
+- Converter functions track the latest mediavocab API surface.
+- Public client methods now yield mediavocab models in addition to the raw dicts.
+
+### Migration notes
+
+- `mediavocab` installs automatically. Code consuming raw dicts continues to work; new code should consume the typed `Work` / `Release` / `Entity` models.
+
 ## [0.3.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.3.0a1) (2026-04-30)
 
 [Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.2.0a1...0.3.0a1)
