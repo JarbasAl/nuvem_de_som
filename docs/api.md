@@ -36,7 +36,31 @@ release.work.external_ids.get("soundcloud_track_id")
 release.work.external_ids.get("soundcloud_user_id")
 # sets also have:
 release.external_ids.get("soundcloud_playlist_id")
+release.work.tracklist               # list[Appearance], positions 1..N
 ```
+
+### Enriched fields populated from the SoundCloud API
+
+The ``SoundCloudAPI`` backend (and the ``SoundCloud`` orchestrator when
+it falls through to it) populates the following fields from the live
+v2 response when SoundCloud exposes them:
+
+| mediavocab field | source on SoundCloud track JSON |
+| --- | --- |
+| ``Work.aka`` | ``permalink`` (URL slug) |
+| ``Work.content_genres`` | ``genre`` + ``tag_list`` (mapped to ``GENRE_*`` when recognised) |
+| ``Work.country`` | uploader ``country_code`` |
+| ``Work.tracklist`` | ``tracks[]`` of a playlist/set, as typed ``Appearance`` |
+| ``Release.codec`` | best ``media.transcodings[].format.mime_type`` |
+| ``Release.bitrate`` | ``"256"`` (hq) / ``"128"`` (sq) from transcoding ``quality`` |
+| ``Release.audio_channels`` | ``"stereo"`` (SoundCloud is always 2-channel) |
+| ``Release.license`` | ``license`` mapped to SPDX (e.g. ``cc-by-nc`` → ``CC-BY-NC-4.0``); ``all-rights-reserved`` is preserved verbatim |
+| ``Release.release_date`` | ``display_date`` / ``created_at`` truncated to ISO date |
+| ``Entity.extra["country"]`` | uploader ``country_code`` |
+| ``Entity.extra["permalink"]`` | profile URL slug |
+
+The ``SoundCloudHTML`` backend cannot recover these fields from page
+HTML; they will be empty/default when an HTML-only path is used.
 
 ### Entity fields (artists / users)
 

@@ -9,6 +9,10 @@ import pytest
 
 from nuvem_de_som import SoundCloud, SoundCloudAPI, SoundCloudHTML, SoundCloudYTDLP
 from nuvem_de_som import _invalidate_client_id, _get_client_id
+from nuvem_de_som import (
+    _build_genres, _map_license, _parse_transcodings,
+    _track_dict_to_release, _set_dict_to_release,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -332,3 +336,119 @@ class TestDownloadTracks:
         assert not hasattr(sc, "download_track"), (
             "SoundCloudHTML should not expose download_track"
         )
+
+
+# ---------------------------------------------------------------------------
+# Mediavocab enrichment helpers
+# ---------------------------------------------------------------------------
+
+class TestLicenseMapping:
+    def test_known_cc_license_to_spdx(self):
+        assert _map_license("cc-by-nc") == "CC-BY-NC-4.0"
+        assert _map_license("cc-by") == "CC-BY-4.0"
+        assert _map_license("no-rights-reserved") == "CC0-1.0"
+
+    def test_unknown_license_passthrough(self):
+        # all-rights-reserved has no SPDX equivalent — preserved verbatim
+        assert _map_license("all-rights-reserved") == "all-rights-reserved"
+
+    def test_empty_license(self):
+        assert _map_license(None) == ""
+        assert _map_license("") == ""
+
+
+class TestBuildGenres:
+    def test_genre_field_mapped(self):
+        out = _build_genres("Electronic", "")
+        assert "electronic" in out
+
+    def test_tag_list_split(self):
+        out = _build_genres(None, 'chill ambient "drum and bass"')
+        assert "chill" in out
+        assert "ambient" in out
+        # multi-word quoted tag canonicalises to GENRE_DRUM_AND_BASS = "drum_and_bass"
+        assert "drum_and_bass" in out
+
+    def test_empty(self):
+        assert _build_genres(None, None) == []
+        assert _build_genres("", "") == []
+
+    def test_dedup(self):
+        out = _build_genres("rock", "rock Rock")
+        assert out.count("rock") == 1
+
+
+class TestParseTranscodings:
+    def test_picks_hq(self):
+        codec, br = _parse_transcodings([
+            {"format": {"mime_type": "audio/mpeg"}, "quality": "sq"},
+            {"format": {"mime_type": "audio/mpeg"}, "quality": "hq"},
+        ])
+        assert codec == "audio/mpeg"
+        assert br == "256"
+
+    def test_falls_back_to_sq(self):
+        codec, br = _parse_transcodings([
+            {"format": {"mime_type": "audio/mpeg"}, "quality": "sq"},
+        ])
+        assert br == "128"
+
+    def test_empty(self):
+        assert _parse_transcodings([]) == ("", "")
+
+
+class TestSetTracklist:
+    def test_set_with_tracks_yields_appearance(self):
+        track = {
+            "title": "T1", "url": "https://soundcloud.com/u/t1",
+            "artist": "U", "artist_url": "https://soundcloud.com/u",
+            "image": "", "duration": 60, "track_id": 1, "user_id": 9,
+        }
+        rel = _set_dict_to_release({
+            "title": "Set", "url": "https://soundcloud.com/u/sets/s",
+            "artist": "U", "artist_url": "https://soundcloud.com/u",
+            "playlist_id": 100, "user_id": 9,
+            "tracks": [track, track],
+        })
+        assert len(rel.work.tracklist) == 2
+        assert rel.work.tracklist[0].position == 1
+        assert rel.work.tracklist[0].work.title == "T1"
+        assert rel.work.tracklist[1].position == 2
+
+    def test_set_without_tracks_empty_tracklist(self):
+        rel = _set_dict_to_release({
+            "title": "Set", "url": "u", "artist": "", "playlist_id": 1,
+        })
+        assert rel.work.tracklist == []
+
+
+class TestTrackEnrichmentRoundtrip:
+    def test_full_payload_populates_release(self):
+        rel = _track_dict_to_release({
+            "title": "T", "url": "https://soundcloud.com/u/t",
+            "artist": "U", "artist_url": "https://soundcloud.com/u",
+            "image": "i", "duration": 90,
+            "track_id": 1, "user_id": 9,
+            "permalink": "t",
+            "content_genres": ["electronic", "chill"],
+            "country": "PT",
+            "license": "CC-BY-NC-4.0",
+            "release_date": "2024-01-15",
+            "codec": "audio/mpeg", "bitrate": "256", "audio_channels": "stereo",
+        })
+        assert rel.license == "CC-BY-NC-4.0"
+        assert rel.codec == "audio/mpeg"
+        assert rel.bitrate == "256"
+        assert rel.audio_channels == "stereo"
+        assert rel.release_date == "2024-01-15"
+        assert rel.work.country == "PT"
+        assert rel.work.aka == ["t"]
+        assert "electronic" in rel.work.content_genres
+
+    def test_release_date_validates_iso(self):
+        # Invalid date format should raise (pydantic IsoDate validator).
+        import pytest as _pytest
+        with _pytest.raises(Exception):
+            _track_dict_to_release({
+                "title": "T", "url": "u", "release_date": "not-a-date",
+            })

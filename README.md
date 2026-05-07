@@ -73,7 +73,20 @@ release.work.runtime                 # duration in seconds (float or None)
 release.work.credits[0].entity.name  # artist display name (if available)
 release.work.extra.get("artist_url") # artist profile URL
 release.work.external_ids            # {"soundcloud_track_id": "...", "soundcloud_user_id": "..."}
+release.work.aka                     # [permalink slug]
+release.work.content_genres          # ["electronic", "ambient", ...]   from genre + tag_list
+release.work.country                 # ISO 3166 alpha-2 of the uploader, when known
+release.work.tracklist               # [Appearance, ...] for sets/playlists
+release.codec                        # e.g. "audio/mpeg"
+release.bitrate                      # "128" (sq) / "256" (hq) when known
+release.audio_channels               # "stereo"
+release.license                      # SPDX id ("CC-BY-NC-4.0", "CC0-1.0") or raw
+release.release_date                 # ISO date validated by mediavocab
 ```
+
+For SoundCloud sets/playlists, `Work.tracklist` is populated with typed
+`mediavocab.Appearance` entries (each carrying the per-track `Work`),
+positioned 1..N. See `examples/set_tracklist.py`.
 
 **`Entity`** — from `search_people`, `resolve_user`:
 

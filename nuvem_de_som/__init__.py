@@ -68,14 +68,102 @@ import requests
 from bs4 import BeautifulSoup
 
 from mediavocab import (
+    Appearance,
     Entity, EntityRef, EntityKind,
     Credit, CreditSection, RelationRole,
     Release, Work, MediaType, StreamMode,
 )
+from mediavocab.taxonomy import genre as _genre_tax
 
 log = logging.getLogger(__name__)
 
 _PREFER_VALUES = frozenset(("progressive", "hls"))
+
+# SoundCloud `license` field → SPDX identifier.
+# `all-rights-reserved` has no SPDX equivalent; we leave it as the raw string
+# so consumers can still distinguish it from "unknown".
+_SC_LICENSE_TO_SPDX = {
+    "no-rights-reserved": "CC0-1.0",
+    "cc-by": "CC-BY-4.0",
+    "cc-by-nc": "CC-BY-NC-4.0",
+    "cc-by-nd": "CC-BY-ND-4.0",
+    "cc-by-sa": "CC-BY-SA-4.0",
+    "cc-by-nc-nd": "CC-BY-NC-ND-4.0",
+    "cc-by-nc-sa": "CC-BY-NC-SA-4.0",
+}
+
+
+def _map_license(value: str | None) -> str:
+    """Map a SoundCloud `license` value to an SPDX id (or pass through)."""
+    if not value:
+        return ""
+    return _SC_LICENSE_TO_SPDX.get(value, value)
+
+
+def _build_genres(genre: str | None, tag_list: str | None) -> list[str]:
+    """Return content_genres from SC `genre` + free-form `tag_list`.
+
+    Recognised tokens are mapped to ``mediavocab.taxonomy.genre.GENRE_*``
+    constants; unrecognised tokens are preserved as free strings.
+    SoundCloud `tag_list` separates tags by spaces but supports
+    quoted multi-word tags (``"drum and bass"``).
+    """
+    out: list[str] = []
+    seen: set[str] = set()
+
+    def _add(raw: str) -> None:
+        if not raw:
+            return
+        token = raw.strip().strip('"').lower()
+        if not token:
+            return
+        # Try to resolve to a canonical GENRE_* constant.
+        candidates = [
+            token,
+            token.replace(" ", "_").replace("-", "_"),
+            token.replace("&", "and").replace(" ", "_"),
+        ]
+        mapped: str | None = None
+        for c in candidates:
+            attr = "GENRE_" + c.upper()
+            value = getattr(_genre_tax, attr, None)
+            if isinstance(value, str):
+                mapped = value
+                break
+        final = mapped or token
+        if final not in seen:
+            seen.add(final)
+            out.append(final)
+
+    if genre:
+        _add(genre)
+    if tag_list:
+        # SC tag_list: space-separated, quoted multi-word tags.
+        tokens = re.findall(r'"([^"]+)"|(\S+)', tag_list)
+        for q, w in tokens:
+            _add(q or w)
+    return out
+
+
+def _parse_transcodings(transcodings: list[dict]) -> tuple[str, str]:
+    """Return ``(codec, bitrate)`` derived from SC transcoding entries.
+
+    SoundCloud encodes ``mime_type`` (e.g. ``audio/mpeg``, ``audio/ogg``)
+    and ``quality`` (``sq`` ≈ 128 kbps, ``hq`` ≈ 256 kbps). We pick the
+    highest-quality progressive entry available.
+    """
+    if not transcodings:
+        return "", ""
+    # Prefer hq, then sq, then anything.
+    rank = {"hq": 0, "sq": 1}
+    ordered = sorted(transcodings,
+                     key=lambda t: rank.get((t.get("quality") or "").lower(), 9))
+    best = ordered[0]
+    fmt = best.get("format") or {}
+    codec = fmt.get("mime_type") or ""
+    quality = (best.get("quality") or "").lower()
+    bitrate = {"hq": "256", "sq": "128"}.get(quality, "")
+    return codec, bitrate
 
 # ---------------------------------------------------------------------------
 # client_id management — pure requests, no yt-dlp
@@ -146,8 +234,18 @@ def _empty_track(url: str = "") -> dict:
             "duration": None}
 
 
+_AUDIO_CHANNELS_STEREO = "stereo"
+
+
 def _track_dict_to_release(d: dict) -> Release:
-    """Convert an internal track dict to a mediavocab Release."""
+    """Convert an internal track dict to a mediavocab Release.
+
+    The dict may include the optional enrichment keys:
+    ``permalink`` (slug → ``Work.aka``), ``content_genres`` (list[str]),
+    ``license`` (mapped SPDX), ``release_date`` (ISO 8601), ``codec``,
+    ``bitrate``, ``audio_channels``, and ``country`` on the uploader.
+    Unknown keys are ignored.
+    """
     external_ids: dict[str, str] = {}
     if d.get("track_id") is not None:
         external_ids["soundcloud_track_id"] = str(d["track_id"])
@@ -174,6 +272,9 @@ def _track_dict_to_release(d: dict) -> Release:
         media_type=MediaType.MUSIC,
         runtime=float(d["duration"]) if d.get("duration") is not None else None,
         credits=credits,
+        content_genres=list(d.get("content_genres") or []),
+        country=d.get("country") or "",
+        aka=[d["permalink"]] if d.get("permalink") else [],
         external_ids=external_ids,
         extra=({"artist_url": d["artist_url"]} if d.get("artist_url") else {}),
     )
@@ -182,26 +283,46 @@ def _track_dict_to_release(d: dict) -> Release:
         uri=d.get("url") or "",
         image=d.get("image") or "",
         stream_mode=StreamMode.ON_DEMAND,
+        codec=d.get("codec") or "",
+        bitrate=d.get("bitrate") or "",
+        audio_channels=d.get("audio_channels") or "",
+        license=d.get("license") or "",
+        release_date=d.get("release_date") or None,
         external_ids=external_ids,
     )
 
 
 def _user_dict_to_entity(d: dict) -> Entity:
-    """Convert an internal user/artist dict to a mediavocab Entity."""
+    """Convert an internal user/artist dict to a mediavocab Entity.
+
+    Optional keys: ``country`` (ISO 3166 alpha-2 from SoundCloud
+    ``country_code``) and ``permalink`` (URL slug, surfaced via
+    ``extra.permalink``).
+    """
     external_ids: dict[str, str] = {}
     if d.get("user_id") is not None:
         external_ids["soundcloud_user_id"] = str(d["user_id"])
+    extra: dict[str, str] = {"image": d.get("image") or ""}
+    if d.get("artist_url"):
+        extra["artist_url"] = d["artist_url"]
+    if d.get("country"):
+        extra["country"] = d["country"]
+    if d.get("permalink"):
+        extra["permalink"] = d["permalink"]
     return Entity(
         name=d.get("artist") or "",
         kind=EntityKind.PERSON,
         external_ids=external_ids,
-        extra=({"artist_url": d["artist_url"], "image": d.get("image") or ""}
-               if d.get("artist_url") else {"image": d.get("image") or ""}),
+        extra=extra,
     )
 
 
 def _set_dict_to_release(d: dict) -> Release:
-    """Convert an internal playlist/set dict to a mediavocab Release."""
+    """Convert an internal playlist/set dict to a mediavocab Release.
+
+    Optional ``tracks`` (list of internal track dicts) is converted to a
+    typed ``Work.tracklist`` of :class:`mediavocab.Appearance` entries.
+    """
     external_ids: dict[str, str] = {}
     if d.get("playlist_id") is not None:
         external_ids["soundcloud_playlist_id"] = str(d["playlist_id"])
@@ -223,10 +344,20 @@ def _set_dict_to_release(d: dict) -> Release:
             section=CreditSection.PRINCIPAL,
         ))
 
+    tracklist: list[Appearance] = []
+    for i, t in enumerate(d.get("tracks") or [], start=1):
+        if not t.get("title"):
+            continue
+        track_release = _track_dict_to_release(t)
+        tracklist.append(Appearance(work=track_release.work, position=i))
+
     work = Work(
         title=d.get("title") or "",
         media_type=MediaType.MUSIC,
         credits=credits,
+        content_genres=list(d.get("content_genres") or []),
+        aka=[d["permalink"]] if d.get("permalink") else [],
+        tracklist=tracklist,
         external_ids=external_ids,
         extra=({"artist_url": d["artist_url"]} if d.get("artist_url") else {}),
     )
@@ -235,6 +366,8 @@ def _set_dict_to_release(d: dict) -> Release:
         uri=d.get("url") or "",
         image=d.get("image") or "",
         stream_mode=StreamMode.ON_DEMAND,
+        license=d.get("license") or "",
+        release_date=d.get("release_date") or None,
         external_ids=external_ids,
     )
 
@@ -343,6 +476,13 @@ class SoundCloudAPI(SoundCloudBase):
         user = t.get("user") or {}
         image = t.get("artwork_url") or user.get("avatar_url") or ""
         duration = (t["duration"] // 1000) if t.get("duration") else None
+        codec, bitrate = _parse_transcodings(
+            ((t.get("media") or {}).get("transcodings") or [])
+        )
+        # SoundCloud release dates are ISO 8601 (e.g. ``2018-09-25T15:36:31Z``).
+        # Take the date prefix only — Release.release_date is validated as IsoDate.
+        created_at = t.get("display_date") or t.get("created_at") or ""
+        release_date = created_at[:10] if len(created_at) >= 10 else None
         return {
             "title": t.get("title") or "",
             "url": t.get("permalink_url") or "",
@@ -352,6 +492,14 @@ class SoundCloudAPI(SoundCloudBase):
             "duration": duration,
             "track_id": t.get("id"),
             "user_id": user.get("id"),
+            "permalink": t.get("permalink") or "",
+            "content_genres": _build_genres(t.get("genre"), t.get("tag_list")),
+            "license": _map_license(t.get("license")),
+            "release_date": release_date,
+            "codec": codec,
+            "bitrate": bitrate,
+            "audio_channels": _AUDIO_CHANNELS_STEREO if codec else "",
+            "country": (user.get("country_code") or "") if user else "",
         }
 
     def search_tracks(self, query: str, limit: int = 10) -> Iterator[Release]:
@@ -371,6 +519,8 @@ class SoundCloudAPI(SoundCloudBase):
                 "artist_url": u.get("permalink_url") or "",
                 "image": u.get("avatar_url") or "",
                 "user_id": u.get("id"),
+                "country": u.get("country_code") or "",
+                "permalink": u.get("permalink") or "",
             })
 
     def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
@@ -379,14 +529,26 @@ class SoundCloudAPI(SoundCloudBase):
         )
         for p in data.get("collection") or []:
             user = p.get("user") or {}
+            tracks_raw = p.get("tracks") or []
+            artist_url = user.get("permalink_url") or ""
+            tracks_parsed = [
+                self._parse_track(t, artist_url=artist_url)
+                for t in tracks_raw if t.get("title")
+            ]
+            created = p.get("display_date") or p.get("created_at") or ""
             yield _set_dict_to_release({
                 "title": p.get("title") or "",
                 "url": p.get("permalink_url") or "",
                 "artist": user.get("username") or "",
-                "artist_url": user.get("permalink_url") or "",
+                "artist_url": artist_url,
                 "image": p.get("artwork_url") or user.get("avatar_url") or "",
                 "playlist_id": p.get("id"),
                 "user_id": user.get("id"),
+                "permalink": p.get("permalink") or "",
+                "content_genres": _build_genres(p.get("genre"), p.get("tag_list")),
+                "license": _map_license(p.get("license")),
+                "release_date": created[:10] if len(created) >= 10 else None,
+                "tracks": tracks_parsed,
             })
 
     def get_tracks(self, url: str, limit: int = 200) -> Iterator[Release]:
@@ -462,6 +624,8 @@ class SoundCloudAPI(SoundCloudBase):
                 "artist_url": u.get("permalink_url") or profile_url,
                 "image": u.get("avatar_url") or "",
                 "user_id": u.get("id"),
+                "country": u.get("country_code") or "",
+                "permalink": u.get("permalink") or "",
             })
         except Exception as exc:
             log.debug("resolve_user failed for %s: %s", profile_url, exc)
