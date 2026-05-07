@@ -28,6 +28,37 @@ except ImportError:
 
 from nuvem_de_som import SoundCloud, SoundCloudAPI, SoundCloudHTML, SoundCloudYTDLP
 
+
+def _track_view(t) -> dict:
+    """Normalise a track (Release object or dict) into a flat view dict.
+
+    The CLI was originally written against raw track dicts; backends now
+    return mediavocab.Release objects. This adapter lets the rest of the
+    CLI keep the simple dict idiom while accepting both shapes.
+    """
+    if isinstance(t, dict):
+        return t
+    credits = getattr(getattr(t, "work", None), "credits", None) or []
+    artist = credits[0].entity.name if credits else ""
+    runtime = getattr(getattr(t, "work", None), "runtime", None)
+    duration = int(runtime) if runtime is not None else None
+    return {
+        "title": getattr(getattr(t, "work", None), "title", "") or "",
+        "url": getattr(t, "uri", "") or "",
+        "artist": artist,
+        "duration": duration,
+    }
+
+
+def _entity_view(p) -> dict:
+    """Normalise a person (Entity object or dict) into a flat view dict."""
+    if isinstance(p, dict):
+        return p
+    return {
+        "artist": getattr(p, "name", "") or "",
+        "artist_url": (getattr(p, "extra", {}) or {}).get("artist_url", ""),
+    }
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -90,7 +121,8 @@ def _fmt_duration(seconds: Optional[int]) -> str:
 
 def _print_tracks(tracks: List[dict], offset: int = 0) -> None:
     width = shutil.get_terminal_size().columns
-    for i, t in enumerate(tracks, start=offset + 1):
+    for i, raw in enumerate(tracks, start=offset + 1):
+        t = _track_view(raw)
         dur = _fmt_duration(t.get("duration"))
         artist = t.get("artist") or ""
         title = t.get("title") or t.get("url", "")
@@ -104,7 +136,8 @@ def _print_tracks(tracks: List[dict], offset: int = 0) -> None:
 
 
 def _print_people(people: List[dict], offset: int = 0) -> None:
-    for i, p in enumerate(people, start=offset + 1):
+    for i, raw in enumerate(people, start=offset + 1):
+        p = _entity_view(raw)
         name = p.get("artist") or ""
         url = p.get("artist_url") or ""
         click.echo(f"  {i:>3}. {name}  <{url}>")
@@ -170,7 +203,7 @@ def _interactive_session(sc, tracks: List[dict], people: List[dict],
             click.echo("Type a number or 'q'.")
             continue
 
-        track = tracks[idx]
+        track = _track_view(tracks[idx])
         click.echo(f"\n  {track['title']}  [{track.get('artist', '')}]  "
                    f"{_fmt_duration(track.get('duration'))}")
         click.echo("  [p]lay  [d]ownload  [b]ack")
@@ -236,7 +269,8 @@ def search(ctx: click.Context, query: str, limit: int, mode: str) -> None:
         if not sets:
             click.echo("No sets found.")
             return
-        for i, s in enumerate(sets, 1):
+        for i, raw in enumerate(sets, 1):
+            s = _track_view(raw)
             click.echo(f"  {i:>3}. {s['title']}  [{s.get('artist', '')}]  <{s['url']}>")
         return
 
