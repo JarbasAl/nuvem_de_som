@@ -9,12 +9,13 @@ description = "SoundCloud search and stream extractor"
 license = { text = "Apache-2.0" }
 authors = [{ name = "JarbasAi" }]
 requires-python = ">=3.8"
-dependencies = ["bs4", "requests"]
+dependencies = ["bs4", "requests", "mediavocab>=0.1.0,<0.2"]
 
 [project.optional-dependencies]
 yt-dlp = ["yt-dlp"]
 cli = ["click"]
-test = ["pytest"]
+stealth = ["curl-cffi"]
+test = ["pytest", "vcrpy", "pytest-vcr", "click"]
 
 [project.scripts]
 nds = "nuvem_de_som.cli:main"
@@ -32,3 +33,4 @@ include = ["nuvem_de_som*"]
 markers = [
     "integration: tests that hit live network endpoints (deselect with -m 'not integration')",
 ]
+addopts = "-m 'not integration'"

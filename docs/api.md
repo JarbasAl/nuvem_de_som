@@ -12,18 +12,64 @@ SoundCloudBase  (abstract)
 └── SoundCloud       — orchestrator subclass, tries API → yt-dlp → HTML
 ```
 
-All backends implement the same interface.  All track dicts share the same
-canonical key schema regardless of backend:
+All backends implement the same interface. Metadata retrieval methods return
+[`mediavocab`](https://github.com/OpenVoiceOS/mediavocab) objects:
+
+- **track methods** (`search_tracks`, `get_tracks`, `resolve_track`) yield/return `mediavocab.Release`
+- **people/user methods** (`search_people`, `resolve_user`) yield/return `mediavocab.Entity`
+- **set methods** (`search_sets`) yield `mediavocab.Release`
+
+### Release fields (tracks and sets)
 
 ```python
-{
-    "title":      str,        # track title
-    "url":        str,        # SoundCloud permalink
-    "artist":     str,        # display name ("" when not available)
-    "artist_url": str,        # profile URL  ("" when not available)
-    "image":      str,        # artwork URL  ("" when not available)
-    "duration":   int | None, # seconds      (None when not available)
-}
+release.uri                          # SoundCloud permalink
+release.image                        # artwork URL ("" when not available)
+release.stream_mode                  # StreamMode.ON_DEMAND
+release.work.title                   # track / set title
+release.work.media_type              # MediaType.MUSIC
+release.work.runtime                 # duration in seconds (float or None)
+release.work.credits                 # list[Credit]; empty when artist unknown
+release.work.credits[0].entity.name  # artist display name
+release.work.credits[0].entity.external_ids.get("soundcloud_user_id")
+release.work.extra.get("artist_url") # artist profile URL
+release.work.external_ids.get("soundcloud_track_id")
+release.work.external_ids.get("soundcloud_user_id")
+# sets also have:
+release.external_ids.get("soundcloud_playlist_id")
+release.work.tracklist               # list[Appearance], positions 1..N
+```
+
+### Enriched fields populated from the SoundCloud API
+
+The ``SoundCloudAPI`` backend (and the ``SoundCloud`` orchestrator when
+it falls through to it) populates the following fields from the live
+v2 response when SoundCloud exposes them:
+
+| mediavocab field | source on SoundCloud track JSON |
+| --- | --- |
+| ``Work.aka`` | ``permalink`` (URL slug) |
+| ``Work.content_genres`` | ``genre`` + ``tag_list`` (mapped to ``GENRE_*`` when recognised) |
+| ``Work.country`` | uploader ``country_code`` |
+| ``Work.tracklist`` | ``tracks[]`` of a playlist/set, as typed ``Appearance`` |
+| ``Release.codec`` | best ``media.transcodings[].format.mime_type`` |
+| ``Release.bitrate`` | ``"256"`` (hq) / ``"128"`` (sq) from transcoding ``quality`` |
+| ``Release.audio_channels`` | ``"stereo"`` (SoundCloud is always 2-channel) |
+| ``Release.license`` | ``license`` mapped to SPDX (e.g. ``cc-by-nc`` → ``CC-BY-NC-4.0``); ``all-rights-reserved`` is preserved verbatim |
+| ``Release.release_date`` | ``display_date`` / ``created_at`` truncated to ISO date |
+| ``Entity.extra["country"]`` | uploader ``country_code`` |
+| ``Entity.extra["permalink"]`` | profile URL slug |
+
+The ``SoundCloudHTML`` backend cannot recover these fields from page
+HTML; they will be empty/default when an HTML-only path is used.
+
+### Entity fields (artists / users)
+
+```python
+entity.name                          # display name
+entity.kind                          # EntityKind.PERSON
+entity.external_ids.get("soundcloud_user_id")
+entity.extra.get("artist_url")       # profile URL
+entity.extra.get("image")            # avatar URL
 ```
 
 > **Note:** `SoundCloudYTDLP.search_people()` and `search_sets()` yield nothing —
@@ -45,8 +91,9 @@ sc = SoundCloudAPI()     # API only (full metadata, recommended)
 sc = SoundCloudHTML()    # HTML scraper only (no extra deps)
 sc = SoundCloudYTDLP()   # yt-dlp only (requires pip install nuvem_de_som[yt-dlp])
 
-for t in sc.search_tracks("nuclear chill", limit=5):
-    print(t["title"], t["artist"], t["duration"])
+for release in sc.search_tracks("nuclear chill", limit=5):
+    artist = release.work.credits[0].entity.name if release.work.credits else ""
+    print(release.work.title, artist, release.work.runtime)
 ```
 
 ---
@@ -61,32 +108,35 @@ from nuvem_de_som import SoundCloudAPI
 
 sc = SoundCloudAPI()
 
-# Track search
-for t in sc.search_tracks("nuclear chill", limit=5):
-    print(t["title"], t["artist"], t["duration"])
+# Track search → Release objects
+for release in sc.search_tracks("nuclear chill", limit=5):
+    print(release.work.title, release.work.runtime)
 
-# People search
-for p in sc.search_people("acidkid"):
-    print(p["artist"], p["artist_url"], p["image"])
+# People search → Entity objects
+for entity in sc.search_people("acidkid"):
+    print(entity.name, entity.extra.get("artist_url"), entity.extra.get("image"))
 
-# Playlist/set search
-for pl in sc.search_sets("chill", limit=5):
-    print(pl["title"], pl["artist"])
+# Playlist/set search → Release objects
+for release in sc.search_sets("chill", limit=5):
+    print(release.work.title, release.work.credits[0].entity.name if release.work.credits else "")
 
 # Enumerate all tracks for an artist or set (paginates the full catalogue)
-for t in sc.get_tracks("https://soundcloud.com/acidkid", limit=200):
-    print(t["title"])
+for release in sc.get_tracks("https://soundcloud.com/acidkid", limit=200):
+    print(release.work.title)
 
-for t in sc.get_tracks("https://soundcloud.com/acidkid/sets/beathop"):
-    print(t["title"])
+for release in sc.get_tracks("https://soundcloud.com/acidkid/sets/beathop"):
+    print(release.work.title)
 
 # Resolve a track URL to a direct stream (no yt-dlp required)
 stream_url = sc.resolve_stream("https://soundcloud.com/acidkid/nuclear-chill")
 stream_url = sc.resolve_stream("...", prefer="hls")    # default: "progressive"
 
-# Resolve a profile URL to display name + avatar
-user = sc.resolve_user("https://soundcloud.com/acidkid")
-# {"artist": "Piratech", "artist_url": "...", "image": "..."}
+# Resolve a profile URL → Entity
+entity = sc.resolve_user("https://soundcloud.com/acidkid")
+# entity.name, entity.extra["artist_url"], entity.extra["image"]
+
+# Resolve a track URL → Release
+release = sc.resolve_track("https://soundcloud.com/acidkid/nuclear-chill")
 ```
 
 ---
@@ -109,19 +159,21 @@ from nuvem_de_som import SoundCloudHTML
 sc = SoundCloudHTML()
 
 # Artist page — full metadata from schema.org markup
-for t in sc.get_tracks("https://soundcloud.com/acidkid", limit=20):
-    print(t["title"], t["artist"], t["duration"])  # duration in seconds
+for release in sc.get_tracks("https://soundcloud.com/acidkid", limit=20):
+    artist = release.work.credits[0].entity.name if release.work.credits else ""
+    print(release.work.title, artist, release.work.runtime)  # runtime in seconds
 
-# Search — title + URL only (artist/artist_url/image/duration are ""/None)
-for t in sc.search_tracks("nuclear chill", limit=5):
-    print(t["title"], t["url"])
+# Search — title + URL only (credits/image/runtime are empty/None)
+for release in sc.search_tracks("nuclear chill", limit=5):
+    print(release.work.title, release.uri)
 
 # Enriched search — adds artist + image via one extra request per track
-for t in sc.search_tracks_enriched("nuclear chill", limit=5):
-    print(t["title"], t.get("artist"))
+for release in sc.search_tracks_enriched("nuclear chill", limit=5):
+    artist = release.work.credits[0].entity.name if release.work.credits else ""
+    print(release.work.title, artist)
 
-# resolve_user scrapes Open Graph / JSON-LD (no API required)
-user = sc.resolve_user("https://soundcloud.com/acidkid")
+# resolve_user scrapes Open Graph / JSON-LD (no API required) → Entity
+entity = sc.resolve_user("https://soundcloud.com/acidkid")
 
 # resolve_stream raises NotImplementedError — HTML has no stream access
 # Use SoundCloudAPI or SoundCloudYTDLP for stream resolution
@@ -139,11 +191,11 @@ from nuvem_de_som import SoundCloudYTDLP
 
 sc = SoundCloudYTDLP()
 
-for t in sc.search_tracks("nuclear chill", limit=5):
-    print(t["title"])
+for release in sc.search_tracks("nuclear chill", limit=5):
+    print(release.work.title)
 
-for t in sc.get_tracks("https://soundcloud.com/acidkid"):
-    print(t["title"])
+for release in sc.get_tracks("https://soundcloud.com/acidkid"):
+    print(release.work.title)
 
 stream = sc.resolve_stream("https://soundcloud.com/acidkid/track-slug")
 ```
@@ -152,31 +204,26 @@ stream = sc.resolve_stream("https://soundcloud.com/acidkid/track-slug")
 
 ## Downloads
 
-Download methods are available **only** on `SoundCloudYTDLP` and `SoundCloud`
-(the orchestrator).  `SoundCloudAPI` and `SoundCloudHTML` do **not** expose
-download methods — calling them would silently lack any implementation.
+Download methods are available on `SoundCloudAPI`, `SoundCloudYTDLP`, and `SoundCloud`
+(the orchestrator).  `SoundCloudHTML` does **not** expose download methods.
 
-Downloads require yt-dlp: `pip install nuvem_de_som[yt-dlp]`.
+`SoundCloudAPI.download_*` uses pure `requests` — no yt-dlp required.
+`SoundCloudYTDLP.download_*` uses yt-dlp: `pip install nuvem_de_som[yt-dlp]`.
+
+`SoundCloud` (orchestrator) tries the API backend first, falls back to yt-dlp.
 
 `download_track()` returns `None` on failure (not a placeholder path).
-`download_tracks()` returns only the paths of successfully downloaded files —
-failed downloads are omitted from the list.
-
-`SoundCloud` (orchestrator) delegates all download calls to its internal
-`SoundCloudYTDLP` backend automatically.
+`download_tracks()` returns only the paths of successfully downloaded files.
 
 ```python
-# Use either SoundCloudYTDLP directly, or the SoundCloud orchestrator
 from nuvem_de_som import SoundCloud, SoundCloudYTDLP
 
-sc = SoundCloud()        # orchestrator — download delegates to yt-dlp backend
-# sc = SoundCloudYTDLP() # yt-dlp backend directly
+sc = SoundCloud()        # orchestrator — API first, yt-dlp fallback
 
 # Single track → ~/Music/Artist - Title.mp3
 path = sc.download_track(
     "https://soundcloud.com/acidkid/some-track",
     output_dir="~/Music",
-    audio_format="mp3",   # or "aac", "flac", etc.
 )
 
 # Multiple tracks — only successful downloads in the return list
@@ -191,42 +238,43 @@ sc.download_playlist("https://soundcloud.com/acidkid", output_dir="~/Music")
 sc.download_playlist("https://soundcloud.com/acidkid/sets/beathop", output_dir="~/Music")
 ```
 
-> **Note:** Calling `download_track()` / `download_tracks()` / `download_playlist()`
-> on `SoundCloudAPI` or `SoundCloudHTML` will raise `AttributeError` — those
-> backends do not expose download methods.
-
 ---
 
-## Dict schemas
+## Return types
 
-### Track (all backends)
+### Release (tracks and sets)
 
-```python
-{
-    "title":      str,
-    "url":        str,        # SoundCloud permalink
-    "artist":     str,        # display name; "" when not available
-    "artist_url": str,        # profile URL; "" when not available
-    "image":      str,        # artwork URL; "" when not available
-    "duration":   int | None, # seconds; None when not available
-}
-```
+Returned by `search_tracks`, `get_tracks`, `resolve_track`, `search_sets`.
 
-> `SoundCloudHTML.search_*` methods return `""` / `None` for artist, artist_url,
-> image, and duration — those fields are absent from SoundCloud's search HTML.
+| Attribute | Type | Description |
+|---|---|---|
+| `release.uri` | `str` | SoundCloud permalink |
+| `release.image` | `str` | Artwork URL (`""` when unavailable) |
+| `release.stream_mode` | `StreamMode` | Always `StreamMode.ON_DEMAND` |
+| `release.work.title` | `str` | Track or set title |
+| `release.work.media_type` | `MediaType` | Always `MediaType.MUSIC` |
+| `release.work.runtime` | `float \| None` | Duration in seconds |
+| `release.work.credits` | `list[Credit]` | Empty when artist unknown |
+| `release.work.credits[0].entity.name` | `str` | Artist display name |
+| `release.work.extra.get("artist_url")` | `str` | Artist profile URL |
+| `release.work.external_ids` | `dict` | `soundcloud_track_id`, `soundcloud_user_id` |
+| `release.external_ids` | `dict` | `soundcloud_playlist_id` (sets only) |
+
+### Entity (artists / users)
+
+Returned by `search_people`, `resolve_user`.
+
+| Attribute | Type | Description |
+|---|---|---|
+| `entity.name` | `str` | Display name |
+| `entity.kind` | `EntityKind` | Always `EntityKind.PERSON` |
+| `entity.extra.get("artist_url")` | `str` | Profile URL |
+| `entity.extra.get("image")` | `str` | Avatar URL |
+| `entity.external_ids` | `dict` | `soundcloud_user_id` |
+
+> `SoundCloudHTML.search_*` methods return empty credits, `""` image, and
+> `None` runtime — those fields are absent from SoundCloud's search HTML.
 > `get_tracks()` on an artist/set page provides all fields.
-
-### Artist (`search_people`, `resolve_user`)
-
-```python
-{"artist": str, "artist_url": str, "image": str}
-```
-
-### Playlist (`search_sets`)
-
-```python
-{"title": str, "url": str, "artist": str, "artist_url": str, "image": str}
-```
 
 ---
 

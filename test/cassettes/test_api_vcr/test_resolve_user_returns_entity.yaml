@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api-v2.soundcloud.com/resolve?client_id=m3fPPZefBYC1BJGyknJMS6wN6PyvlrEN&url=https%3A%2F%2Fsoundcloud.com%2Fdisclosuremusic
+  response:
+    body:
+      string: '{"avatar_url":"https://i1.sndcdn.com/avatars-V57b6hERdlsSVzyY-UYlQUQ-large.jpg","city":"","comments_count":0,"country_code":null,"created_at":null,"creator_subscriptions":[{"product":{"id":"creator-pro-unlimited"}}],"creator_subscription":{"product":{"id":"creator-pro-unlimited"}},"description":"","followers_count":1439130,"followings_count":866,"first_name":"","full_name":"","groups_count":0,"id":494163,"kind":"user","last_modified":"2026-03-30T22:44:06Z","last_name":"","likes_count":207,"playlist_likes_count":10,"permalink":"disclosuremusic","permalink_url":"https://soundcloud.com/disclosuremusic","playlist_count":66,"reposts_count":null,"track_count":222,"uri":"https://api.soundcloud.com/users/soundcloud%3Ausers%3A494163","urn":"soundcloud:users:494163","username":"Disclosure","verified":true,"visuals":{"urn":"soundcloud:users:494163","enabled":true,"visuals":[{"urn":"soundcloud:visuals:263312703","entry_time":0,"visual_url":"https://i1.sndcdn.com/visuals-000000494163-jRZGl3-original.jpg"}],"tracking":null},"badges":{"pro":false,"creator_mid_tier":false,"pro_unlimited":true,"verified":true},"station_urn":"soundcloud:system-playlists:artist-stations:494163","station_permalink":"artist-stations:494163","date_of_birth":null}'
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 07 May 2026 15:48:37 GMT
+      Server:
+      - am/2
+      Vary:
+      - Origin
+      Via:
+      - 1.1 dd9ad8cb4b8e0d6775772241747a2354.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 1OH723gvAKTsGbSVf9zBJA0T_e_4DApal4wlUFG2Vwvs-QAihnZ4dw==
+      X-Amz-Cf-Pop:
+      - LIS50-P2
+      X-Cache:
+      - Miss from cloudfront
+      content-length:
+      - '1244'
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=63072000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-robots-tag:
+      - noindex
+    status:
+      code: 200
+      message: OK
+version: 1

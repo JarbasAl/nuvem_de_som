@@ -1,0 +1,616 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api-v2.soundcloud.com/search/playlists?client_id=m3fPPZefBYC1BJGyknJMS6wN6PyvlrEN&q=chillhop+essentials&limit=3
+  response:
+    body:
+      string: "{\"collection\":[{\"artwork_url\":\"https://i1.sndcdn.com/artworks-scY8Myfi8gVfHn2C-kOEnuw-large.jpg\",\"created_at\":\"2026-02-22T19:55:27Z\",\"description\":\"It\u2019s
+        that time again. Winter finally cleared out without much ceremony, and suddenly
+        the air feels different. Windows are opening. Streets look a little less gray.
+        Essentials Spring 2026 is up, and it sounds like that moment when you realize
+        the season\u2019s changed halfway through your day. We put together 24 new
+        instrumentals that move through warm textures, easy rhythms, and steady grooves.
+        Stuff to listen to while you work, walk, or stare out the window longer than
+        necessary. Nothing flashy. Just music that gets out of your way while the
+        city does its thing.\\n\\nThis seasonal release has been around since 2016,
+        and over time it\u2019s turned into its own ongoing story, whether we meant
+        it to or not. If you\u2019ve been listening for a while, you already know
+        how these drops tend to feel. If you\u2019re new, welcome; this seemed like
+        a decent place to start. This chapter finds the crew bouncing between friends\u2019
+        places and getting a better sense of the city from the inside. Spring 2026
+        takes place in Triplet Peaks, a hillside borough on the west side of town
+        where streets climb, water runs wherever it wants, and green tends to take
+        over if you let it.\\n\\nWhether you\u2019re settling into the season, checking
+        out a new place through someone else\u2019s perspective, or just looking for
+        background music that doesn\u2019t suck, these tracks are here to keep you
+        company. Sleepy Fish, HM Surf, Psalm Trees, Ruck P, and plenty more. Take
+        your time with it. Look around. There\u2019s a lot more year left, and this
+        is just the start.\",\"duration\":3745696,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"id\":2195635727,\"kind\":\"playlist\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2026-03-10T11:25:28Z\",\"license\":\"all-rights-reserved\",\"likes_count\":142,\"managed_by_feeds\":false,\"permalink\":\"chillhop-essentials-spring-2026\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/sets/chillhop-essentials-spring-2026\",\"public\":true,\"purchase_title\":\"Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/spring2026.PBT\",\"release_date\":\"2026-03-10T00:00:00Z\",\"reposts_count\":5,\"secret_token\":null,\"sharing\":\"public\",\"tag_list\":\"\",\"title\":\"Chillhop
+        Essentials Spring 2026\",\"uri\":\"https://api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2195635727\",\"user_id\":35228969,\"set_type\":\"album\",\"is_album\":true,\"published_at\":\"2026-03-10T11:25:28Z\",\"display_date\":\"2026-03-10T11:25:28Z\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"city\":\"Rotterdam\",\"comments_count\":0,\"country_code\":\"NL\",\"created_at\":null,\"creator_subscriptions\":[{\"product\":{\"id\":\"creator-pro-unlimited\"}}],\"creator_subscription\":{\"product\":{\"id\":\"creator-pro-unlimited\"}},\"description\":\"Chillhop
+        Essentials - Spring 2026 out now!\\nhttps://chillhop.ffm.to/spring2026.pbt\\n\\n\U0001F3B6
+        Listen to Chillhop on Spotify & Apple Music\\n\u30FB chillhop.ffm.to/chillhopradiospotify.pbt
+        (Spotify)\\n\u30FB chillhop.ffm.to/chillhopradioapplemusic.pbt (Apple Music)\",\"followers_count\":193202,\"followings_count\":997,\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"full_name\":\"Your Daily Chilled Vibes!\",\"groups_count\":0,\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"likes_count\":886,\"playlist_likes_count\":63,\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"playlist_count\":145,\"reposts_count\":null,\"track_count\":1773,\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"visuals\":{\"urn\":\"soundcloud:users:35228969\",\"enabled\":true,\"visuals\":[{\"urn\":\"soundcloud:visuals:219249249\",\"entry_time\":0,\"visual_url\":\"https://i1.sndcdn.com/visuals-000035228969-ZH1Iq8-original.jpg\"}],\"tracking\":null},\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\",\"date_of_birth\":null},\"tracks\":[{\"artwork_url\":\"https://i1.sndcdn.com/artworks-lnA9a8Wy5snwRu3L-8ZWvwQ-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":3,\"created_at\":\"2026-02-22T19:55:26Z\",\"description\":\"It\u2019s
+        that time again. Winter finally cleared out without much ceremony, and suddenly
+        the air feels different. Windows are opening. Streets look a little less gray.
+        Essentials Spring 2026 is up, and it sounds like that moment when you realize
+        the season\u2019s changed halfway through your day. We put together 24 new
+        instrumentals that move through warm textures, easy rhythms, and steady grooves.
+        Stuff to listen to while you work, walk, or stare out the window longer than
+        necessary. Nothing flashy. Just music that gets out of your way while the
+        city does its thing.\\n\\nThis seasonal release has been around since 2016,
+        and over time it\u2019s turned into its own ongoing story, whether we meant
+        it to or not. If you\u2019ve been listening for a while, you already know
+        how these drops tend to feel. If you\u2019re new, welcome; this seemed like
+        a decent place to start. This chapter finds the crew bouncing between friends\u2019
+        places and getting a better sense of the city from the inside. Spring 2026
+        takes place in Triplet Peaks, a hillside borough on the west side of town
+        where streets climb, water runs wherever it wants, and green tends to take
+        over if you let it.\\n\\nWhether you\u2019re settling into the season, checking
+        out a new place through someone else\u2019s perspective, or just looking for
+        background music that doesn\u2019t suck, these tracks are here to keep you
+        company. Sleepy Fish, HM Surf, Psalm Trees, Ruck P, and plenty more. Take
+        your time with it. Look around. There\u2019s a lot more year left, and this
+        is just the start.\",\"downloadable\":false,\"download_count\":0,\"duration\":130003,\"full_duration\":129985,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2271425147,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2026-03-10T00:30:06Z\",\"license\":\"all-rights-reserved\",\"likes_count\":59,\"permalink\":\"leavv-juicebx-skylight-1\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/leavv-juicebx-skylight-1\",\"playback_count\":4868,\"public\":true,\"publisher_metadata\":{\"id\":2271425147,\"urn\":\"soundcloud:tracks:2271425147\",\"artist\":\"Leavv,
+        JUICEB\u262EX\",\"album_title\":\"Chillhop Essentials Spring 2026\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098054051\",\"isrc\":\"NL1LE2503843\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Cyrano
+        Kaul, Joshua Cooper Braunstein\",\"release_title\":\"Skylight\"},\"purchase_title\":\"Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/spring2026.PBT\",\"release_date\":\"2026-03-10T00:00:00Z\",\"reposts_count\":7,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Leavv,
+        JUICEB\u262EX - Skylight\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2271425147\",\"urn\":\"soundcloud:tracks:2271425147\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/8ZvdsyK17nUK_m.json\",\"display_date\":\"2026-03-10T00:30:06Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425147/a870abfb-6956-48cb-8071-7a1a72dd117d/stream/hls\",\"preset\":\"aac_160k\",\"duration\":130003,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425147/272679b7-8f33-49eb-9ef3-065c11a98047/stream/hls\",\"preset\":\"aac_96k\",\"duration\":130003,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425147/6d34c016-9ce0-41f7-ba05-aa127d51bd66/stream/hls\",\"preset\":\"abr_sq\",\"duration\":130003,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425147/133307e7-1a04-460a-9711-e0e192ba2536/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":129985,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425147/133307e7-1a04-460a-9711-e0e192ba2536/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":129985,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2271425147\",\"station_permalink\":\"track-stations:2271425147\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImMzMjg2ZGJjLTc3OGMtNDQ1MC05YTc0LTA0MDc5NWQ4ODM2NiIsImlhdCI6MTc3ODE2ODkxNn0.O95HeqIy0NddxS1OZr8rdc5uGHTHfwBnZpwj7Uy4H-c\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-VUCeMrxA5bne1wG2-08zL1g-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":2,\"created_at\":\"2026-02-22T19:55:26Z\",\"description\":\"It\u2019s
+        that time again. Winter finally cleared out without much ceremony, and suddenly
+        the air feels different. Windows are opening. Streets look a little less gray.
+        Essentials Spring 2026 is up, and it sounds like that moment when you realize
+        the season\u2019s changed halfway through your day. We put together 24 new
+        instrumentals that move through warm textures, easy rhythms, and steady grooves.
+        Stuff to listen to while you work, walk, or stare out the window longer than
+        necessary. Nothing flashy. Just music that gets out of your way while the
+        city does its thing.\\n\\nThis seasonal release has been around since 2016,
+        and over time it\u2019s turned into its own ongoing story, whether we meant
+        it to or not. If you\u2019ve been listening for a while, you already know
+        how these drops tend to feel. If you\u2019re new, welcome; this seemed like
+        a decent place to start. This chapter finds the crew bouncing between friends\u2019
+        places and getting a better sense of the city from the inside. Spring 2026
+        takes place in Triplet Peaks, a hillside borough on the west side of town
+        where streets climb, water runs wherever it wants, and green tends to take
+        over if you let it.\\n\\nWhether you\u2019re settling into the season, checking
+        out a new place through someone else\u2019s perspective, or just looking for
+        background music that doesn\u2019t suck, these tracks are here to keep you
+        company. Sleepy Fish, HM Surf, Psalm Trees, Ruck P, and plenty more. Take
+        your time with it. Look around. There\u2019s a lot more year left, and this
+        is just the start.\",\"downloadable\":false,\"download_count\":0,\"duration\":158311,\"full_duration\":158302,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2271425129,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2026-03-10T00:30:06Z\",\"license\":\"all-rights-reserved\",\"likes_count\":32,\"permalink\":\"mac-kay-flora-2\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/mac-kay-flora-2\",\"playback_count\":3830,\"public\":true,\"publisher_metadata\":{\"id\":2271425129,\"urn\":\"soundcloud:tracks:2271425129\",\"artist\":\"Mac
+        Kay\",\"album_title\":\"Chillhop Essentials Spring 2026\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098054051\",\"isrc\":\"NL1LE2503836\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Marek
+        Stanis\u0142aw Koz\u0142owski\",\"release_title\":\"Flora\"},\"purchase_title\":\"Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/spring2026.PBT\",\"release_date\":\"2026-02-10T00:00:00Z\",\"reposts_count\":5,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Mac
+        Kay - Flora\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2271425129\",\"urn\":\"soundcloud:tracks:2271425129\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/2tSAa3XMimun_m.json\",\"display_date\":\"2026-03-10T00:30:06Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425129/45f9d397-acb5-4624-955c-45c430b9c901/stream/hls\",\"preset\":\"aac_160k\",\"duration\":158311,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425129/ca38d764-f99c-4b66-96a0-9ee6d5a901ba/stream/hls\",\"preset\":\"aac_96k\",\"duration\":158311,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425129/195812f0-9679-4078-bb64-52b7d3cee927/stream/hls\",\"preset\":\"abr_sq\",\"duration\":158311,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425129/098aef2a-b19d-4aca-a4fe-c5ff2b4b53d6/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":158302,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425129/098aef2a-b19d-4aca-a4fe-c5ff2b4b53d6/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":158302,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2271425129\",\"station_permalink\":\"track-stations:2271425129\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjdlNWU4YTQyLTkzYzEtNDAwYi1iMDRmLWY2ZmQyMTZmMzBjMSIsImlhdCI6MTc3ODE2ODkxNn0.K2bp7x344Opu27KQQEDQBKaStV6nl2o-XlYYxigbZ_w\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-zeo3n6wX2W2Xft5q-570bEw-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":1,\"created_at\":\"2026-02-22T19:55:26Z\",\"description\":\"It\u2019s
+        that time again. Winter finally cleared out without much ceremony, and suddenly
+        the air feels different. Windows are opening. Streets look a little less gray.
+        Essentials Spring 2026 is up, and it sounds like that moment when you realize
+        the season\u2019s changed halfway through your day. We put together 24 new
+        instrumentals that move through warm textures, easy rhythms, and steady grooves.
+        Stuff to listen to while you work, walk, or stare out the window longer than
+        necessary. Nothing flashy. Just music that gets out of your way while the
+        city does its thing.\\n\\nThis seasonal release has been around since 2016,
+        and over time it\u2019s turned into its own ongoing story, whether we meant
+        it to or not. If you\u2019ve been listening for a while, you already know
+        how these drops tend to feel. If you\u2019re new, welcome; this seemed like
+        a decent place to start. This chapter finds the crew bouncing between friends\u2019
+        places and getting a better sense of the city from the inside. Spring 2026
+        takes place in Triplet Peaks, a hillside borough on the west side of town
+        where streets climb, water runs wherever it wants, and green tends to take
+        over if you let it.\\n\\nWhether you\u2019re settling into the season, checking
+        out a new place through someone else\u2019s perspective, or just looking for
+        background music that doesn\u2019t suck, these tracks are here to keep you
+        company. Sleepy Fish, HM Surf, Psalm Trees, Ruck P, and plenty more. Take
+        your time with it. Look around. There\u2019s a lot more year left, and this
+        is just the start.\",\"downloadable\":false,\"download_count\":0,\"duration\":208045,\"full_duration\":208039,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2271425126,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2026-03-10T00:30:06Z\",\"license\":\"all-rights-reserved\",\"likes_count\":36,\"permalink\":\"chromo-the-dreamer-cloud-builders-3\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/chromo-the-dreamer-cloud-builders-3\",\"playback_count\":3990,\"public\":true,\"publisher_metadata\":{\"id\":2271425126,\"urn\":\"soundcloud:tracks:2271425126\",\"artist\":\"chromo,
+        the dreamer\",\"album_title\":\"Chillhop Essentials Spring 2026\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098054051\",\"isrc\":\"NL1LE2503839\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Christian
+        Crenshaw\",\"release_title\":\"Cloud Builders.\"},\"purchase_title\":\"Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/spring2026.PBT\",\"release_date\":\"2026-03-10T00:00:00Z\",\"reposts_count\":3,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"chromo,
+        the dreamer - Cloud Builders.\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2271425126\",\"urn\":\"soundcloud:tracks:2271425126\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/wZVrRwU6VdUN_m.json\",\"display_date\":\"2026-03-10T00:30:06Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425126/68945c40-bc79-48b9-a70a-841585de69f6/stream/hls\",\"preset\":\"aac_160k\",\"duration\":208045,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425126/44a926c7-8e69-4c22-97d6-829121b006a9/stream/hls\",\"preset\":\"aac_96k\",\"duration\":208045,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425126/46eb0fa5-b677-45b8-af5e-ad39dc38b337/stream/hls\",\"preset\":\"abr_sq\",\"duration\":208045,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425126/4693e130-d0e9-4b13-b271-8af7610e8dd1/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":208039,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425126/4693e130-d0e9-4b13-b271-8af7610e8dd1/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":208039,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2271425126\",\"station_permalink\":\"track-stations:2271425126\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImZkYTcyZjg5LTVlMWUtNDAwMC1hYzZhLTg2ZGNkYWFjNTc5NCIsImlhdCI6MTc3ODE2ODkxNn0.xSBDhxl2tEBseKQ9PPCBvVW0YnrChByqJawht2WG8T8\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-6vE4zheosJswLR3w-6PG6iQ-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":0,\"created_at\":\"2026-02-22T19:55:26Z\",\"description\":\"It\u2019s
+        that time again. Winter finally cleared out without much ceremony, and suddenly
+        the air feels different. Windows are opening. Streets look a little less gray.
+        Essentials Spring 2026 is up, and it sounds like that moment when you realize
+        the season\u2019s changed halfway through your day. We put together 24 new
+        instrumentals that move through warm textures, easy rhythms, and steady grooves.
+        Stuff to listen to while you work, walk, or stare out the window longer than
+        necessary. Nothing flashy. Just music that gets out of your way while the
+        city does its thing.\\n\\nThis seasonal release has been around since 2016,
+        and over time it\u2019s turned into its own ongoing story, whether we meant
+        it to or not. If you\u2019ve been listening for a while, you already know
+        how these drops tend to feel. If you\u2019re new, welcome; this seemed like
+        a decent place to start. This chapter finds the crew bouncing between friends\u2019
+        places and getting a better sense of the city from the inside. Spring 2026
+        takes place in Triplet Peaks, a hillside borough on the west side of town
+        where streets climb, water runs wherever it wants, and green tends to take
+        over if you let it.\\n\\nWhether you\u2019re settling into the season, checking
+        out a new place through someone else\u2019s perspective, or just looking for
+        background music that doesn\u2019t suck, these tracks are here to keep you
+        company. Sleepy Fish, HM Surf, Psalm Trees, Ruck P, and plenty more. Take
+        your time with it. Look around. There\u2019s a lot more year left, and this
+        is just the start.\",\"downloadable\":false,\"download_count\":0,\"duration\":204777,\"full_duration\":204774,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2271425123,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2026-03-10T00:30:06Z\",\"license\":\"all-rights-reserved\",\"likes_count\":24,\"permalink\":\"goosetaf-gregory-david-dine-n-dash-4\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/goosetaf-gregory-david-dine-n-dash-4\",\"playback_count\":4242,\"public\":true,\"publisher_metadata\":{\"id\":2271425123,\"urn\":\"soundcloud:tracks:2271425123\",\"artist\":\"goosetaf,
+        Gregory David\",\"album_title\":\"Chillhop Essentials Spring 2026\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098054051\",\"isrc\":\"NL1LE2503847\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Gustaf
+        John Henry Isaacson, Gregory David Clark\",\"release_title\":\"Dine 'n Dash\"},\"purchase_title\":\"Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/spring2026.PBT\",\"release_date\":\"2026-03-10T00:00:00Z\",\"reposts_count\":1,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"goosetaf,
+        Gregory David - Dine 'n Dash\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2271425123\",\"urn\":\"soundcloud:tracks:2271425123\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/y2XxQfGI9B0E_m.json\",\"display_date\":\"2026-03-10T00:30:06Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425123/b632f1c4-fb2f-44ee-8e88-fc6513ed3c5a/stream/hls\",\"preset\":\"aac_160k\",\"duration\":204777,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425123/c5e76856-5723-4364-ab64-c06777bfe4e1/stream/hls\",\"preset\":\"aac_96k\",\"duration\":204777,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425123/380be3e0-35b1-4e7f-a3e7-628f01f9bdbf/stream/hls\",\"preset\":\"abr_sq\",\"duration\":204777,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425123/d7a20a27-c0bf-4ee0-aa47-d6e2ebbf3580/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":204774,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425123/d7a20a27-c0bf-4ee0-aa47-d6e2ebbf3580/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":204774,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2271425123\",\"station_permalink\":\"track-stations:2271425123\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImI2NjA0OTJiLWFiZDgtNDlhMi1hOWRhLTY3OTRjMGIwNjEwMSIsImlhdCI6MTc3ODE2ODkxNn0.yZ1hbPWqrnwcTDS53skdtDXrL0KaXFnC6qfX-Aor0-Y\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-S4YUywFwhWEPyVN5-qNQpvw-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":0,\"created_at\":\"2026-02-22T19:55:26Z\",\"description\":\"It\u2019s
+        that time again. Winter finally cleared out without much ceremony, and suddenly
+        the air feels different. Windows are opening. Streets look a little less gray.
+        Essentials Spring 2026 is up, and it sounds like that moment when you realize
+        the season\u2019s changed halfway through your day. We put together 24 new
+        instrumentals that move through warm textures, easy rhythms, and steady grooves.
+        Stuff to listen to while you work, walk, or stare out the window longer than
+        necessary. Nothing flashy. Just music that gets out of your way while the
+        city does its thing.\\n\\nThis seasonal release has been around since 2016,
+        and over time it\u2019s turned into its own ongoing story, whether we meant
+        it to or not. If you\u2019ve been listening for a while, you already know
+        how these drops tend to feel. If you\u2019re new, welcome; this seemed like
+        a decent place to start. This chapter finds the crew bouncing between friends\u2019
+        places and getting a better sense of the city from the inside. Spring 2026
+        takes place in Triplet Peaks, a hillside borough on the west side of town
+        where streets climb, water runs wherever it wants, and green tends to take
+        over if you let it.\\n\\nWhether you\u2019re settling into the season, checking
+        out a new place through someone else\u2019s perspective, or just looking for
+        background music that doesn\u2019t suck, these tracks are here to keep you
+        company. Sleepy Fish, HM Surf, Psalm Trees, Ruck P, and plenty more. Take
+        your time with it. Look around. There\u2019s a lot more year left, and this
+        is just the start.\",\"downloadable\":false,\"download_count\":0,\"duration\":155954,\"full_duration\":155951,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2271425114,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2026-03-10T00:30:06Z\",\"license\":\"all-rights-reserved\",\"likes_count\":29,\"permalink\":\"enough-cereals-side-quest-5\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/enough-cereals-side-quest-5\",\"playback_count\":3484,\"public\":true,\"publisher_metadata\":{\"id\":2271425114,\"urn\":\"soundcloud:tracks:2271425114\",\"artist\":\"Enough
+        Cereals\",\"album_title\":\"Chillhop Essentials Spring 2026\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098054051\",\"isrc\":\"NL1LE2503840\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Louis
+        Le Clerc, F\xE9lix Schmidt, Bastien Brison\",\"release_title\":\"Side Quest\"},\"purchase_title\":\"Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/spring2026.PBT\",\"release_date\":\"2026-03-10T00:00:00Z\",\"reposts_count\":2,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Enough
+        Cereals - Side Quest\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2271425114\",\"urn\":\"soundcloud:tracks:2271425114\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/4hI3i6Mx7QuX_m.json\",\"display_date\":\"2026-03-10T00:30:06Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425114/02fb0794-8f8a-4fe7-8a2f-b063861d2390/stream/hls\",\"preset\":\"aac_160k\",\"duration\":155954,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425114/7b1d3c49-c349-4fba-9442-e223cce51d94/stream/hls\",\"preset\":\"aac_96k\",\"duration\":155954,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425114/a078f42a-1851-4c6b-acd1-ac8acc10d2fb/stream/hls\",\"preset\":\"abr_sq\",\"duration\":155954,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425114/01b1e6ee-4fbb-4973-b80a-ef66e35c0493/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":155951,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2271425114/01b1e6ee-4fbb-4973-b80a-ef66e35c0493/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":155951,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2271425114\",\"station_permalink\":\"track-stations:2271425114\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjE0OWJiNjc1LTlkYzgtNDExNS05NjM1LWVhZjU2MWU0NWY1OSIsImlhdCI6MTc3ODE2ODkxNn0.-GdNBs8wTA_jKUulqq3-27hiatyaJy5vA6qxD9yV_UM\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"id\":2270249447,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425159,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425111,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425153,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425120,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425132,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425144,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425135,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425138,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425156,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425150,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425177,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425141,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425117,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425162,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425174,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425165,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425168,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2271425171,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"}],\"track_count\":24},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-aMYT5UBRzbpS3MwJ-NgDiBw-large.jpg\",\"created_at\":\"2025-08-22T10:19:42Z\",\"description\":\"Autumn
+        is in the air! Our most well-known series continues with Essentials Fall 2025,
+        the 10th autumnal release since beginning this ever-growing seasonal tradition
+        back in 2016.  \\n\\nFeaturing 44 artists contributing to 28 instrumentals,
+        Essentials Fall 2025 is a warm and cozy project designed to carry you through
+        the crisp, golden months ahead. Whether you're sipping something warm, going
+        for a long walk through falling leaves, or settling in for a focused work
+        session, these mellow and nostalgic tracks are the perfect soundtrack for
+        this new season. Fall is the perfect time to slow down, reminisce, reflect,
+        and get inspired by the world as it transitions around us.\\n\\nThe third
+        Essentials of 2025 also features Chillhop favorites like Sleepy Fish, Ian
+        Ewing, C Y G N, G Mills, and many more. These 68 minutes of hand-picked and
+        carefully-curated instrumental gems are everything you need to settle into
+        a brand new season.\\n\\nWhether you're drawn to jazzy lofi, smooth chillhop,
+        or classic boom bap beats, Essentials Fall 2025 offers a little something
+        for every kind of listener. Put on a hoodie, cozy up with some coffee, and
+        let the introspective vibes carry you through the season.\\n\\nAs for our
+        Raccoon\u2014last we saw, they were enjoying summer with Mango the Toucan
+        on a floating island. Now, as the leaves fall, with Mango still around, the
+        island has turned into a garden, complete with carrots and Jazz the Bunny.
+        Together, the three partake in deep conversations, cultivating, and connecting
+        with nature. The colors are shifting, the vibes are mellowing, and a new chapter
+        in the Chillhop world begins. Stay tuned to see where this journey takes us
+        next season.\",\"duration\":4126901,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"id\":2069854368,\"kind\":\"playlist\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-09-04T06:18:38Z\",\"license\":\"all-rights-reserved\",\"likes_count\":280,\"managed_by_feeds\":false,\"permalink\":\"chillhop-essentials-fall-2025\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/sets/chillhop-essentials-fall-2025\",\"public\":true,\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/fall2025.PBT\",\"release_date\":\"2025-09-04T00:00:00Z\",\"reposts_count\":15,\"secret_token\":null,\"sharing\":\"public\",\"tag_list\":\"\",\"title\":\"Chillhop
+        Essentials Fall 2025\",\"uri\":\"https://api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2069854368\",\"user_id\":35228969,\"set_type\":\"album\",\"is_album\":true,\"published_at\":\"2025-09-04T06:18:38Z\",\"display_date\":\"2025-09-04T06:18:38Z\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"city\":\"Rotterdam\",\"comments_count\":0,\"country_code\":\"NL\",\"created_at\":null,\"creator_subscriptions\":[{\"product\":{\"id\":\"creator-pro-unlimited\"}}],\"creator_subscription\":{\"product\":{\"id\":\"creator-pro-unlimited\"}},\"description\":\"Chillhop
+        Essentials - Spring 2026 out now!\\nhttps://chillhop.ffm.to/spring2026.pbt\\n\\n\U0001F3B6
+        Listen to Chillhop on Spotify & Apple Music\\n\u30FB chillhop.ffm.to/chillhopradiospotify.pbt
+        (Spotify)\\n\u30FB chillhop.ffm.to/chillhopradioapplemusic.pbt (Apple Music)\",\"followers_count\":193202,\"followings_count\":997,\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"full_name\":\"Your Daily Chilled Vibes!\",\"groups_count\":0,\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"likes_count\":886,\"playlist_likes_count\":63,\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"playlist_count\":145,\"reposts_count\":null,\"track_count\":1773,\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"visuals\":{\"urn\":\"soundcloud:users:35228969\",\"enabled\":true,\"visuals\":[{\"urn\":\"soundcloud:visuals:219249249\",\"entry_time\":0,\"visual_url\":\"https://i1.sndcdn.com/visuals-000035228969-ZH1Iq8-original.jpg\"}],\"tracking\":null},\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\",\"date_of_birth\":null},\"tracks\":[{\"artwork_url\":\"https://i1.sndcdn.com/artworks-wCXnxAowdJmiPUFC-7CnjhQ-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":3,\"created_at\":\"2025-08-22T10:19:41Z\",\"description\":\"Autumn
+        is in the air! Our most well-known series continues with Essentials Fall 2025,
+        the 10th autumnal release since beginning this ever-growing seasonal tradition
+        back in 2016.  \\n\\nFeaturing 44 artists contributing to 28 instrumentals,
+        Essentials Fall 2025 is a warm and cozy project designed to carry you through
+        the crisp, golden months ahead. Whether you're sipping something warm, going
+        for a long walk through falling leaves, or settling in for a focused work
+        session, these mellow and nostalgic tracks are the perfect soundtrack for
+        this new season. Fall is the perfect time to slow down, reminisce, reflect,
+        and get inspired by the world as it transitions around us.\\n\\nThe third
+        Essentials of 2025 also features Chillhop favorites like Sleepy Fish, Ian
+        Ewing, C Y G N, G Mills, and many more. These 68 minutes of hand-picked and
+        carefully-curated instrumental gems are everything you need to settle into
+        a brand new season.\\n\\nWhether you're drawn to jazzy lofi, smooth chillhop,
+        or classic boom bap beats, Essentials Fall 2025 offers a little something
+        for every kind of listener. Put on a hoodie, cozy up with some coffee, and
+        let the introspective vibes carry you through the season.\\n\\nAs for our
+        Raccoon\u2014last we saw, they were enjoying summer with Mango the Toucan
+        on a floating island. Now, as the leaves fall, with Mango still around, the
+        island has turned into a garden, complete with carrots and Jazz the Bunny.
+        Together, the three partake in deep conversations, cultivating, and connecting
+        with nature. The colors are shifting, the vibes are mellowing, and a new chapter
+        in the Chillhop world begins. Stay tuned to see where this journey takes us
+        next season.\",\"downloadable\":false,\"download_count\":0,\"duration\":135959,\"full_duration\":135941,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2157500322,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-09-04T00:30:02Z\",\"license\":\"all-rights-reserved\",\"likes_count\":93,\"permalink\":\"haystack-rock-1\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/haystack-rock-1\",\"playback_count\":12699,\"public\":true,\"publisher_metadata\":{\"id\":2157500322,\"urn\":\"soundcloud:tracks:2157500322\",\"artist\":\"Sweeps,
+        luv pug\",\"album_title\":\"Chillhop Essentials Fall 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098052538\",\"isrc\":\"NL1LE2503715\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Sweeps,
+        Kyle Scherrer\",\"release_title\":\"Haystack Rock\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/fall2025.PBT\",\"release_date\":\"2025-09-04T00:00:00Z\",\"reposts_count\":2,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Haystack
+        Rock\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2157500322\",\"urn\":\"soundcloud:tracks:2157500322\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/1L6C7HsgrC8Z_m.json\",\"display_date\":\"2025-09-04T00:30:02Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500322/c5cf2d6f-57e0-46c0-b0ee-a9ebcc303984/stream/hls\",\"preset\":\"aac_160k\",\"duration\":135959,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500322/9264bb3a-4f1e-4756-9707-ce9767a7e763/stream/hls\",\"preset\":\"aac_96k\",\"duration\":135959,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500322/447df189-0388-4ec2-b75b-5c982ed8cf71/stream/hls\",\"preset\":\"abr_sq\",\"duration\":135959,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500322/eb5fc638-b441-4118-a693-e5fd6ede507a/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":135941,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500322/eb5fc638-b441-4118-a693-e5fd6ede507a/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":135941,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2157500322\",\"station_permalink\":\"track-stations:2157500322\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjZjMTViY2NiLTJlYjctNDE4Zi1iOGI1LWU3MzkzMGExYzAzZiIsImlhdCI6MTc3ODE2ODkxNn0.BECM2aaeIHsX5jQzaf7ZlBOZSynrAv662NPvfOnav8M\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-nibuNUQl0WTRBbrp-LHAzIA-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":1,\"created_at\":\"2025-08-22T10:19:41Z\",\"description\":\"Autumn
+        is in the air! Our most well-known series continues with Essentials Fall 2025,
+        the 10th autumnal release since beginning this ever-growing seasonal tradition
+        back in 2016.  \\n\\nFeaturing 44 artists contributing to 28 instrumentals,
+        Essentials Fall 2025 is a warm and cozy project designed to carry you through
+        the crisp, golden months ahead. Whether you're sipping something warm, going
+        for a long walk through falling leaves, or settling in for a focused work
+        session, these mellow and nostalgic tracks are the perfect soundtrack for
+        this new season. Fall is the perfect time to slow down, reminisce, reflect,
+        and get inspired by the world as it transitions around us.\\n\\nThe third
+        Essentials of 2025 also features Chillhop favorites like Sleepy Fish, Ian
+        Ewing, C Y G N, G Mills, and many more. These 68 minutes of hand-picked and
+        carefully-curated instrumental gems are everything you need to settle into
+        a brand new season.\\n\\nWhether you're drawn to jazzy lofi, smooth chillhop,
+        or classic boom bap beats, Essentials Fall 2025 offers a little something
+        for every kind of listener. Put on a hoodie, cozy up with some coffee, and
+        let the introspective vibes carry you through the season.\\n\\nAs for our
+        Raccoon\u2014last we saw, they were enjoying summer with Mango the Toucan
+        on a floating island. Now, as the leaves fall, with Mango still around, the
+        island has turned into a garden, complete with carrots and Jazz the Bunny.
+        Together, the three partake in deep conversations, cultivating, and connecting
+        with nature. The colors are shifting, the vibes are mellowing, and a new chapter
+        in the Chillhop world begins. Stay tuned to see where this journey takes us
+        next season.\",\"downloadable\":false,\"download_count\":0,\"duration\":142372,\"full_duration\":142367,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2157500337,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-09-04T00:30:02Z\",\"license\":\"all-rights-reserved\",\"likes_count\":70,\"permalink\":\"introvert-2\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/introvert-2\",\"playback_count\":13889,\"public\":true,\"publisher_metadata\":{\"id\":2157500337,\"urn\":\"soundcloud:tracks:2157500337\",\"artist\":\"\xD8DYSSEE,
+        Florent Garcia, Dosi\",\"album_title\":\"Chillhop Essentials Fall 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098052538\",\"isrc\":\"NL1LE2503727\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Louis
+        Le Clerc, Florent Francis Garcia, Benjamin Sigisfr\xE9do Karp\",\"release_title\":\"Introvert\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/fall2025.PBT\",\"release_date\":\"2025-09-04T00:00:00Z\",\"reposts_count\":3,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Introvert\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2157500337\",\"urn\":\"soundcloud:tracks:2157500337\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/CMgGGv7L6Xgi_m.json\",\"display_date\":\"2025-09-04T00:30:02Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500337/4c9d0bdf-75bc-4f05-9204-0aa72179d483/stream/hls\",\"preset\":\"aac_160k\",\"duration\":142372,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500337/37be2b0d-704f-4d28-adf3-e3cbe30be04e/stream/hls\",\"preset\":\"aac_96k\",\"duration\":142372,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500337/b0fef00d-62dd-4d63-83a5-42145f854d53/stream/hls\",\"preset\":\"abr_sq\",\"duration\":142372,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500337/94b9bf87-cfe2-42be-8919-cdb1ed893648/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":142367,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500337/94b9bf87-cfe2-42be-8919-cdb1ed893648/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":142367,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2157500337\",\"station_permalink\":\"track-stations:2157500337\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImU4YzNjNWE5LTM1MjQtNDdiMC1hODI0LTJlNTA4NzNhZDRmMCIsImlhdCI6MTc3ODE2ODkxNn0.Hl9gHZ8FFhIPjPOUxKlSInyx4kIxM4bNkp7sXOMasII\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-mbOUmPYVLKkcEQOk-dIrT5w-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":2,\"created_at\":\"2025-08-22T10:19:41Z\",\"description\":\"Autumn
+        is in the air! Our most well-known series continues with Essentials Fall 2025,
+        the 10th autumnal release since beginning this ever-growing seasonal tradition
+        back in 2016.  \\n\\nFeaturing 44 artists contributing to 28 instrumentals,
+        Essentials Fall 2025 is a warm and cozy project designed to carry you through
+        the crisp, golden months ahead. Whether you're sipping something warm, going
+        for a long walk through falling leaves, or settling in for a focused work
+        session, these mellow and nostalgic tracks are the perfect soundtrack for
+        this new season. Fall is the perfect time to slow down, reminisce, reflect,
+        and get inspired by the world as it transitions around us.\\n\\nThe third
+        Essentials of 2025 also features Chillhop favorites like Sleepy Fish, Ian
+        Ewing, C Y G N, G Mills, and many more. These 68 minutes of hand-picked and
+        carefully-curated instrumental gems are everything you need to settle into
+        a brand new season.\\n\\nWhether you're drawn to jazzy lofi, smooth chillhop,
+        or classic boom bap beats, Essentials Fall 2025 offers a little something
+        for every kind of listener. Put on a hoodie, cozy up with some coffee, and
+        let the introspective vibes carry you through the season.\\n\\nAs for our
+        Raccoon\u2014last we saw, they were enjoying summer with Mango the Toucan
+        on a floating island. Now, as the leaves fall, with Mango still around, the
+        island has turned into a garden, complete with carrots and Jazz the Bunny.
+        Together, the three partake in deep conversations, cultivating, and connecting
+        with nature. The colors are shifting, the vibes are mellowing, and a new chapter
+        in the Chillhop world begins. Stay tuned to see where this journey takes us
+        next season.\",\"downloadable\":false,\"download_count\":0,\"duration\":153493,\"full_duration\":153496,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2157500340,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-09-04T00:30:02Z\",\"license\":\"all-rights-reserved\",\"likes_count\":57,\"permalink\":\"between-phases-3\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/between-phases-3\",\"playback_count\":9282,\"public\":true,\"publisher_metadata\":{\"id\":2157500340,\"urn\":\"soundcloud:tracks:2157500340\",\"artist\":\"goosetaf\",\"album_title\":\"Chillhop
+        Essentials Fall 2025\",\"contains_music\":true,\"publisher\":\"Chillhop Publishing
+        B.V.\",\"upc_or_ean\":\"723098052538\",\"isrc\":\"NL1LE2503726\",\"explicit\":false,\"writer_composer\":\"Gustaf
+        Isaacson\",\"release_title\":\"Between Phases\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/fall2025.PBT\",\"release_date\":\"2025-09-04T00:00:00Z\",\"reposts_count\":3,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Between
+        Phases\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2157500340\",\"urn\":\"soundcloud:tracks:2157500340\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/kuHDwjiKMSvJ_m.json\",\"display_date\":\"2025-09-04T00:30:02Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500340/cf36fee7-44ac-468b-8b1c-bd1dc6608b71/stream/hls\",\"preset\":\"aac_160k\",\"duration\":153493,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500340/0d900d8a-1cf9-4328-82b2-8b13ab49eda6/stream/hls\",\"preset\":\"aac_96k\",\"duration\":153493,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500340/ca3bd3da-69e8-46de-8089-21fa394a06d8/stream/hls\",\"preset\":\"abr_sq\",\"duration\":153493,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500340/7481db1d-6828-4059-9cf8-01adc8712083/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":153496,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500340/7481db1d-6828-4059-9cf8-01adc8712083/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":153496,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2157500340\",\"station_permalink\":\"track-stations:2157500340\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImIzMzZmZjAxLTk3NGQtNDVkNy05N2VjLTFkNmI2NWY5ZDA5NiIsImlhdCI6MTc3ODE2ODkxNn0.GonkkjLXKRPT5WMnCbod5Z-sF7FyeHhmP0B3yemZAFA\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-LYFvH0zgGyc6vcjR-YH74MA-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":1,\"created_at\":\"2025-08-22T10:19:41Z\",\"description\":\"Autumn
+        is in the air! Our most well-known series continues with Essentials Fall 2025,
+        the 10th autumnal release since beginning this ever-growing seasonal tradition
+        back in 2016.  \\n\\nFeaturing 44 artists contributing to 28 instrumentals,
+        Essentials Fall 2025 is a warm and cozy project designed to carry you through
+        the crisp, golden months ahead. Whether you're sipping something warm, going
+        for a long walk through falling leaves, or settling in for a focused work
+        session, these mellow and nostalgic tracks are the perfect soundtrack for
+        this new season. Fall is the perfect time to slow down, reminisce, reflect,
+        and get inspired by the world as it transitions around us.\\n\\nThe third
+        Essentials of 2025 also features Chillhop favorites like Sleepy Fish, Ian
+        Ewing, C Y G N, G Mills, and many more. These 68 minutes of hand-picked and
+        carefully-curated instrumental gems are everything you need to settle into
+        a brand new season.\\n\\nWhether you're drawn to jazzy lofi, smooth chillhop,
+        or classic boom bap beats, Essentials Fall 2025 offers a little something
+        for every kind of listener. Put on a hoodie, cozy up with some coffee, and
+        let the introspective vibes carry you through the season.\\n\\nAs for our
+        Raccoon\u2014last we saw, they were enjoying summer with Mango the Toucan
+        on a floating island. Now, as the leaves fall, with Mango still around, the
+        island has turned into a garden, complete with carrots and Jazz the Bunny.
+        Together, the three partake in deep conversations, cultivating, and connecting
+        with nature. The colors are shifting, the vibes are mellowing, and a new chapter
+        in the Chillhop world begins. Stay tuned to see where this journey takes us
+        next season.\",\"downloadable\":false,\"download_count\":0,\"duration\":145481,\"full_duration\":145476,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2157500328,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-09-04T00:30:02Z\",\"license\":\"all-rights-reserved\",\"likes_count\":60,\"permalink\":\"otono-4\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/otono-4\",\"playback_count\":9331,\"public\":true,\"publisher_metadata\":{\"id\":2157500328,\"urn\":\"soundcloud:tracks:2157500328\",\"artist\":\"Gas-Lab,
+        Kristoffer Eikrem\",\"album_title\":\"Chillhop Essentials Fall 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098052538\",\"isrc\":\"NL1LE2503724\",\"explicit\":false,\"writer_composer\":\"Gas-Lab,
+        Kristoffer Eikrem\",\"release_title\":\"Oton\u0303o\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/fall2025.PBT\",\"release_date\":\"2025-09-04T00:00:00Z\",\"reposts_count\":3,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Oton\u0303o\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2157500328\",\"urn\":\"soundcloud:tracks:2157500328\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/sEQJG55ROtqb_m.json\",\"display_date\":\"2025-09-04T00:30:02Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500328/840b30bb-bb49-4927-a30d-d2dd595e0039/stream/hls\",\"preset\":\"aac_160k\",\"duration\":145481,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500328/4bab3d40-1043-4103-9c9c-4634b525b558/stream/hls\",\"preset\":\"aac_96k\",\"duration\":145481,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500328/b22260a9-c9c3-4d95-9928-b2d3ddb66f9d/stream/hls\",\"preset\":\"abr_sq\",\"duration\":145481,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500328/1b5c5e0c-117d-43e3-9c17-1a48e12c0b98/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":145476,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500328/1b5c5e0c-117d-43e3-9c17-1a48e12c0b98/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":145476,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2157500328\",\"station_permalink\":\"track-stations:2157500328\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjE5Y2Y0MWYyLTM4ODQtNGI2YS1iODAyLWQ0MDhhN2VlMDM4YyIsImlhdCI6MTc3ODE2ODkxNn0.8r5WcmQumyVGJdfLZck6GL7mV0PIGNhh-QuYszsglrM\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-pWBml1Vbow3XpVig-k7eAnA-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":0,\"created_at\":\"2025-08-22T10:19:41Z\",\"description\":\"Autumn
+        is in the air! Our most well-known series continues with Essentials Fall 2025,
+        the 10th autumnal release since beginning this ever-growing seasonal tradition
+        back in 2016.  \\n\\nFeaturing 44 artists contributing to 28 instrumentals,
+        Essentials Fall 2025 is a warm and cozy project designed to carry you through
+        the crisp, golden months ahead. Whether you're sipping something warm, going
+        for a long walk through falling leaves, or settling in for a focused work
+        session, these mellow and nostalgic tracks are the perfect soundtrack for
+        this new season. Fall is the perfect time to slow down, reminisce, reflect,
+        and get inspired by the world as it transitions around us.\\n\\nThe third
+        Essentials of 2025 also features Chillhop favorites like Sleepy Fish, Ian
+        Ewing, C Y G N, G Mills, and many more. These 68 minutes of hand-picked and
+        carefully-curated instrumental gems are everything you need to settle into
+        a brand new season.\\n\\nWhether you're drawn to jazzy lofi, smooth chillhop,
+        or classic boom bap beats, Essentials Fall 2025 offers a little something
+        for every kind of listener. Put on a hoodie, cozy up with some coffee, and
+        let the introspective vibes carry you through the season.\\n\\nAs for our
+        Raccoon\u2014last we saw, they were enjoying summer with Mango the Toucan
+        on a floating island. Now, as the leaves fall, with Mango still around, the
+        island has turned into a garden, complete with carrots and Jazz the Bunny.
+        Together, the three partake in deep conversations, cultivating, and connecting
+        with nature. The colors are shifting, the vibes are mellowing, and a new chapter
+        in the Chillhop world begins. Stay tuned to see where this journey takes us
+        next season.\",\"downloadable\":false,\"download_count\":0,\"duration\":171262,\"full_duration\":171259,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2157500301,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-09-04T00:30:02Z\",\"license\":\"all-rights-reserved\",\"likes_count\":49,\"permalink\":\"half-light-5\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/half-light-5\",\"playback_count\":9536,\"public\":true,\"publisher_metadata\":{\"id\":2157500301,\"urn\":\"soundcloud:tracks:2157500301\",\"artist\":\"Birocratic,
+        Ross Mayfield, Kosmicho\",\"album_title\":\"Chillhop Essentials Fall 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098052538\",\"isrc\":\"NL1LE2503719\",\"explicit\":false,\"writer_composer\":\"Brandon
+        Gabriel Rowan, Ross Mayfield, Kosmicho, Ethan Cohen\",\"release_title\":\"Half-Light\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/fall2025.PBT\",\"release_date\":\"2025-09-04T00:00:00Z\",\"reposts_count\":3,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Half-Light\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2157500301\",\"urn\":\"soundcloud:tracks:2157500301\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/uo8xktYiMsqp_m.json\",\"display_date\":\"2025-09-04T00:30:02Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500301/063a0081-b2b3-402b-a3d3-9f2acbd43727/stream/hls\",\"preset\":\"aac_160k\",\"duration\":171262,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500301/4e0a6031-8a39-4d80-a936-32f118da89ac/stream/hls\",\"preset\":\"aac_96k\",\"duration\":171262,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500301/6fdbb7ab-2447-4a7a-adfe-e3771251bbc4/stream/hls\",\"preset\":\"abr_sq\",\"duration\":171262,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500301/206e372e-f0ae-44ac-8953-8399d2313834/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":171259,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2157500301/206e372e-f0ae-44ac-8953-8399d2313834/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":171259,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2157500301\",\"station_permalink\":\"track-stations:2157500301\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImQyZDM0ZTIzLWQ4YzEtNGMzYS1iODQ5LTcyMTM4MDI1ZTgzZCIsImlhdCI6MTc3ODE2ODkxNn0.QQGiGxyoPVoqxyltbUt2foFvr30LbL--r65uVeeqAwI\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"id\":2157500313,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500334,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500295,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500271,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2151291138,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500292,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500319,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500274,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500298,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500268,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500343,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500304,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2156762793,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500289,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500283,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500280,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500316,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500286,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500325,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500307,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500331,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500277,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2157500310,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"}],\"track_count\":28},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-5PVFLFlpoXBepf96-cwXBwQ-large.jpg\",\"created_at\":\"2025-10-12T14:59:51Z\",\"description\":\"Attention:
+        it's officially time to switch from a hoodie to a heavy coat. The sunglasses
+        and flip flops remain in storage and all of the autumn leaves have fallen,
+        for it is time for fireside conversations, buckets of hot coffee, and much-needed
+        hibernation. It is time for Essentials Winter 2025. The world may be cooling
+        down, but if you press play, your speakers will start warming up.\\n\\nOur
+        long-running seasonal series provides end-of-the-year chill with its Winter
+        edition, continuing the tradition we kicked off all the way back in 2016.
+        Shout-out to the real ones who have been with us since the beginning. Say
+        farewell to Fall\u2019s golden glow, and welcome the cozy stillness of Winter,
+        a season made for blankets, deep thoughts, and deeper bass lines.\\n\\nLet
+        this new compilation be your space heater: 28 instrumental tracks crafted
+        by 37 producers from around the globe. From frostbitten lo-fi loops to jazzy
+        slow-burns and head-nodding vibes. Everything you need to soundtrack the coldest
+        months on this planet. Whether you're journaling by candlelight (analog vibes!),
+        watching snow fall from the window (chill, bro), or just letting your mind
+        wander in the quiet, these beats were made to keep you company.\\n\\nSo settle
+        in and start working on those New Year's resolutions. It'll be 2026 in no
+        time.\",\"duration\":4180297,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"id\":2095111347,\"kind\":\"playlist\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-12-04T06:49:03Z\",\"license\":\"all-rights-reserved\",\"likes_count\":160,\"managed_by_feeds\":false,\"permalink\":\"winter2025\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/sets/winter2025\",\"public\":true,\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/winter2025.PBT\",\"release_date\":\"2025-12-04T00:00:00Z\",\"reposts_count\":15,\"secret_token\":null,\"sharing\":\"public\",\"tag_list\":\"\",\"title\":\"Chillhop
+        Essentials Winter 2025\",\"uri\":\"https://api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2095111347\",\"user_id\":35228969,\"set_type\":\"album\",\"is_album\":true,\"published_at\":\"2025-12-04T06:49:03Z\",\"display_date\":\"2025-12-04T06:49:03Z\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"city\":\"Rotterdam\",\"comments_count\":0,\"country_code\":\"NL\",\"created_at\":null,\"creator_subscriptions\":[{\"product\":{\"id\":\"creator-pro-unlimited\"}}],\"creator_subscription\":{\"product\":{\"id\":\"creator-pro-unlimited\"}},\"description\":\"Chillhop
+        Essentials - Spring 2026 out now!\\nhttps://chillhop.ffm.to/spring2026.pbt\\n\\n\U0001F3B6
+        Listen to Chillhop on Spotify & Apple Music\\n\u30FB chillhop.ffm.to/chillhopradiospotify.pbt
+        (Spotify)\\n\u30FB chillhop.ffm.to/chillhopradioapplemusic.pbt (Apple Music)\",\"followers_count\":193202,\"followings_count\":997,\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"full_name\":\"Your Daily Chilled Vibes!\",\"groups_count\":0,\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"likes_count\":886,\"playlist_likes_count\":63,\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"playlist_count\":145,\"reposts_count\":null,\"track_count\":1773,\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"visuals\":{\"urn\":\"soundcloud:users:35228969\",\"enabled\":true,\"visuals\":[{\"urn\":\"soundcloud:visuals:219249249\",\"entry_time\":0,\"visual_url\":\"https://i1.sndcdn.com/visuals-000035228969-ZH1Iq8-original.jpg\"}],\"tracking\":null},\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\",\"date_of_birth\":null},\"tracks\":[{\"artwork_url\":\"https://i1.sndcdn.com/artworks-C4Zv8cupIDVLLkbF-PaNCKA-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":0,\"created_at\":\"2025-10-10T11:02:33Z\",\"description\":\"Attention:
+        it's officially time to switch from a hoodie to a heavy coat. The sunglasses
+        and flip flops remain in storage and all of the autumn leaves have fallen,
+        for it is time for fireside conversations, buckets of hot coffee, and much-needed
+        hibernation. It is time for Essentials Winter 2025. The world may be cooling
+        down, but if you press play, your speakers will start warming up.\\n\\nOur
+        long-running seasonal series provides end-of-the-year chill with its Winter
+        edition, continuing the tradition we kicked off all the way back in 2016.
+        Shout-out to the real ones who have been with us since the beginning. Say
+        farewell to Fall\u2019s golden glow, and welcome the cozy stillness of Winter,
+        a season made for blankets, deep thoughts, and deeper bass lines.\\n\\nLet
+        this new compilation be your space heater: 28 instrumental tracks crafted
+        by 37 producers from around the globe. From frostbitten lo-fi loops to jazzy
+        slow-burns and head-nodding vibes. Everything you need to soundtrack the coldest
+        months on this planet. Whether you're journaling by candlelight (analog vibes!),
+        watching snow fall from the window (chill, bro), or just letting your mind
+        wander in the quiet, these beats were made to keep you company.\\n\\nSo settle
+        in and start working on those New Year's resolutions. It'll be 2026 in no
+        time.\",\"downloadable\":false,\"download_count\":0,\"duration\":117016,\"full_duration\":117002,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2187023778,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-12-04T00:30:03Z\",\"license\":\"all-rights-reserved\",\"likes_count\":28,\"permalink\":\"always-white-ft-dani-catala-1\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/always-white-ft-dani-catala-1\",\"playback_count\":7709,\"public\":true,\"publisher_metadata\":{\"id\":2187023778,\"urn\":\"soundcloud:tracks:2187023778\",\"artist\":\"dennisivnvc\",\"album_title\":\"Chillhop
+        Essentials Winter 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098053221\",\"isrc\":\"NL1LE2503757\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Dennis
+        Wiebe, Dani Catal\xE1\",\"release_title\":\"Always White\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/winter2025.PBT\",\"release_date\":\"2025-12-04T00:00:00Z\",\"reposts_count\":3,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Always
+        White, ft. Dani Catal\xE1\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2187023778\",\"urn\":\"soundcloud:tracks:2187023778\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/bjmnq5tRD3j9_m.json\",\"display_date\":\"2025-12-04T00:30:03Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023778/cdcf0e31-6ac5-47a4-b6ab-3cd6177c5eaa/stream/hls\",\"preset\":\"aac_160k\",\"duration\":117016,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023778/df51b85c-2c29-4523-9925-8cdf3fc95d2d/stream/hls\",\"preset\":\"aac_96k\",\"duration\":117016,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023778/76e1e056-15ee-43d5-8026-8e07460e181a/stream/hls\",\"preset\":\"abr_sq\",\"duration\":117016,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023778/b8abd435-ebfe-4bc8-b2cc-f413028a1d8b/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":117002,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023778/b8abd435-ebfe-4bc8-b2cc-f413028a1d8b/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":117002,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2187023778\",\"station_permalink\":\"track-stations:2187023778\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjZlYWNhMmRlLTQzOTktNGM3My1iZTI4LWMyY2RlODM3M2VkYSIsImlhdCI6MTc3ODE2ODkxNn0.qYEL-FpRak61thMO5n-9izR4VWE3D3Whs5F7_ukwHM4\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-5PVFLFlpoXBepf96-cwXBwQ-large.png\",\"caption\":null,\"commentable\":true,\"comment_count\":0,\"created_at\":\"2025-10-12T14:59:50Z\",\"description\":\"Attention:
+        it's officially time to switch from a hoodie to a heavy coat. The sunglasses
+        and flip flops remain in storage and all of the autumn leaves have fallen,
+        for it is time for fireside conversations, buckets of hot coffee, and much-needed
+        hibernation. It is time for Essentials Winter 2025. The world may be cooling
+        down, but if you press play, your speakers will start warming up.\\n\\nOur
+        long-running seasonal series provides end-of-the-year chill with its Winter
+        edition, continuing the tradition we kicked off all the way back in 2016.
+        Shout-out to the real ones who have been with us since the beginning. Say
+        farewell to Fall\u2019s golden glow, and welcome the cozy stillness of Winter,
+        a season made for blankets, deep thoughts, and deeper bass lines.\\n\\nLet
+        this new compilation be your space heater: 28 instrumental tracks crafted
+        by 37 producers from around the globe. From frostbitten lo-fi loops to jazzy
+        slow-burns and head-nodding vibes. Everything you need to soundtrack the coldest
+        months on this planet. Whether you're journaling by candlelight (analog vibes!),
+        watching snow fall from the window (chill, bro), or just letting your mind
+        wander in the quiet, these beats were made to keep you company.\\n\\nSo settle
+        in and start working on those New Year's resolutions. It'll be 2026 in no
+        time.\",\"downloadable\":false,\"download_count\":0,\"duration\":185998,\"full_duration\":185992,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2188530107,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-12-04T06:28:25Z\",\"license\":\"all-rights-reserved\",\"likes_count\":60,\"permalink\":\"cold-start-1\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/cold-start-1\",\"playback_count\":9121,\"public\":true,\"publisher_metadata\":{\"id\":2188530107,\"urn\":\"soundcloud:tracks:2188530107\",\"artist\":\"anbuu,
+        Blue Wednesday\",\"publisher\":\"\",\"isrc\":\"NL1LE2503753\",\"explicit\":false},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/winter2025.PBT\",\"release_date\":\"2025-12-04T00:00:00Z\",\"reposts_count\":9,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Cold
+        Start\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2188530107\",\"urn\":\"soundcloud:tracks:2188530107\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/c7IU6DTq01Kc_m.json\",\"display_date\":\"2025-12-04T06:28:25Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530107/d93146a6-6a58-4cc3-b8b9-245548cc4ecb/stream/hls\",\"preset\":\"aac_160k\",\"duration\":185998,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530107/10735510-52e6-413f-9c2f-a99b684bda20/stream/hls\",\"preset\":\"aac_96k\",\"duration\":185998,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530107/bf97755a-963d-4357-bb3e-9839476d99ab/stream/hls\",\"preset\":\"abr_sq\",\"duration\":185998,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530107/5a426912-d7a3-4e09-9353-90ce6987907c/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":185992,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530107/5a426912-d7a3-4e09-9353-90ce6987907c/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":185992,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2188530107\",\"station_permalink\":\"track-stations:2188530107\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjBlNWZiYjdiLTMxYjktNGZkNS05YmEzLTFkOGE0YWZlYjQwYSIsImlhdCI6MTc3ODE2ODkxNn0.0tIR3VWrGzpKT0Z16r0hPW092lSyFshUpVw2FvCjqrs\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-ORgx1hDZyV89Q8vi-09swxQ-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":0,\"created_at\":\"2025-10-10T11:02:33Z\",\"description\":\"Attention:
+        it's officially time to switch from a hoodie to a heavy coat. The sunglasses
+        and flip flops remain in storage and all of the autumn leaves have fallen,
+        for it is time for fireside conversations, buckets of hot coffee, and much-needed
+        hibernation. It is time for Essentials Winter 2025. The world may be cooling
+        down, but if you press play, your speakers will start warming up.\\n\\nOur
+        long-running seasonal series provides end-of-the-year chill with its Winter
+        edition, continuing the tradition we kicked off all the way back in 2016.
+        Shout-out to the real ones who have been with us since the beginning. Say
+        farewell to Fall\u2019s golden glow, and welcome the cozy stillness of Winter,
+        a season made for blankets, deep thoughts, and deeper bass lines.\\n\\nLet
+        this new compilation be your space heater: 28 instrumental tracks crafted
+        by 37 producers from around the globe. From frostbitten lo-fi loops to jazzy
+        slow-burns and head-nodding vibes. Everything you need to soundtrack the coldest
+        months on this planet. Whether you're journaling by candlelight (analog vibes!),
+        watching snow fall from the window (chill, bro), or just letting your mind
+        wander in the quiet, these beats were made to keep you company.\\n\\nSo settle
+        in and start working on those New Year's resolutions. It'll be 2026 in no
+        time.\",\"downloadable\":false,\"download_count\":0,\"duration\":146100,\"full_duration\":146103,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2187023733,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-12-04T00:30:03Z\",\"license\":\"all-rights-reserved\",\"likes_count\":17,\"permalink\":\"at-first-there-was-rain-3\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/at-first-there-was-rain-3\",\"playback_count\":7038,\"public\":true,\"publisher_metadata\":{\"id\":2187023733,\"urn\":\"soundcloud:tracks:2187023733\",\"artist\":\"goosetaf,
+        Idan Morim\",\"album_title\":\"Chillhop Essentials Winter 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098053221\",\"isrc\":\"NL1LE2503769\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Gustaf
+        Isaacson, Idan Morim\",\"release_title\":\"At First There Was Rain\"},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/winter2025.PBT\",\"release_date\":\"2025-12-04T00:00:00Z\",\"reposts_count\":2,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"At
+        First There Was Rain\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2187023733\",\"urn\":\"soundcloud:tracks:2187023733\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/BHyzxH35DvfY_m.json\",\"display_date\":\"2025-12-04T00:30:03Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023733/5a1cea92-c24b-41b0-a879-af0604c3d9b5/stream/hls\",\"preset\":\"aac_160k\",\"duration\":146100,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023733/3e52ce23-ca68-4741-a57a-b3e0484fff15/stream/hls\",\"preset\":\"aac_96k\",\"duration\":146100,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023733/e68e33c1-2518-4e0c-b012-6824a2e1cdec/stream/hls\",\"preset\":\"abr_sq\",\"duration\":146100,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023733/0070e3d1-02f6-492e-b1e1-25ffc591ccff/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":146103,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023733/0070e3d1-02f6-492e-b1e1-25ffc591ccff/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":146103,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2187023733\",\"station_permalink\":\"track-stations:2187023733\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImFlZWMyYmUxLWUzMzMtNDYwZC04NWMyLWU3NTZiZGJlYmM2NCIsImlhdCI6MTc3ODE2ODkxNn0.7JMrv1wxbWdSdHnE-m-8HlllXYRsDjTFs3SP4WQRf5E\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-OZr5xNAQJueOAaA1-yUCnnQ-large.jpg\",\"caption\":null,\"commentable\":true,\"comment_count\":3,\"created_at\":\"2025-10-10T11:02:33Z\",\"description\":\"Attention:
+        it's officially time to switch from a hoodie to a heavy coat. The sunglasses
+        and flip flops remain in storage and all of the autumn leaves have fallen,
+        for it is time for fireside conversations, buckets of hot coffee, and much-needed
+        hibernation. It is time for Essentials Winter 2025. The world may be cooling
+        down, but if you press play, your speakers will start warming up.\\n\\nOur
+        long-running seasonal series provides end-of-the-year chill with its Winter
+        edition, continuing the tradition we kicked off all the way back in 2016.
+        Shout-out to the real ones who have been with us since the beginning. Say
+        farewell to Fall\u2019s golden glow, and welcome the cozy stillness of Winter,
+        a season made for blankets, deep thoughts, and deeper bass lines.\\n\\nLet
+        this new compilation be your space heater: 28 instrumental tracks crafted
+        by 37 producers from around the globe. From frostbitten lo-fi loops to jazzy
+        slow-burns and head-nodding vibes. Everything you need to soundtrack the coldest
+        months on this planet. Whether you're journaling by candlelight (analog vibes!),
+        watching snow fall from the window (chill, bro), or just letting your mind
+        wander in the quiet, these beats were made to keep you company.\\n\\nSo settle
+        in and start working on those New Year's resolutions. It'll be 2026 in no
+        time.\",\"downloadable\":false,\"download_count\":0,\"duration\":179962,\"full_duration\":179958,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2187023848,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-12-04T00:30:03Z\",\"license\":\"all-rights-reserved\",\"likes_count\":24,\"permalink\":\"color-flow-4\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/color-flow-4\",\"playback_count\":6912,\"public\":true,\"publisher_metadata\":{\"id\":2187023848,\"urn\":\"soundcloud:tracks:2187023848\",\"artist\":\"Saib\",\"album_title\":\"Chillhop
+        Essentials Winter 2025\",\"contains_music\":true,\"publisher\":\"Chillhop
+        Publishing B.V.\",\"upc_or_ean\":\"723098053221\",\"isrc\":\"NL1LE2503775\",\"explicit\":false,\"p_line\":\"Chillhop
+        Music B.V.\",\"p_line_for_display\":\"\u2117 Chillhop Music B.V.\",\"writer_composer\":\"Hamza
+        Saib\",\"release_title\":\"Color Flow\"},\"purchase_title\":\"\U0001F3A7 Download
+        / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/winter2025.PBT\",\"release_date\":\"2025-12-04T00:00:00Z\",\"reposts_count\":2,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Color
+        Flow\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2187023848\",\"urn\":\"soundcloud:tracks:2187023848\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/ShEqfuqr3yO4_m.json\",\"display_date\":\"2025-12-04T00:30:03Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023848/26e3c135-f894-40c2-9657-382a69a52143/stream/hls\",\"preset\":\"aac_160k\",\"duration\":179962,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023848/36930fdb-07cd-477a-a730-37d972afefbe/stream/hls\",\"preset\":\"aac_96k\",\"duration\":179962,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023848/e8e61543-ad22-4a76-b87e-bf397ad226b1/stream/hls\",\"preset\":\"abr_sq\",\"duration\":179962,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023848/507ccecc-da35-476c-ae22-2cec03ec487b/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":179958,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2187023848/507ccecc-da35-476c-ae22-2cec03ec487b/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":179958,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2187023848\",\"station_permalink\":\"track-stations:2187023848\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6ImNmMTY1N2I2LWZhYjAtNGVlZC1hN2ZmLWFkOTQ0Y2IzMWZiYyIsImlhdCI6MTc3ODE2ODkxNn0.NZ0o0WuvyeESz8Br8KBbQs2LKcchBLUFPYeiS-yJwYo\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"artwork_url\":\"https://i1.sndcdn.com/artworks-5PVFLFlpoXBepf96-cwXBwQ-large.png\",\"caption\":null,\"commentable\":true,\"comment_count\":1,\"created_at\":\"2025-10-12T14:59:50Z\",\"description\":\"Attention:
+        it's officially time to switch from a hoodie to a heavy coat. The sunglasses
+        and flip flops remain in storage and all of the autumn leaves have fallen,
+        for it is time for fireside conversations, buckets of hot coffee, and much-needed
+        hibernation. It is time for Essentials Winter 2025. The world may be cooling
+        down, but if you press play, your speakers will start warming up.\\n\\nOur
+        long-running seasonal series provides end-of-the-year chill with its Winter
+        edition, continuing the tradition we kicked off all the way back in 2016.
+        Shout-out to the real ones who have been with us since the beginning. Say
+        farewell to Fall\u2019s golden glow, and welcome the cozy stillness of Winter,
+        a season made for blankets, deep thoughts, and deeper bass lines.\\n\\nLet
+        this new compilation be your space heater: 28 instrumental tracks crafted
+        by 37 producers from around the globe. From frostbitten lo-fi loops to jazzy
+        slow-burns and head-nodding vibes. Everything you need to soundtrack the coldest
+        months on this planet. Whether you're journaling by candlelight (analog vibes!),
+        watching snow fall from the window (chill, bro), or just letting your mind
+        wander in the quiet, these beats were made to keep you company.\\n\\nSo settle
+        in and start working on those New Year's resolutions. It'll be 2026 in no
+        time.\",\"downloadable\":false,\"download_count\":0,\"duration\":180117,\"full_duration\":180114,\"embeddable_by\":\"all\",\"genre\":\"Chillhop\",\"has_downloads_left\":false,\"id\":2188530119,\"kind\":\"track\",\"label_name\":\"Chillhop
+        Music\",\"last_modified\":\"2025-12-04T06:28:47Z\",\"license\":\"all-rights-reserved\",\"likes_count\":58,\"permalink\":\"night-waltz-2\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom/night-waltz-2\",\"playback_count\":8376,\"public\":true,\"publisher_metadata\":{\"id\":2188530119,\"urn\":\"soundcloud:tracks:2188530119\",\"artist\":\"Sweeps,
+        luv pug\",\"publisher\":\"\",\"isrc\":\"NL1LE2503779\",\"explicit\":false},\"purchase_title\":\"\U0001F3A7
+        Download / Stream\",\"purchase_url\":\"https://chillhop.ffm.to/winter2025.PBT\",\"release_date\":\"2025-12-04T00:00:00Z\",\"reposts_count\":7,\"secret_token\":null,\"sharing\":\"public\",\"state\":\"finished\",\"streamable\":true,\"tag_list\":\"\",\"title\":\"Night
+        Waltz\",\"uri\":\"https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2188530119\",\"urn\":\"soundcloud:tracks:2188530119\",\"user_id\":35228969,\"visuals\":null,\"waveform_url\":\"https://wave.sndcdn.com/sASZoj16hGRK_m.json\",\"display_date\":\"2025-12-04T06:28:47Z\",\"media\":{\"transcodings\":[{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530119/9aed4fe5-5245-4d02-a1fa-6da589a818b5/stream/hls\",\"preset\":\"aac_160k\",\"duration\":180117,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530119/9c297afb-0b77-4c84-8c20-a17e761ff289/stream/hls\",\"preset\":\"aac_96k\",\"duration\":180117,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mp4;
+        codecs=\\\"mp4a.40.2\\\"\"},\"quality\":\"lq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530119/fc908afc-083e-469f-9a98-f04c059e3a20/stream/hls\",\"preset\":\"abr_sq\",\"duration\":180117,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpegurl\"},\"quality\":\"sq\",\"is_legacy_transcoding\":false},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530119/07150d85-b836-4288-b7a5-1d8667411e9d/stream/hls\",\"preset\":\"mp3_1_0\",\"duration\":180114,\"snipped\":false,\"format\":{\"protocol\":\"hls\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true},{\"url\":\"https://api-v2.soundcloud.com/media/soundcloud:tracks:2188530119/07150d85-b836-4288-b7a5-1d8667411e9d/stream/progressive\",\"preset\":\"mp3_1_0\",\"duration\":180114,\"snipped\":false,\"format\":{\"protocol\":\"progressive\",\"mime_type\":\"audio/mpeg\"},\"quality\":\"sq\",\"is_legacy_transcoding\":true}]},\"station_urn\":\"soundcloud:system-playlists:track-stations:2188530119\",\"station_permalink\":\"track-stations:2188530119\",\"track_authorization\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJnZW8iOiJQVCIsInN1YiI6IiIsInJpZCI6IjM3ZGVjNDhiLWIxMWQtNDdhNC1hNjA5LTFiMGM5NGNlOGM5YyIsImlhdCI6MTc3ODE2ODkxNn0.EAckNzBSf8kfMgwavSS-uAPIWx4YKt_g61qvlCon6e0\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\",\"user\":{\"avatar_url\":\"https://i1.sndcdn.com/avatars-r4zK7WtA0FKek2eI-Sk9dKQ-large.jpg\",\"first_name\":\"Your
+        Daily Chilled Vibes!\",\"followers_count\":193202,\"full_name\":\"Your Daily
+        Chilled Vibes!\",\"id\":35228969,\"kind\":\"user\",\"last_modified\":\"2026-05-05T08:03:11Z\",\"last_name\":\"\",\"permalink\":\"chillhopdotcom\",\"permalink_url\":\"https://soundcloud.com/chillhopdotcom\",\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A35228969\",\"urn\":\"soundcloud:users:35228969\",\"username\":\"Chillhop
+        Music\",\"verified\":true,\"city\":\"Rotterdam\",\"country_code\":\"NL\",\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:35228969\",\"station_permalink\":\"artist-stations:35228969\"}},{\"id\":2187023808,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530159,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530123,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188533095,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530155,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530103,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530099,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530183,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188656523,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530127,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530139,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530111,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530163,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530171,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530175,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530131,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530147,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530179,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530143,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530167,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530151,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530187,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"},{\"id\":2188530191,\"kind\":\"track\",\"monetization_model\":\"NOT_APPLICABLE\",\"policy\":\"ALLOW\"}],\"track_count\":28}],\"total_results\":463,\"next_href\":\"https://api-v2.soundcloud.com/search/playlists?query_urn=soundcloud%3Asearch%3Ab20aeb17dc654edf927f49d24d8bdb2f&limit=3&offset=3&q=chillhop%20essentials\",\"query_urn\":\"soundcloud:search:b20aeb17dc654edf927f49d24d8bdb2f\"}"
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 07 May 2026 15:48:36 GMT
+      Server:
+      - am/2
+      Vary:
+      - Origin
+      Via:
+      - 1.1 830c9997414d0bb9d4014a496a8c9294.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - EEfW9QCobprd0rQK1VzISn2gfGRpsdV7dZmo0P7hx7NBEwyyG6MLjg==
+      X-Amz-Cf-Pop:
+      - LIS50-P2
+      X-Cache:
+      - Miss from cloudfront
+      content-length:
+      - '102881'
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=63072000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-robots-tag:
+      - noindex
+    status:
+      code: 200
+      message: OK
+version: 1

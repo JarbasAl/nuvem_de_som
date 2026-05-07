@@ -1,0 +1,131 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api-v2.soundcloud.com/search/users?client_id=m3fPPZefBYC1BJGyknJMS6wN6PyvlrEN&q=disclosure&limit=3
+  response:
+    body:
+      string: "{\"collection\":[{\"avatar_url\":\"https://i1.sndcdn.com/avatars-V57b6hERdlsSVzyY-UYlQUQ-large.jpg\",\"city\":\"\",\"comments_count\":0,\"country_code\":null,\"created_at\":null,\"creator_subscriptions\":[{\"product\":{\"id\":\"creator-pro-unlimited\"}}],\"creator_subscription\":{\"product\":{\"id\":\"creator-pro-unlimited\"}},\"description\":\"\",\"followers_count\":1439130,\"followings_count\":866,\"first_name\":\"\",\"full_name\":\"\",\"groups_count\":0,\"id\":494163,\"kind\":\"user\",\"last_modified\":\"2026-03-30T22:44:06Z\",\"last_name\":\"\",\"likes_count\":207,\"playlist_likes_count\":10,\"permalink\":\"disclosuremusic\",\"permalink_url\":\"https://soundcloud.com/disclosuremusic\",\"playlist_count\":66,\"reposts_count\":null,\"track_count\":222,\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A494163\",\"urn\":\"soundcloud:users:494163\",\"username\":\"Disclosure\",\"verified\":true,\"visuals\":{\"urn\":\"soundcloud:users:494163\",\"enabled\":true,\"visuals\":[{\"urn\":\"soundcloud:visuals:263312703\",\"entry_time\":0,\"visual_url\":\"https://i1.sndcdn.com/visuals-000000494163-jRZGl3-original.jpg\"}],\"tracking\":null},\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":true},\"station_urn\":\"soundcloud:system-playlists:artist-stations:494163\",\"station_permalink\":\"artist-stations:494163\",\"date_of_birth\":null},{\"avatar_url\":\"https://i1.sndcdn.com/avatars-000434849067-ph5oir-large.jpg\",\"city\":\"London\",\"comments_count\":0,\"country_code\":null,\"created_at\":null,\"creator_subscriptions\":[{\"product\":{\"id\":\"creator-pro-unlimited\"}}],\"creator_subscription\":{\"product\":{\"id\":\"creator-pro-unlimited\"}},\"description\":\"\\\"I
+        love music, how it can make our emotions flow, how it can change the way we
+        think, the way we love, the way we express ourselves\\\" Omid 16B\\nSome DJs
+        and producers have their finger on the pulse \u2013 Omid 16B is the pulse.
+        Music runs through his veins \u2013 DJ Mag\\nOmid Nourizadeh also known as
+        Omid 16B, is a DJ whose passion for cutting edge electronic music is unrivalled.
+        As a DJ and producer, songwriter, musician and label boss, Omid has forged
+        a unique and prolific career as one of the world\u2019s most talented and
+        respected musicians and producers.\\nHe\u2019s much regarded as one of the
+        leaders who pioneered the tech house movement back in the early nineties,
+        alongside the likes of Carl Craig, Vince Watson, Craig Richards, Mr C, Steve
+        Bug and Francois K .\\nGrowing up in London, with Persian roots, Omid was
+        influenced by the likes of Jimi Hendrix, The Cure, Depeche Mode, RIDE and
+        The Mission. Throughout his teens he became an accomplished musician playing
+        a list of instruments while attending Richmond College and utilising the music
+        rooms at any given chance.\\n\\nstay tuned for more updates\u2026.\\n\\nFor
+        Information, Bookings Or Remix Requests Please Contact :\Linfo@alola.co.uk
+        \u2013 World & General Enquiries\Lomid16bmanagement@alola.co.uk \u2013 All
+        Management Enquiries\\n\Lbooking@alola.co.uk\_ -\_Bookings and Dj Related
+        Enquiries\\nSharron@mn2s.com - Bookings and Dj Related Enquiries\",\"followers_count\":13329,\"followings_count\":462,\"first_name\":\"aLOLa
+        - SOW - Disclosure UK\",\"full_name\":\"aLOLa - SOW - Disclosure UK Recordings\",\"groups_count\":0,\"id\":121855,\"kind\":\"user\",\"last_modified\":\"2020-11-30T11:39:49Z\",\"last_name\":\"Recordings\",\"likes_count\":46,\"playlist_likes_count\":4,\"permalink\":\"sexonwax\",\"permalink_url\":\"https://soundcloud.com/sexonwax\",\"playlist_count\":236,\"reposts_count\":null,\"track_count\":928,\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A121855\",\"urn\":\"soundcloud:users:121855\",\"username\":\"Omid
+        16B\",\"verified\":false,\"visuals\":{\"urn\":\"soundcloud:users:121855\",\"enabled\":true,\"visuals\":[{\"urn\":\"soundcloud:visuals:46905230\",\"entry_time\":0,\"visual_url\":\"https://i1.sndcdn.com/visuals-000000121855-GlsAyG-original.jpg\"}],\"tracking\":null},\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":false},\"station_urn\":\"soundcloud:system-playlists:artist-stations:121855\",\"station_permalink\":\"artist-stations:121855\",\"date_of_birth\":null},{\"avatar_url\":\"https://i1.sndcdn.com/avatars-Hy5AY0SQT3nzkAVJ-kZaF2A-large.jpg\",\"city\":\"\",\"comments_count\":0,\"country_code\":null,\"created_at\":null,\"creator_subscriptions\":[{\"product\":{\"id\":\"creator-pro-unlimited\"}}],\"creator_subscription\":{\"product\":{\"id\":\"creator-pro-unlimited\"}},\"description\":\"\U0001F198
+        DISTURBING CONTENT WARNING \U0001F6A9https://www.facebook.com/priestessmc/\\n\\nSOUNDCLOUD
+        \u2014 ID LIKE TO CHANGE MY DONATIONS ACCOUNT TO THE SAME ONE I GET BILLED
+        TO PAY FOR SOUNDCLOUD. \\n\\n\u2666\uFE0FTHANK YOU FOR \U0001F4B2UPPORTING
+        ME \u203C\uFE0F I LOVE YOU ALL \u2014 ESPECIALLY THOSE HELPING, WHETHER, MONETARILY
+        OR WORD OF MOUTH & SHARING THE MUSIC & LOVE  \u2026 THIS IS NOT A GAME, I\u2019VE
+        BEEN SERIOUSLY TARGETED & DISENFRANCHISED FOR TOO LONG BY THE SATANIC RITUAL
+        ABUSE NETWORK \u2014 THROUGHOUT THE AGES \U0001F198 \\n\\nThank you SoundCloud
+        \u2764\uFE0F May authorities please ensure that monetary donations come through.
+        \U0001F64F\U0001F9FF\\n\\nI\u2019ve been finding out that over 100,000 individuals
+        had access to screenshots of mixes I was working on, from my computer and
+        #akashicrecords. They went so far as mixing & DJing it on their own accord,
+        which is really upsetting to me. Songs I haven\u2019t posted yet. \\n\\nAnother
+        thing, I do not want anyone on my #SoundCloud tampering with any of my music
+        files. I mentioned I wouldn\u2019t mind people cleaning it up. But so many
+        idiotic individuals took it upon themselves to keep the original track & replaced
+        with a distorted one. Some even went so far as keeping the original to themselves,
+        as well as tracks I wasn\u2019t able to post due to copyright \u2014 and #DJ
+        as their own mix. This is really f*cked up & evil. If you\u2019re cleaning
+        it up for me, keep it to yourself & send to me personally for me to post.
+        Otherwise, stay off my account. My grandma is telling me there are 5 songs
+        Armen Miran (his #organic duplicate in the #astral plane) has cleaned up &
+        reposted \u2014 those can stay. Other than that, I don\u2019t want anyone
+        \ except for authorized individuals accessing my tracks, because too many
+        were making them worse & me look bad. #BillieEilish is behind orchestrating
+        a lot of this. So is #MichelleLeMaire, #LisaRenee & other thieving entities.\\n\\nI
+        really would like help DJing, mixing and producing, but I am solely focusing
+        on destroying the #satanicritualabuse network at this time. They are evil,
+        and anything I  create, they steal anyway.\\n\\n**I give authorization to
+        select SoundCloud employees, that I have a duplicate of me in their #mentalbody
+        to clean up and repost. Thank you \U0001F64F\\n\\n\U0001F399\uFE0FI AM NOT
+        SINGING (because they can take my vocals and play it in peoples heads & then
+        do evil stuff to them) NOR MAKING ANY MUSIC UNTIL THIS IS RESOLVED: \\n\\nThis
+        is Caitlin Leah McLaughlin, PLEASE find me on FB (it is where I\u2019ve been
+        revealing all that has been & is currently happening \u2014 I\u2019ve screenshotted
+        the most important posts, into my photo/thumbnails). I am sharing the TRUTHthat
+        mainstream media refuses to talk about. This is a big deal. I am not religious,
+        but it is biblical. WE MUST DESTROY THE SATANIC RITUAL ABUSE NETWORK. Please
+        share \U0001F9FF\U0001F64F\U0001F90D https://www.facebook.com/priestessmc\\n\\nTHANK
+        YOU TO ALL THE BEAUTIFUL SOULS WHO\u2019VE CORRECTED MY AUDIO TRACKS ON SoundCloud
+        THAT WERE PURPOSEFULLY DISTORTED. I can\u2019t believe they went that far\u2026
+        I noticed some of my tracks sounded a little off from what I had uploaded\u2026\U0001F3B6
+        \\n\\nI have just been informed that Naga Chuga had accepted DJ invitations
+        to events in which I never showed up because I had no idea. This is freakin\u2019
+        ridiculous. I never even received an email. She had access to my server and
+        managed to intercept them, and then deleted them after responding. Or she
+        made them believe I was accepting the invitation telepathically. This is awful
+        and I am even finding it hard to believe \u2014 but it makes sense that I
+        didn\u2019t receive any emails regarding DJing. Fortunately, Mu\u2019a Naga
+        and Annunaki benefactors who\u2019ve recently entered the scene are retrieving
+        things at this very moment. My apologies to those who were expecting me.\\n\\nPeace,
+        Love, Please, Thank You\U0001F493\\n\\n\u16C9 Vanir Vaikuntha \u0950 Vedic
+        \u2042 Venusian \u2640\\n\u534D Vrilya V-22 Vimana 'VROOM' Vishnu\\n\u2695\uFE0F
+        'VAM' Vahana\U0001F6D5Vajrayana <33 \U0001F6F8 \\n\\n\U0001F53A}} = Work in
+        Progress \U0001F3B6ALLways \u267E\uFE0F\\n\u2660\uFE0F No Copyright Infringement
+        intended !!\\nFor record, I have not monetized any mixes\\nSong/artist information
+        in 'behind this track'\\n\U0001F198 = Parental Advisory Explicit Content \U0001F336\uFE0F\u2668\uFE0F\",\"followers_count\":157,\"followings_count\":395,\"first_name\":\"Cosmic
+        Disc'losure\",\"full_name\":\"Cosmic Disc'losure Jockey\",\"groups_count\":0,\"id\":809774788,\"kind\":\"user\",\"last_modified\":\"2026-05-05T15:53:05Z\",\"last_name\":\"Jockey\",\"likes_count\":291,\"playlist_likes_count\":85,\"permalink\":\"djvenusflytrap\",\"permalink_url\":\"https://soundcloud.com/djvenusflytrap\",\"playlist_count\":8,\"reposts_count\":null,\"track_count\":0,\"uri\":\"https://api.soundcloud.com/users/soundcloud%3Ausers%3A809774788\",\"urn\":\"soundcloud:users:809774788\",\"username\":\"DJ
+        VenusFlytrap\",\"verified\":false,\"visuals\":{\"urn\":\"soundcloud:users:809774788\",\"enabled\":true,\"visuals\":[{\"urn\":\"soundcloud:visuals:228220536\",\"entry_time\":0,\"visual_url\":\"https://i1.sndcdn.com/visuals-dFGCOT3CcJ173Teh-dmiPpQ-original.jpg\"}],\"tracking\":null},\"badges\":{\"pro\":false,\"creator_mid_tier\":false,\"pro_unlimited\":true,\"verified\":false},\"station_urn\":\"soundcloud:system-playlists:artist-stations:809774788\",\"station_permalink\":\"artist-stations:809774788\",\"date_of_birth\":null}],\"total_results\":248,\"next_href\":\"https://api-v2.soundcloud.com/search/users?query_urn=soundcloud%3Asearch%3A4b92aec3d59440729b723b35d3af06d3&limit=3&offset=3&q=disclosure\",\"query_urn\":\"soundcloud:search:4b92aec3d59440729b723b35d3af06d3\"}"
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 07 May 2026 15:48:36 GMT
+      Server:
+      - am/2
+      Vary:
+      - Origin
+      Via:
+      - 1.1 17604744a1cad767c0d00b6823182bbc.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - WEa97g5UfYf0li1o_nl8qEzC-oTjv-KcdWuJGROOKYuGvE0sghnktg==
+      X-Amz-Cf-Pop:
+      - CDG54-P1
+      X-Cache:
+      - Miss from cloudfront
+      content-length:
+      - '9670'
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=63072000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-robots-tag:
+      - noindex
+    status:
+      code: 200
+      message: OK
+version: 1
