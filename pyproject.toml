@@ -15,7 +15,7 @@ dependencies = ["bs4", "requests", "mediavocab>=0.1.0,<0.2"]
 yt-dlp = ["yt-dlp"]
 cli = ["click"]
 stealth = ["curl-cffi"]
-test = ["pytest", "vcrpy", "pytest-vcr"]
+test = ["pytest", "vcrpy", "pytest-vcr", "click"]
 
 [project.scripts]
 nds = "nuvem_de_som.cli:main"
