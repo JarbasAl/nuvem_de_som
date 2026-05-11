@@ -441,7 +441,7 @@ class TestTrackEnrichmentRoundtrip:
         assert rel.bitrate == "256"
         assert rel.audio_channels == "stereo"
         assert rel.release_date == "2024-01-15"
-        assert rel.work.country == "PT"
+        assert rel.work.production_country == "PT"
         assert rel.work.aka == ["t"]
         assert "electronic" in rel.work.content_genres
 
