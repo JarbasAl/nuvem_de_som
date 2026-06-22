@@ -29,7 +29,7 @@ Returned by `search_tracks`, `get_tracks`, `resolve_track`, `search_sets`.
 | `release.work.extra["artist_url"]` | `str` | Uploader `permalink_url` |
 | `release.work.aka` | `list[str]` | `[permalink]` (URL slug) |
 | `release.work.content_genres` | `list[str]` | From `genre` + `tag_list`; mapped to `GENRE_*` constants when recognised |
-| `release.work.country` | `str` | Uploader `country_code` (ISO 3166 alpha-2) |
+| `release.work.production_country` | `str` | Uploader `country_code` (ISO 3166 alpha-2) |
 | `release.work.external_ids` | `dict` | Same ids as `release.external_ids` |
 
 For sets: `release.work.tracklist` is a `list[Appearance]` with positions 1..N;

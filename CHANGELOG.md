@@ -1,28 +1,20 @@
 # Changelog
 
-## 0.4.0 — unreleased
+## [0.4.0a2](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a2) (2026-05-13)
 
-### mediavocab integration
+[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a1...0.4.0a2)
 
-- `mediavocab` is now a **hard runtime dependency**. SoundCloud results are emitted as canonical mediavocab `Work` / `Release` / `Entity` models alongside the existing dict surface.
+**Merged pull requests:**
 
-### Added
+- Update actions/checkout action to v6 [\#17](https://github.com/TigreGotico/nuvem_de_som/pull/17) ([renovate[bot]](https://github.com/apps/renovate))
 
-- **License** — SoundCloud's free-text license field is mapped to SPDX identifiers (e.g. `cc-by-4.0` → `CC-BY-4.0`) and stamped on the emitted `Release` so `parsed_license.is_open()` works end-to-end.
-- **Genres** — `tag_list` is parsed and surfaced as `content_genres` on the `Work`.
-- **Audio technicals** — `codec` and `bitrate` are pulled out of SoundCloud's `transcodings` array (HLS / progressive variants) and attached to each `Release` it emits.
-- **Tracklists** — DJ sets and playlists now populate `Work.tracklist` so the full track sequence round-trips through mediavocab.
-- **Country** — uploader country is sourced from the SoundCloud user profile and surfaced on the emitted `Entity`.
-- **release_date** — validated through `IsoDate` on the way out, rejecting malformed SoundCloud date strings instead of silently propagating them.
+## [0.4.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a1) (2026-05-07)
 
-### Changed
+[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.3.0a1...0.4.0a1)
 
-- Converter functions track the latest mediavocab API surface.
-- Public client methods now yield mediavocab models in addition to the raw dicts.
+**Merged pull requests:**
 
-### Migration notes
-
-- `mediavocab` installs automatically. Code consuming raw dicts continues to work; new code should consume the typed `Work` / `Release` / `Entity` models.
+- feat: emit mediavocab Release / Entity from SoundCloud [\#15](https://github.com/TigreGotico/nuvem_de_som/pull/15) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.3.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.3.0a1) (2026-04-30)
 

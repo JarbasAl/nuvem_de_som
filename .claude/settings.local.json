@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip show *)",
+      "Bash(python *)",
+      "Read(//home/miro/AgentWorkspaces/api_clients/**)",
+      "Read(//home/miro/AgentWorkspaces/**)"
+    ]
+  }
+}
