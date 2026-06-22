@@ -4,7 +4,9 @@ SoundCloud tries API → yt-dlp → HTML in order and returns the first success.
 This example demonstrates the fallback chain and shows which backend answered.
 """
 import logging
-from nuvem_de_som import SoundCloud, SoundCloudAPI, SoundCloudYTDLP, SoundCloudHTML
+import os
+import tempfile
+from nuvem_de_som import SoundCloud
 
 # Enable debug to see which backends are tried
 logging.basicConfig(level=logging.DEBUG,
@@ -32,12 +34,10 @@ if stream:
 
 print()
 print("download_track — API first, yt-dlp fallback:")
-import tempfile
 with tempfile.TemporaryDirectory() as tmp:
     try:
         path = sc.download_track(url, output_dir=tmp)
         if path:
-            import os
             size = os.path.getsize(path)
             print(f"  Saved: {path}  ({size // 1024} KB)")
     except Exception as exc:

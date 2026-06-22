@@ -53,6 +53,12 @@ Scrapes SoundCloud's public HTML. No API key needed.
 
 `SoundCloudScraper` is an alias for backwards compatibility.
 
+Inject a custom session:
+
+```python
+sc = SoundCloudHTML(session=my_session)
+```
+
 ---
 
 ## SoundCloudYTDLP

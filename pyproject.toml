@@ -16,7 +16,6 @@ yt-dlp = ["yt-dlp"]
 cli = ["click"]
 stealth = ["curl-cffi"]
 test = ["pytest", "vcrpy", "pytest-vcr", "click"]
-dev = ["pytest", "vcrpy", "pytest-vcr", "click"]
 
 [project.scripts]
 nds = "nuvem_de_som.cli:main"

@@ -31,7 +31,7 @@ print(f"  title:          {release.work.title}")
 print(f"  media_type:     {release.work.media_type}")
 print(f"  runtime:        {release.work.runtime}s")
 print(f"  content_genres: {release.work.content_genres}")
-print(f"  country:        {release.work.country}")
+print(f"  production_country: {release.work.production_country}")
 print(f"  aka:            {release.work.aka}")
 print(f"  external_ids:   {release.work.external_ids}")
 

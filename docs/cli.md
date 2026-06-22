@@ -4,7 +4,7 @@ Requires `pip install "nuvem_de_som[cli]"`.
 
 ## Global options
 
-```
+```bash
 nds [--backend BACKEND] [--player PLAYER] COMMAND ...
 ```
 

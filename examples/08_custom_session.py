@@ -6,11 +6,10 @@ standard requests. Requires: pip install nuvem_de_som[stealth]
 Alternatively, set NUVEM_TRANSPORT=curl_cffi and let default_session() pick
 the right backend automatically.
 """
-import os
 from nuvem_de_som import SoundCloudAPI, SoundCloudHTML, SoundCloud
 
 # --- Option A: env var (applies to default_session() in all backends) --------
-# os.environ["NUVEM_TRANSPORT"] = "curl_cffi"
+# import os; os.environ["NUVEM_TRANSPORT"] = "curl_cffi"
 # sc = SoundCloud()   # will use curl_cffi if installed
 
 # --- Option B: inject directly -----------------------------------------------
