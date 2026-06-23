@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0a3](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a3) (2026-06-23)
+
+[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a2...0.4.0a3)
+
+**Merged pull requests:**
+
+- chore: migrate to mediavocab 1.0 [\#19](https://github.com/TigreGotico/nuvem_de_som/pull/19) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.4.0a2](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a2) (2026-05-13)
 
 [Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a1...0.4.0a2)
