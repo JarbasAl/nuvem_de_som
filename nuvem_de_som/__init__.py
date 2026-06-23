@@ -283,7 +283,7 @@ def _track_dict_to_release(d: dict) -> Release:
         runtime=float(d["duration"]) if d.get("duration") is not None else None,
         credits=credits,
         content_genres=list(d.get("content_genres") or []),
-        country=d.get("country") or "",
+        production_country=d.get("country") or "",
         aka=[d["permalink"]] if d.get("permalink") else [],
         external_ids=external_ids,
         extra=({"artist_url": d["artist_url"]} if d.get("artist_url") else {}),

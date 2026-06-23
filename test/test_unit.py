@@ -436,12 +436,12 @@ class TestTrackEnrichmentRoundtrip:
             "release_date": "2024-01-15",
             "codec": "audio/mpeg", "bitrate": "256", "audio_channels": "stereo",
         })
-        assert rel.license == "CC-BY-NC-4.0"
+        assert rel.license.identifier == "CC-BY-NC-4.0"
         assert rel.codec == "audio/mpeg"
         assert rel.bitrate == "256"
         assert rel.audio_channels == "stereo"
         assert rel.release_date == "2024-01-15"
-        assert rel.work.country == "PT"
+        assert rel.work.production_country == "PT"
         assert rel.work.aka == ["t"]
         assert "electronic" in rel.work.content_genres
 
