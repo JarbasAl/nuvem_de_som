@@ -302,12 +302,34 @@ def _track_dict_to_release(d: dict) -> Release:
     )
 
 
+def _sc_user_to_dict(u: dict, artist_url: str | None = None) -> dict:
+    """Normalize a raw SoundCloud API user object to our internal user dict.
+
+    Centralises field extraction so every call site (search_people,
+    resolve_user, get_followers, get_following, …) produces a consistent
+    representation with the same optional fields present.
+    """
+    return {
+        "artist":           u.get("username") or "",
+        "artist_url":       artist_url or u.get("permalink_url") or "",
+        "image":            u.get("avatar_url") or "",
+        "user_id":          u.get("id"),
+        "country":          u.get("country_code") or "",
+        "permalink":        u.get("permalink") or "",
+        "verified":         bool(u.get("verified")),
+        "followers_count":  u.get("followers_count"),
+        "followings_count": u.get("followings_count"),
+        "track_count":      u.get("track_count"),
+    }
+
+
 def _user_dict_to_entity(d: dict) -> Entity:
     """Convert an internal user/artist dict to a mediavocab Entity.
 
     Optional keys: ``country`` (ISO 3166 alpha-2 from SoundCloud
-    ``country_code``) and ``permalink`` (URL slug, surfaced via
-    ``extra.permalink``).
+    ``country_code``), ``permalink`` (URL slug), ``verified``,
+    ``followers_count``, ``followings_count``, ``track_count``.
+    All optional keys are surfaced via ``extra``.
     """
     external_ids: dict[str, str] = {}
     if d.get("user_id") is not None:
@@ -319,6 +341,11 @@ def _user_dict_to_entity(d: dict) -> Entity:
         extra["country"] = d["country"]
     if d.get("permalink"):
         extra["permalink"] = d["permalink"]
+    if d.get("verified"):
+        extra["verified"] = "1"
+    for cnt_key in ("followers_count", "followings_count", "track_count"):
+        if d.get(cnt_key) is not None:
+            extra[cnt_key] = str(d[cnt_key])
     return Entity(
         name=d.get("artist") or "",
         kind=EntityKind.PERSON,
@@ -530,14 +557,7 @@ class SoundCloudAPI(SoundCloudBase):
             "https://api-v2.soundcloud.com/search/users", q=query, limit=limit
         )
         for u in data.get("collection") or []:
-            yield _user_dict_to_entity({
-                "artist": u.get("username") or "",
-                "artist_url": u.get("permalink_url") or "",
-                "image": u.get("avatar_url") or "",
-                "user_id": u.get("id"),
-                "country": u.get("country_code") or "",
-                "permalink": u.get("permalink") or "",
-            })
+            yield _user_dict_to_entity(_sc_user_to_dict(u))
 
     def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
         data = self._call(
@@ -635,14 +655,7 @@ class SoundCloudAPI(SoundCloudBase):
             u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
             if u.get("kind") != "user":
                 return None
-            return _user_dict_to_entity({
-                "artist": u.get("username") or "",
-                "artist_url": u.get("permalink_url") or profile_url,
-                "image": u.get("avatar_url") or "",
-                "user_id": u.get("id"),
-                "country": u.get("country_code") or "",
-                "permalink": u.get("permalink") or "",
-            })
+            return _user_dict_to_entity(_sc_user_to_dict(u, artist_url=profile_url))
         except Exception as exc:
             log.debug("resolve_user failed for %s: %s", profile_url, exc)
             return None
@@ -657,6 +670,89 @@ class SoundCloudAPI(SoundCloudBase):
         except Exception as exc:
             log.debug("resolve_track failed for %s: %s", track_url, exc)
             return None
+
+    def get_followers(self, profile_url: str, limit: int = 200) -> Iterator[Entity]:
+        """Yield Entity objects for users who follow the given profile."""
+        try:
+            u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
+            user_id = u.get("id")
+            if not user_id:
+                return
+        except Exception as exc:
+            log.debug("get_followers resolve failed for %s: %s", profile_url, exc)
+            return
+        next_href = f"https://api-v2.soundcloud.com/users/{user_id}/followers"
+        collected = 0
+        while next_href and collected < limit:
+            try:
+                page = self._call(next_href, limit=min(200, limit - collected),
+                                  linked_partitioning=1)
+            except Exception as exc:
+                log.debug("get_followers page failed: %s", exc)
+                break
+            for u in page.get("collection") or []:
+                if collected >= limit:
+                    return
+                yield _user_dict_to_entity(_sc_user_to_dict(u))
+                collected += 1
+            next_href = page.get("next_href")
+
+    def get_following(self, profile_url: str, limit: int = 200) -> Iterator[Entity]:
+        """Yield Entity objects for users that the given profile follows."""
+        try:
+            u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
+            user_id = u.get("id")
+            if not user_id:
+                return
+        except Exception as exc:
+            log.debug("get_following resolve failed for %s: %s", profile_url, exc)
+            return
+        next_href = f"https://api-v2.soundcloud.com/users/{user_id}/followings"
+        collected = 0
+        while next_href and collected < limit:
+            try:
+                page = self._call(next_href, limit=min(200, limit - collected),
+                                  linked_partitioning=1)
+            except Exception as exc:
+                log.debug("get_following page failed: %s", exc)
+                break
+            for u in page.get("collection") or []:
+                if collected >= limit:
+                    return
+                yield _user_dict_to_entity(_sc_user_to_dict(u))
+                collected += 1
+            next_href = page.get("next_href")
+
+    def get_reposts(self, profile_url: str, limit: int = 50) -> Iterator[Release]:
+        """Yield Release objects for tracks reposted by the given profile."""
+        try:
+            u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
+            user_id = u.get("id")
+            if not user_id:
+                return
+        except Exception as exc:
+            log.debug("get_reposts resolve failed for %s: %s", profile_url, exc)
+            return
+        next_href = f"https://api-v2.soundcloud.com/stream/users/{user_id}/reposts"
+        collected = 0
+        while next_href and collected < limit:
+            try:
+                page = self._call(next_href, limit=min(50, limit - collected),
+                                  linked_partitioning=1)
+            except Exception as exc:
+                log.debug("get_reposts page failed: %s", exc)
+                break
+            for item in page.get("collection") or []:
+                if collected >= limit:
+                    return
+                track = item.get("track") or {}
+                if not track.get("title"):
+                    continue
+                user = track.get("user") or {}
+                yield _track_dict_to_release(self._parse_track(track,
+                    artist_url=user.get("permalink_url") or ""))
+                collected += 1
+            next_href = page.get("next_href")
 
     # -- download (pure requests, no yt-dlp) ---------------------------------
 
