@@ -302,12 +302,34 @@ def _track_dict_to_release(d: dict) -> Release:
     )
 
 
+def _sc_user_to_dict(u: dict, artist_url: str | None = None) -> dict:
+    """Normalize a raw SoundCloud API user object to our internal user dict.
+
+    Centralises field extraction so every call site (search_people,
+    resolve_user, get_followers, get_following, …) produces a consistent
+    representation with the same optional fields present.
+    """
+    return {
+        "artist":           u.get("username") or "",
+        "artist_url":       artist_url or u.get("permalink_url") or "",
+        "image":            u.get("avatar_url") or "",
+        "user_id":          u.get("id"),
+        "country":          u.get("country_code") or "",
+        "permalink":        u.get("permalink") or "",
+        "verified":         bool(u.get("verified")),
+        "followers_count":  u.get("followers_count"),
+        "followings_count": u.get("followings_count"),
+        "track_count":      u.get("track_count"),
+    }
+
+
 def _user_dict_to_entity(d: dict) -> Entity:
     """Convert an internal user/artist dict to a mediavocab Entity.
 
     Optional keys: ``country`` (ISO 3166 alpha-2 from SoundCloud
-    ``country_code``) and ``permalink`` (URL slug, surfaced via
-    ``extra.permalink``).
+    ``country_code``), ``permalink`` (URL slug), ``verified``,
+    ``followers_count``, ``followings_count``, ``track_count``.
+    All optional keys are surfaced via ``extra``.
     """
     external_ids: dict[str, str] = {}
     if d.get("user_id") is not None:
@@ -319,6 +341,11 @@ def _user_dict_to_entity(d: dict) -> Entity:
         extra["country"] = d["country"]
     if d.get("permalink"):
         extra["permalink"] = d["permalink"]
+    if d.get("verified"):
+        extra["verified"] = "1"
+    for cnt_key in ("followers_count", "followings_count", "track_count"):
+        if d.get(cnt_key) is not None:
+            extra[cnt_key] = str(d[cnt_key])
     return Entity(
         name=d.get("artist") or "",
         kind=EntityKind.PERSON,
@@ -437,6 +464,43 @@ class SoundCloudBase(ABC):
 
     # -- concrete shared -----------------------------------------------------
 
+    def crawl(
+        self,
+        seeds: list[str],
+        *,
+        social_depth: int = 50,
+        max_artists: int = 0,
+        seen: set[str] | None = None,
+    ) -> Iterator[Entity]:
+        """Yield Entity objects discovered from *seeds* via social-graph BFS.
+
+        The default implementation does a flat search-people expansion with no
+        social-graph traversal (suitable for HTML/yt-dlp backends that lack
+        follower APIs).  Override in subclasses that have follower endpoints.
+        """
+        if seen is None:
+            seen = set()
+        yielded = 0
+        for seed in seeds:
+            query = seed if not seed.startswith("http") else ""
+            if not query:
+                entity = self.resolve_user(seed)
+                if entity and seed not in seen:
+                    seen.add(seed)
+                    yield entity
+                    yielded += 1
+                    if max_artists and yielded >= max_artists:
+                        return
+            else:
+                for entity in self.search_people(query, limit=social_depth):
+                    url = entity.extra.get("artist_url") or ""
+                    if url and url not in seen:
+                        seen.add(url)
+                        yield entity
+                        yielded += 1
+                        if max_artists and yielded >= max_artists:
+                            return
+
     def search(self, query: str, limit: int = 10) -> Iterator[Release]:
         """Combined search: artist tracks + set tracks + direct track search."""
         for person in self.search_people(query, limit=3):
@@ -530,14 +594,7 @@ class SoundCloudAPI(SoundCloudBase):
             "https://api-v2.soundcloud.com/search/users", q=query, limit=limit
         )
         for u in data.get("collection") or []:
-            yield _user_dict_to_entity({
-                "artist": u.get("username") or "",
-                "artist_url": u.get("permalink_url") or "",
-                "image": u.get("avatar_url") or "",
-                "user_id": u.get("id"),
-                "country": u.get("country_code") or "",
-                "permalink": u.get("permalink") or "",
-            })
+            yield _user_dict_to_entity(_sc_user_to_dict(u))
 
     def search_sets(self, query: str, limit: int = 10) -> Iterator[Release]:
         data = self._call(
@@ -635,14 +692,7 @@ class SoundCloudAPI(SoundCloudBase):
             u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
             if u.get("kind") != "user":
                 return None
-            return _user_dict_to_entity({
-                "artist": u.get("username") or "",
-                "artist_url": u.get("permalink_url") or profile_url,
-                "image": u.get("avatar_url") or "",
-                "user_id": u.get("id"),
-                "country": u.get("country_code") or "",
-                "permalink": u.get("permalink") or "",
-            })
+            return _user_dict_to_entity(_sc_user_to_dict(u, artist_url=profile_url))
         except Exception as exc:
             log.debug("resolve_user failed for %s: %s", profile_url, exc)
             return None
@@ -657,6 +707,178 @@ class SoundCloudAPI(SoundCloudBase):
         except Exception as exc:
             log.debug("resolve_track failed for %s: %s", track_url, exc)
             return None
+
+    def get_followers(self, profile_url: str, limit: int = 200) -> Iterator[Entity]:
+        """Yield Entity objects for users who follow the given profile."""
+        try:
+            u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
+            user_id = u.get("id")
+            if not user_id:
+                return
+        except Exception as exc:
+            log.debug("get_followers resolve failed for %s: %s", profile_url, exc)
+            return
+        next_href = f"https://api-v2.soundcloud.com/users/{user_id}/followers"
+        collected = 0
+        while next_href and collected < limit:
+            try:
+                page = self._call(next_href, limit=min(200, limit - collected),
+                                  linked_partitioning=1)
+            except Exception as exc:
+                log.debug("get_followers page failed: %s", exc)
+                break
+            for u in page.get("collection") or []:
+                if collected >= limit:
+                    return
+                yield _user_dict_to_entity(_sc_user_to_dict(u))
+                collected += 1
+            next_href = page.get("next_href")
+
+    def get_following(self, profile_url: str, limit: int = 200) -> Iterator[Entity]:
+        """Yield Entity objects for users that the given profile follows."""
+        try:
+            u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
+            user_id = u.get("id")
+            if not user_id:
+                return
+        except Exception as exc:
+            log.debug("get_following resolve failed for %s: %s", profile_url, exc)
+            return
+        next_href = f"https://api-v2.soundcloud.com/users/{user_id}/followings"
+        collected = 0
+        while next_href and collected < limit:
+            try:
+                page = self._call(next_href, limit=min(200, limit - collected),
+                                  linked_partitioning=1)
+            except Exception as exc:
+                log.debug("get_following page failed: %s", exc)
+                break
+            for u in page.get("collection") or []:
+                if collected >= limit:
+                    return
+                yield _user_dict_to_entity(_sc_user_to_dict(u))
+                collected += 1
+            next_href = page.get("next_href")
+
+    def get_reposts(self, profile_url: str, limit: int = 50) -> Iterator[Release]:
+        """Yield Release objects for tracks reposted by the given profile."""
+        try:
+            u = self._call("https://api-v2.soundcloud.com/resolve", url=profile_url)
+            user_id = u.get("id")
+            if not user_id:
+                return
+        except Exception as exc:
+            log.debug("get_reposts resolve failed for %s: %s", profile_url, exc)
+            return
+        next_href = f"https://api-v2.soundcloud.com/stream/users/{user_id}/reposts"
+        collected = 0
+        while next_href and collected < limit:
+            try:
+                page = self._call(next_href, limit=min(50, limit - collected),
+                                  linked_partitioning=1)
+            except Exception as exc:
+                log.debug("get_reposts page failed: %s", exc)
+                break
+            for item in page.get("collection") or []:
+                if collected >= limit:
+                    return
+                track = item.get("track") or {}
+                if not track.get("title"):
+                    continue
+                user = track.get("user") or {}
+                yield _track_dict_to_release(self._parse_track(track,
+                    artist_url=user.get("permalink_url") or ""))
+                collected += 1
+            next_href = page.get("next_href")
+
+    # -- crawl (social-graph BFS) --------------------------------------------
+
+    def crawl(
+        self,
+        seeds: list[str],
+        *,
+        social_depth: int = 50,
+        max_artists: int = 0,
+        seen: set[str] | None = None,
+    ) -> Iterator[Entity]:
+        """Yield Entity objects via social-graph BFS from seed profile URLs.
+
+        Starting from *seeds* (SoundCloud profile URLs), each artist's
+        followers and followings are fetched and added to the frontier.  This
+        discovers artists that have no MusicBrainz or Wikidata presence —
+        they only appear because they are socially connected to known artists.
+
+        Parameters
+        ----------
+        seeds:
+            Iterable of SoundCloud profile URLs, e.g.
+            ``["https://soundcloud.com/noisia"]``.  Keyword queries are also
+            accepted: if a value does not start with ``"http"``, it is treated
+            as a ``search_people`` query and the first result's URL is used as
+            the seed.
+        social_depth:
+            How many followers / followings to enqueue per artist.
+        max_artists:
+            Stop after this many artists have been yielded.  0 = unlimited.
+        seen:
+            Optional external set of already-visited profile URLs — lets the
+            caller resume across multiple ``crawl()`` calls without revisiting
+            the same profiles.  The set is mutated in-place.
+        """
+        from collections import deque
+
+        if seen is None:
+            seen = set()
+
+        frontier: deque[str] = deque()
+
+        # Resolve seeds: queries → profile URLs
+        for seed in seeds:
+            if seed.startswith("http"):
+                frontier.append(seed)
+            else:
+                try:
+                    for entity in self.search_people(seed, limit=1):
+                        url = entity.extra.get("artist_url") or ""
+                        if url:
+                            frontier.append(url)
+                        break
+                except Exception as exc:
+                    log.debug("crawl: seed query %r failed: %s", seed, exc)
+
+        yielded = 0
+
+        while frontier:
+            url = frontier.popleft()
+            if url in seen:
+                continue
+            seen.add(url)
+
+            entity = self.resolve_user(url)
+            if entity is None:
+                continue
+
+            yield entity
+            yielded += 1
+            if max_artists and yielded >= max_artists:
+                return
+
+            # Expand frontier via followers + following
+            try:
+                for follower in self.get_followers(url, limit=social_depth):
+                    furl = follower.extra.get("artist_url") or ""
+                    if furl and furl not in seen:
+                        frontier.append(furl)
+            except Exception as exc:
+                log.debug("crawl: get_followers failed for %s: %s", url, exc)
+
+            try:
+                for following in self.get_following(url, limit=social_depth):
+                    furl = following.extra.get("artist_url") or ""
+                    if furl and furl not in seen:
+                        frontier.append(furl)
+            except Exception as exc:
+                log.debug("crawl: get_following failed for %s: %s", url, exc)
 
     # -- download (pure requests, no yt-dlp) ---------------------------------
 
