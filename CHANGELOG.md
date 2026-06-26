@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a1) (2026-06-26)
+
+[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a3...0.5.0a1)
+
+**Merged pull requests:**
+
+- feat: expose followers\_count, followings\_count, verified, track\_count on SoundCloud entities [\#24](https://github.com/TigreGotico/nuvem_de_som/pull/24) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.4.0a3](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a3) (2026-06-23)
 
 [Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a2...0.4.0a3)
