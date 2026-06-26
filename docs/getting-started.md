@@ -66,6 +66,34 @@ sc.download_playlist("https://soundcloud.com/acidkid", output_dir="~/Music")
 
 `SoundCloudHTML` has no download methods. See [Backends reference](backends.md).
 
+## Discovering artists with crawl()
+
+`SoundCloudAPI.crawl()` walks the social graph (followers + followings) via
+BFS from one or more seed profiles.  Seeds can be profile URLs or keyword
+query strings — keywords are resolved to the top `search_people` result.
+
+```python
+from nuvem_de_som import SoundCloudAPI
+
+sc = SoundCloudAPI()
+seen = set()
+for entity in sc.crawl(
+    ["https://soundcloud.com/noisia", "black metal"],
+    social_depth=20,
+    max_artists=100,
+    seen=seen,
+):
+    followers = entity.extra.get("followers_count", "?")
+    verified  = " verified" if entity.extra.get("verified") else ""
+    print(entity.name, followers, verified)
+```
+
+Pass the same `seen` set across calls to resume without revisiting profiles.
+`SoundCloudHTML` and `SoundCloudYTDLP` also expose `crawl()` but use a flat
+expansion (no follower graph) because those backends lack follower endpoints.
+
+See `examples/11_crawl.py` and `examples/12_followers.py` for more.
+
 ## Logging
 
 ```python

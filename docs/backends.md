@@ -2,12 +2,12 @@
 
 ## Capability matrix
 
-| Backend | `search_tracks` | `search_people` | `search_sets` | `get_tracks` | `resolve_stream` | `resolve_track` | `resolve_user` | `download_*` |
-|---|---|---|---|---|---|---|---|---|
-| `SoundCloudAPI` | full metadata | full metadata | full metadata | user + playlist | progressive / HLS | yes | yes | pure requests |
-| `SoundCloudHTML` | title+URL only | name+URL only | title+URL only | full from schema.org | `NotImplementedError` | best-effort | Open Graph / JSON-LD | — |
-| `SoundCloudYTDLP` | full metadata | nothing | nothing | yes | progressive / HLS | yes | yes | yt-dlp |
-| `SoundCloud` | API → yt-dlp → HTML | API → HTML | API | API → yt-dlp → HTML | API → yt-dlp | API → yt-dlp → HTML | API → yt-dlp → HTML | API first, yt-dlp fallback |
+| Backend | `search_tracks` | `search_people` | `search_sets` | `get_tracks` | `resolve_stream` | `resolve_track` | `resolve_user` | `crawl` | `download_*` |
+|---|---|---|---|---|---|---|---|---|---|
+| `SoundCloudAPI` | full metadata | full metadata | full metadata | user + playlist | progressive / HLS | yes | yes | social-graph BFS | pure requests |
+| `SoundCloudHTML` | title+URL only | name+URL only | title+URL only | full from schema.org | `NotImplementedError` | best-effort | Open Graph / JSON-LD | flat expansion | — |
+| `SoundCloudYTDLP` | full metadata | nothing | nothing | yes | progressive / HLS | yes | yes | flat expansion | yt-dlp |
+| `SoundCloud` | API → yt-dlp → HTML | API → HTML | API | API → yt-dlp → HTML | API → yt-dlp | API → yt-dlp → HTML | API → yt-dlp → HTML | API BFS | API first, yt-dlp fallback |
 
 ---
 
@@ -25,6 +25,10 @@ caches it globally, refreshes automatically on 401/403.
 - `resolve_stream(track_url, prefer="progressive")` — resolves transcodings endpoint, returns direct URL
 - `resolve_track(track_url)` — `GET /resolve` → `Release`
 - `resolve_user(profile_url)` — `GET /resolve` → `Entity`
+- `get_followers(profile_url, limit=200)` — paginates `/users/{id}/followers` → `Iterator[Entity]`
+- `get_following(profile_url, limit=200)` — paginates `/users/{id}/followings` → `Iterator[Entity]`
+- `get_reposts(profile_url, limit=50)` — paginates `/stream/users/{id}/reposts` → `Iterator[Release]`
+- `crawl(seeds, *, social_depth=50, max_artists=0, seen=None)` — BFS artist discovery via followers + followings → `Iterator[Entity]`; seeds may be profile URLs or keyword queries
 - `download_track(track_url, output_dir=".", verbose=False)` — progressive stream via requests, returns `Path`
 - `download_tracks(track_urls, output_dir=".", verbose=False)` — returns `list[Path]`
 - `download_playlist(playlist_url, output_dir=".", verbose=False)` — saves into `output_dir/<artist>/`
@@ -34,6 +38,25 @@ Inject a custom session:
 ```python
 sc = SoundCloudAPI(session=my_session)
 ```
+
+### `crawl()` — social-graph BFS
+
+`SoundCloudAPI.crawl()` overrides the base implementation with a proper BFS
+that expands each artist's followers and followings.  The base
+`SoundCloudBase.crawl()` is the flat fallback used by `SoundCloudHTML` and
+`SoundCloudYTDLP`: it resolves URL seeds directly and expands keyword seeds
+via `search_people`, without fetching any follower graph.
+
+```python
+sc = SoundCloudAPI()
+seen = set()
+for entity in sc.crawl(["https://soundcloud.com/noisia", "black metal"],
+                        social_depth=20, max_artists=50, seen=seen):
+    print(entity.name, entity.extra.get("followers_count", "?"))
+```
+
+The `seen` set is mutated in-place.  Re-use it across calls to resume a
+crawl without revisiting profiles.
 
 ---
 
