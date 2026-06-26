@@ -464,6 +464,43 @@ class SoundCloudBase(ABC):
 
     # -- concrete shared -----------------------------------------------------
 
+    def crawl(
+        self,
+        seeds: list[str],
+        *,
+        social_depth: int = 50,
+        max_artists: int = 0,
+        seen: set[str] | None = None,
+    ) -> Iterator[Entity]:
+        """Yield Entity objects discovered from *seeds* via social-graph BFS.
+
+        The default implementation does a flat search-people expansion with no
+        social-graph traversal (suitable for HTML/yt-dlp backends that lack
+        follower APIs).  Override in subclasses that have follower endpoints.
+        """
+        if seen is None:
+            seen = set()
+        yielded = 0
+        for seed in seeds:
+            query = seed if not seed.startswith("http") else ""
+            if not query:
+                entity = self.resolve_user(seed)
+                if entity and seed not in seen:
+                    seen.add(seed)
+                    yield entity
+                    yielded += 1
+                    if max_artists and yielded >= max_artists:
+                        return
+            else:
+                for entity in self.search_people(query, limit=social_depth):
+                    url = entity.extra.get("artist_url") or ""
+                    if url and url not in seen:
+                        seen.add(url)
+                        yield entity
+                        yielded += 1
+                        if max_artists and yielded >= max_artists:
+                            return
+
     def search(self, query: str, limit: int = 10) -> Iterator[Release]:
         """Combined search: artist tracks + set tracks + direct track search."""
         for person in self.search_people(query, limit=3):
@@ -753,6 +790,95 @@ class SoundCloudAPI(SoundCloudBase):
                     artist_url=user.get("permalink_url") or ""))
                 collected += 1
             next_href = page.get("next_href")
+
+    # -- crawl (social-graph BFS) --------------------------------------------
+
+    def crawl(
+        self,
+        seeds: list[str],
+        *,
+        social_depth: int = 50,
+        max_artists: int = 0,
+        seen: set[str] | None = None,
+    ) -> Iterator[Entity]:
+        """Yield Entity objects via social-graph BFS from seed profile URLs.
+
+        Starting from *seeds* (SoundCloud profile URLs), each artist's
+        followers and followings are fetched and added to the frontier.  This
+        discovers artists that have no MusicBrainz or Wikidata presence —
+        they only appear because they are socially connected to known artists.
+
+        Parameters
+        ----------
+        seeds:
+            Iterable of SoundCloud profile URLs, e.g.
+            ``["https://soundcloud.com/noisia"]``.  Keyword queries are also
+            accepted: if a value does not start with ``"http"``, it is treated
+            as a ``search_people`` query and the first result's URL is used as
+            the seed.
+        social_depth:
+            How many followers / followings to enqueue per artist.
+        max_artists:
+            Stop after this many artists have been yielded.  0 = unlimited.
+        seen:
+            Optional external set of already-visited profile URLs — lets the
+            caller resume across multiple ``crawl()`` calls without revisiting
+            the same profiles.  The set is mutated in-place.
+        """
+        from collections import deque
+
+        if seen is None:
+            seen = set()
+
+        frontier: deque[str] = deque()
+
+        # Resolve seeds: queries → profile URLs
+        for seed in seeds:
+            if seed.startswith("http"):
+                frontier.append(seed)
+            else:
+                try:
+                    for entity in self.search_people(seed, limit=1):
+                        url = entity.extra.get("artist_url") or ""
+                        if url:
+                            frontier.append(url)
+                        break
+                except Exception as exc:
+                    log.debug("crawl: seed query %r failed: %s", seed, exc)
+
+        yielded = 0
+
+        while frontier:
+            url = frontier.popleft()
+            if url in seen:
+                continue
+            seen.add(url)
+
+            entity = self.resolve_user(url)
+            if entity is None:
+                continue
+
+            yield entity
+            yielded += 1
+            if max_artists and yielded >= max_artists:
+                return
+
+            # Expand frontier via followers + following
+            try:
+                for follower in self.get_followers(url, limit=social_depth):
+                    furl = follower.extra.get("artist_url") or ""
+                    if furl and furl not in seen:
+                        frontier.append(furl)
+            except Exception as exc:
+                log.debug("crawl: get_followers failed for %s: %s", url, exc)
+
+            try:
+                for following in self.get_following(url, limit=social_depth):
+                    furl = following.extra.get("artist_url") or ""
+                    if furl and furl not in seen:
+                        frontier.append(furl)
+            except Exception as exc:
+                log.debug("crawl: get_following failed for %s: %s", url, exc)
 
     # -- download (pure requests, no yt-dlp) ---------------------------------
 
