@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0a2](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a2) (2026-06-27)
+
+[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.5.0a1...0.5.0a2)
+
+**Merged pull requests:**
+
+- docs: SoundCloudAPI.crawl\(\), followers/social metadata — docs, examples, tests [\#26](https://github.com/TigreGotico/nuvem_de_som/pull/26) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a1) (2026-06-26)
 
 [Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a3...0.5.0a1)
