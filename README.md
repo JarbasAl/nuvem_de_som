@@ -115,14 +115,37 @@ For SoundCloud sets/playlists, `Work.tracklist` is populated with typed
 `mediavocab.Appearance` entries (each carrying the per-track `Work`),
 positioned 1..N. See `examples/set_tracklist.py`.
 
-**`Entity`** — from `search_people`, `resolve_user`:
+**`Entity`** — from `search_people`, `resolve_user`, `get_followers`, `get_following`:
 
 ```python
-entity.name                          # display name
-entity.extra.get("artist_url")       # profile URL
-entity.extra.get("image")            # avatar URL
-entity.external_ids                  # {"soundcloud_user_id": "..."}
+entity.name                              # display name
+entity.extra.get("artist_url")           # profile URL
+entity.extra.get("image")               # avatar URL
+entity.external_ids                      # {"soundcloud_user_id": "..."}
+entity.extra.get("followers_count")      # string int, e.g. "12345"
+entity.extra.get("followings_count")     # string int
+entity.extra.get("track_count")          # string int
+entity.extra.get("verified")             # "1" when verified, absent otherwise
 ```
+
+## Frontier crawling
+
+`SoundCloudAPI.crawl()` discovers artists via social-graph BFS.  Seeds are
+profile URLs or keyword queries; each visited profile's followers and
+followings are enqueued up to `social_depth`:
+
+```python
+from nuvem_de_som import SoundCloudAPI
+
+sc = SoundCloudAPI()
+seen = set()
+for entity in sc.crawl(["https://soundcloud.com/noisia", "black metal"],
+                        social_depth=20, max_artists=100, seen=seen):
+    print(entity.name, entity.extra.get("followers_count", "?"),
+          "verified" if entity.extra.get("verified") else "")
+```
+
+Pass `seen` across calls to resume without revisiting profiles.
 
 ## Backends
 
