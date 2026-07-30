@@ -3,15 +3,15 @@
 See the split docs for full coverage:
 
 - [Getting started](getting-started.md)
-- [Backends reference](backends.md) — `SoundCloudAPI`, `SoundCloudHTML`, `SoundCloudYTDLP`, `SoundCloud`
-- [Streams and transcodings](streams.md) — `resolve_stream`, progressive vs HLS, `_parse_transcodings`
-- [mediavocab converters](converters.md) — `Release` and `Entity` field reference
-- [Transport](transport.md) — `default_session`, `NUVEM_TRANSPORT`, curl_cffi
-- [CLI reference](cli.md) — `nds` commands and options
+- [Backends reference](backends.md): `SoundCloudAPI`, `SoundCloudHTML`, `SoundCloudYTDLP`, `SoundCloud`
+- [Streams and transcodings](streams.md): `resolve_stream`, progressive vs HLS, `_parse_transcodings`
+- [mediavocab converters](converters.md): `Release` and `Entity` field reference
+- [Transport](transport.md): `default_session`, `NUVEM_TRANSPORT`, curl_cffi
+- [CLI reference](cli.md): `nds` commands and options
 
 ---
 
-## SoundCloudAPI — additional methods
+## SoundCloudAPI: additional methods
 
 ### `get_followers(profile_url, limit=200)`
 
@@ -23,15 +23,15 @@ for follower in sc.get_followers("https://soundcloud.com/noisia", limit=50):
     print(follower.name, follower.extra.get("followers_count"))
 ```
 
-Resolves the profile URL to a numeric user id first, then paginates
-`/users/{id}/followers` with `linked_partitioning=1`.  Returns immediately
-if the profile URL cannot be resolved.
+`get_followers` resolves the profile URL to a numeric user id first, then
+paginates `/users/{id}/followers` with `linked_partitioning=1`. It returns
+immediately if the profile URL cannot be resolved.
 
 Parameters:
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `profile_url` | `str` | — | SoundCloud profile URL |
+| `profile_url` | `str` | n/a | SoundCloud profile URL |
 | `limit` | `int` | `200` | Maximum number of followers to yield |
 
 Returns: `Iterator[mediavocab.Entity]`
@@ -47,7 +47,8 @@ for followed in sc.get_following("https://soundcloud.com/noisia", limit=50):
     print(followed.name)
 ```
 
-Same pagination behaviour as `get_followers`; paginates `/users/{id}/followings`.
+This has the same pagination behavior as `get_followers`. It paginates
+`/users/{id}/followings`.
 
 Returns: `Iterator[mediavocab.Entity]`
 
@@ -62,8 +63,8 @@ for release in sc.get_reposts("https://soundcloud.com/noisia", limit=20):
     print(release.work.title, release.uri)
 ```
 
-Paginates `/stream/users/{id}/reposts`.  Items without a title are silently
-skipped.
+`get_reposts` paginates `/stream/users/{id}/reposts`. Items without a title
+are skipped silently.
 
 Returns: `Iterator[mediavocab.Release]`
 
@@ -71,7 +72,7 @@ Returns: `Iterator[mediavocab.Release]`
 
 ### `crawl(seeds, *, social_depth=50, max_artists=0, seen=None)`
 
-BFS generator that discovers artists via their social graph.
+A BFS generator that discovers artists through their social graph.
 
 ```python
 seen = set()
@@ -84,31 +85,31 @@ for entity in sc.crawl(
     print(entity.name, entity.extra.get("followers_count"))
 ```
 
-Seeds may be SoundCloud profile URLs **or** keyword query strings.  A
-keyword seed is resolved to the top `search_people` result; if resolution
-fails it is skipped.  For each artist in the frontier, up to `social_depth`
-followers and followings are fetched and enqueued.
+A seed can be a SoundCloud profile URL or a keyword query string. A keyword
+seed resolves to the top `search_people` result. If resolution fails, the
+seed is skipped. For each artist in the frontier, `crawl` fetches and
+enqueues up to `social_depth` followers and followings.
 
 Parameters:
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `seeds` | `list[str]` | — | Profile URLs or keyword query strings |
+| `seeds` | `list[str]` | n/a | Profile URLs or keyword query strings |
 | `social_depth` | `int` | `50` | Max followers/followings to enqueue per artist |
 | `max_artists` | `int` | `0` | Stop after this many yields (0 = unlimited) |
-| `seen` | `set[str] \| None` | `None` | Mutable set of visited URLs — mutated in-place for resumability |
+| `seen` | `set[str] \| None` | `None` | Mutable set of visited URLs, mutated in place for resumability |
 
 Returns: `Iterator[mediavocab.Entity]`
 
-The `seen` set is mutated in-place.  Pass the same set across multiple
-`crawl()` calls to resume without revisiting already-seen profiles.
+`crawl` mutates the `seen` set in place. Pass the same set across multiple
+`crawl()` calls to resume without visiting an already-seen profile again.
 
 ---
 
-## Entity — extra fields
+## Entity: extra fields
 
-All people methods (`search_people`, `resolve_user`, `get_followers`,
-`get_following`) populate the following fields via `_sc_user_to_dict()`:
+The people methods (`search_people`, `resolve_user`, `get_followers`,
+`get_following`) all populate the following fields with `_sc_user_to_dict()`:
 
 | `entity.extra` key | Source | Notes |
 |---|---|---|
@@ -121,10 +122,13 @@ All people methods (`search_people`, `resolve_user`, `get_followers`,
 | `"followings_count"` | `followings_count` | String int when present in the API response |
 | `"track_count"` | `track_count` | String int when present in the API response |
 
-All count fields are stored as strings (the `Entity.extra` dict is
-`dict[str, str]`).  Convert as needed:
+All count fields are stored as strings, since `Entity.extra` is a
+`dict[str, str]`. Convert them as needed:
 
 ```python
 followers = int(entity.extra.get("followers_count") or 0)
 verified   = bool(entity.extra.get("verified"))
 ```
+
+---
+[← CLI reference](cli.md) · [Home](../README.md)
