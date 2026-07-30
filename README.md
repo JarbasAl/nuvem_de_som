@@ -1,9 +1,10 @@
 # nuvem-de-som
 
-SoundCloud search, stream, and download client. Three independent backends, one
-orchestrator, one terminal app. Returns
+nuvem-de-som is a SoundCloud client for search, streaming, and download. It has
+three independent backends and one orchestrator that tries them in order. It
+also has a terminal app, `nds`. All methods return
 [`mediavocab`](https://github.com/OpenVoiceOS/mediavocab) `Release` and
-`Entity` objects for typed, structured metadata.
+`Entity` objects, so track and artist metadata come back typed and structured.
 
 ## Install
 
@@ -17,9 +18,9 @@ pip install "nuvem_de_som[stealth]"     # adds curl_cffi for browser-impersonati
 
 ### Stealth transport (`curl_cffi`)
 
-SoundCloud's API and HTML endpoints are increasingly bot-defended (TLS/JA3 and
-HTTP/2 fingerprinting). To preempt blocks, install the `[stealth]` extra and
-opt in via env var:
+SoundCloud's API and HTML endpoints increasingly block requests based on
+TLS (JA3) and HTTP/2 fingerprints. To reduce the risk of a block, install the
+`[stealth]` extra and turn it on with an environment variable:
 
 ```bash
 pip install "nuvem_de_som[stealth]"
@@ -27,11 +28,11 @@ NUVEM_TRANSPORT=curl_cffi python -m yourapp
 ```
 
 When `NUVEM_TRANSPORT=curl_cffi` is set and `curl_cffi` is importable,
-`SoundCloudAPI`, `SoundCloudHTML`, and the `SoundCloud` orchestrator default
-to a `curl_cffi.requests.Session(impersonate="chrome")` for every request.
-Otherwise they fall back transparently to the stdlib `requests.Session`.
+`SoundCloudAPI`, `SoundCloudHTML`, and the `SoundCloud` orchestrator use a
+`curl_cffi.requests.Session(impersonate="chrome")` for every request.
+Otherwise they fall back to the stdlib `requests.Session`.
 
-You can also inject any compatible session directly:
+You can also inject a compatible session directly:
 
 ```python
 from curl_cffi import requests as cffi_requests
@@ -40,25 +41,10 @@ from nuvem_de_som import SoundCloudAPI
 sc = SoundCloudAPI(session=cffi_requests.Session(impersonate="chrome120"))
 ```
 
-Note: `SoundCloudYTDLP` uses yt-dlp internally for its HTTP traffic and does
-**not** honour an injected session — yt-dlp manages its own networking.
+Note: `SoundCloudYTDLP` uses yt-dlp for its HTTP traffic and does not use an
+injected session. yt-dlp manages its own networking.
 
-## Terminal app — `nds`
-
-```bash
-nds search "nuclear chill"          # interactive: pick a track, then play or download
-nds browse https://soundcloud.com/acidkid   # browse artist page interactively
-nds play   https://soundcloud.com/acidkid/piratech-nuclear-chill
-nds download https://soundcloud.com/acidkid/piratech-nuclear-chill -o ~/Music
-nds download https://soundcloud.com/acidkid --playlist -o ~/Music
-
-nds --backend api search "chill"    # force a specific backend (api/html/ytdlp/auto)
-```
-
-Playback uses `--player` / `NDS_PLAYER` env var, or auto-detects: **mpv** → vlc → ffplay → mplayer → afplay → cvlc.
-Any binary name or full path works — Termux, Windows, macOS all supported.
-
-## Python API — quick start
+## Python API quick start
 
 ```python
 from nuvem_de_som import SoundCloud
@@ -82,7 +68,7 @@ for entity in sc.search_people("acidkid", limit=5):
 url = sc.resolve_stream("https://soundcloud.com/acidkid/piratech-nuclear-chill")
 url = sc.resolve_stream("...", prefer="hls")   # or "progressive" (default)
 
-# Download — SoundCloudAPI uses pure requests; SoundCloudYTDLP uses yt-dlp
+# Download: SoundCloudAPI uses pure requests. SoundCloudYTDLP uses yt-dlp
 path = sc.download_track("https://soundcloud.com/acidkid/piratech-nuclear-chill",
                           output_dir="~/Music")
 sc.download_playlist("https://soundcloud.com/acidkid", output_dir="~/Music")
@@ -90,7 +76,7 @@ sc.download_playlist("https://soundcloud.com/acidkid", output_dir="~/Music")
 
 ### Return types at a glance
 
-**`Release`** — from `search_tracks`, `get_tracks`, `resolve_track`, `search_sets`:
+**`Release`** comes from `search_tracks`, `get_tracks`, `resolve_track`, and `search_sets`:
 
 ```python
 release.uri                          # SoundCloud permalink
@@ -111,11 +97,11 @@ release.license                      # SPDX id ("CC-BY-NC-4.0", "CC0-1.0") or ra
 release.release_date                 # ISO date validated by mediavocab
 ```
 
-For SoundCloud sets/playlists, `Work.tracklist` is populated with typed
-`mediavocab.Appearance` entries (each carrying the per-track `Work`),
-positioned 1..N. See `examples/set_tracklist.py`.
+For SoundCloud sets and playlists, `Work.tracklist` holds typed
+`mediavocab.Appearance` entries, each with the per-track `Work`, positioned
+1..N. See `examples/set_tracklist.py`.
 
-**`Entity`** — from `search_people`, `resolve_user`, `get_followers`, `get_following`:
+**`Entity`** comes from `search_people`, `resolve_user`, `get_followers`, and `get_following`:
 
 ```python
 entity.name                              # display name
@@ -130,9 +116,9 @@ entity.extra.get("verified")             # "1" when verified, absent otherwise
 
 ## Frontier crawling
 
-`SoundCloudAPI.crawl()` discovers artists via social-graph BFS.  Seeds are
-profile URLs or keyword queries; each visited profile's followers and
-followings are enqueued up to `social_depth`:
+`SoundCloudAPI.crawl()` finds artists with a breadth-first search over the
+social graph. Seeds are profile URLs or keyword queries. Each visited
+profile's followers and followings go into the queue, up to `social_depth`:
 
 ```python
 from nuvem_de_som import SoundCloudAPI
@@ -145,82 +131,47 @@ for entity in sc.crawl(["https://soundcloud.com/noisia", "black metal"],
           "verified" if entity.extra.get("verified") else "")
 ```
 
-Pass `seen` across calls to resume without revisiting profiles.
+Pass `seen` across calls to resume without visiting the same profile twice.
 
 ## Backends
 
 | Backend | Search | Stream | Download | Extra dep |
 |---|---|---|---|---|
-| `SoundCloudAPI` | full metadata | progressive or HLS | pure requests | — |
-| `SoundCloudHTML` | title+URL only | raises `NotImplementedError` | — | — |
+| `SoundCloudAPI` | full metadata | progressive or HLS | pure requests | n/a |
+| `SoundCloudHTML` | title+URL only | raises `NotImplementedError` | n/a | n/a |
 | `SoundCloudYTDLP` | full metadata | yt-dlp | yt-dlp | `yt-dlp` |
 | `SoundCloud` | API → yt-dlp → HTML | API first, yt-dlp fallback | API first, yt-dlp fallback | optional `yt-dlp` |
 
-Use a concrete class when you need a specific backend; use `SoundCloud` for resilience.
+Use a concrete backend class when you need one specific backend. Use
+`SoundCloud` when you want it to fall back automatically.
 
 ```python
 from nuvem_de_som import SoundCloudAPI, SoundCloudHTML, SoundCloudYTDLP, SoundCloud
 
-sc = SoundCloudAPI()     # recommended — full metadata, no yt-dlp
+sc = SoundCloudAPI()     # recommended: full metadata, no yt-dlp
 sc = SoundCloudHTML()    # no extra deps, title+URL from search pages
 sc = SoundCloudYTDLP()   # yt-dlp backed, slowest but most resilient
 sc = SoundCloud()        # tries all three in order
 ```
 
-## Transport — stealth mode
-
-SoundCloud fingerprints TLS and HTTP/2 frames. Set `NUVEM_TRANSPORT=curl_cffi`
-and install the `[stealth]` extra to impersonate a real browser:
+## Terminal app: `nds`
 
 ```bash
-NUVEM_TRANSPORT=curl_cffi python myscript.py
-```
-
-Or inject a session directly:
-
-```python
-from curl_cffi import requests as cffi_requests
-from nuvem_de_som import SoundCloudAPI
-
-sc = SoundCloudAPI(session=cffi_requests.Session(impersonate="chrome120"))
-```
-
-`SoundCloudYTDLP` manages its own networking and ignores an injected session.
-
-## mediavocab integration
-
-All track methods return `mediavocab.Release`; people methods return
-`mediavocab.Entity`. No conversion step needed.
-
-```python
-release = sc.resolve_track("https://soundcloud.com/acidkid/piratech-nuclear-chill")
-
-release.uri                          # SoundCloud permalink
-release.image                        # artwork URL
-release.work.title                   # track title
-release.work.runtime                 # duration in seconds (float or None)
-release.work.credits[0].entity.name  # artist display name
-release.work.content_genres          # ["electronic", "ambient", ...]
-release.work.external_ids            # {"soundcloud_track_id": "...", ...}
-release.codec                        # "audio/mpeg"
-release.bitrate                      # "128" or "256"
-release.license                      # SPDX id e.g. "CC-BY-NC-4.0"
-release.release_date                 # ISO date "2018-09-25"
-```
-
-## CLI — `nds`
-
-```bash
-nds search "nuclear chill"
+nds search "nuclear chill"          # interactive: pick a track, then play or download
 nds search "acidkid" --people
-nds browse https://soundcloud.com/acidkid
+nds browse https://soundcloud.com/acidkid   # browse artist page interactively
 nds play   https://soundcloud.com/acidkid/piratech-nuclear-chill
 nds download https://soundcloud.com/acidkid/piratech-nuclear-chill -o ~/Music
 nds download https://soundcloud.com/acidkid --playlist -o ~/Music
 
-nds --backend api    search "chill"   # force backend: api / html / ytdlp / auto
-NDS_PLAYER=vlc nds play <url>         # override player; auto-detects mpv → vlc → ffplay
+nds --backend api search "chill"    # force a specific backend (api/html/ytdlp/auto)
+NDS_PLAYER=vlc nds play <url>       # override player; auto-detects mpv → vlc → ffplay
 ```
+
+Playback uses the `--player` flag or the `NDS_PLAYER` environment variable,
+or auto-detects a player in this order: **mpv** → vlc → ffplay → mplayer →
+afplay → cvlc. Any binary name or full path works, on Termux, Windows, and
+macOS.
 
 ## Docs
 
@@ -230,10 +181,18 @@ NDS_PLAYER=vlc nds play <url>         # override player; auto-detects mpv → vl
 - [mediavocab converters](docs/converters.md)
 - [Transport](docs/transport.md)
 - [CLI reference](docs/cli.md)
+- [API extras: followers, following, reposts, crawl](docs/api.md)
+
+## Related projects
+
+- [`mediavocab`](https://github.com/OpenVoiceOS/mediavocab): the typed
+  metadata models (`Release`, `Entity`) that every nuvem-de-som method returns.
+- [`soundcloud-ma-provider`](https://github.com/TigreGotico/soundcloud-ma-provider):
+  a Music Assistant provider built on nuvem-de-som.
 
 ## Examples
 
-See [`examples/`](examples/) — numbered zero-to-hero scripts.
+See [`examples/`](examples/) for numbered scripts, from basic to advanced.
 
 ## License
 

@@ -15,7 +15,7 @@ pip install "nuvem_de_som[yt-dlp,cli]"      # everything
 ```python
 from nuvem_de_som import SoundCloud, SoundCloudAPI, SoundCloudHTML, SoundCloudYTDLP
 
-sc = SoundCloud()        # orchestrator — tries API → yt-dlp → HTML transparently
+sc = SoundCloud()        # orchestrator: tries API, then yt-dlp, then HTML
 sc = SoundCloudAPI()     # recommended for most tasks
 sc = SoundCloudHTML()    # no extra deps; search returns title+URL only
 sc = SoundCloudYTDLP()   # pip install nuvem_de_som[yt-dlp]
@@ -54,7 +54,7 @@ url = sc.resolve_stream("https://soundcloud.com/acidkid/piratech-nuclear-chill")
 url = sc.resolve_stream("...", prefer="hls")
 ```
 
-`SoundCloudHTML.resolve_stream()` raises `NotImplementedError` — use
+`SoundCloudHTML.resolve_stream()` raises `NotImplementedError`. Use
 `SoundCloudAPI` or `SoundCloudYTDLP` for stream access.
 
 ## Download
@@ -66,11 +66,12 @@ sc.download_playlist("https://soundcloud.com/acidkid", output_dir="~/Music")
 
 `SoundCloudHTML` has no download methods. See [Backends reference](backends.md).
 
-## Discovering artists with crawl()
+## Discover artists with crawl()
 
-`SoundCloudAPI.crawl()` walks the social graph (followers + followings) via
-BFS from one or more seed profiles.  Seeds can be profile URLs or keyword
-query strings — keywords are resolved to the top `search_people` result.
+`SoundCloudAPI.crawl()` walks the social graph (followers and followings)
+with a breadth-first search from one or more seed profiles. A seed can be a
+profile URL or a keyword query string. A keyword seed resolves to the top
+`search_people` result.
 
 ```python
 from nuvem_de_som import SoundCloudAPI
@@ -88,9 +89,10 @@ for entity in sc.crawl(
     print(entity.name, followers, verified)
 ```
 
-Pass the same `seen` set across calls to resume without revisiting profiles.
-`SoundCloudHTML` and `SoundCloudYTDLP` also expose `crawl()` but use a flat
-expansion (no follower graph) because those backends lack follower endpoints.
+Pass the same `seen` set across calls to resume without visiting the same
+profile twice. `SoundCloudHTML` and `SoundCloudYTDLP` also expose `crawl()`,
+but they use a flat expansion, not a follower graph, because those backends
+have no follower endpoints.
 
 See `examples/11_crawl.py` and `examples/12_followers.py` for more.
 
@@ -100,3 +102,6 @@ See `examples/11_crawl.py` and `examples/12_followers.py` for more.
 import logging
 logging.getLogger("nuvem_de_som").setLevel(logging.DEBUG)
 ```
+
+---
+[Home](../README.md) · [Backends reference →](backends.md)
