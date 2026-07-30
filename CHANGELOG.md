@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0a3](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a3) (2026-07-30)
+
+[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.5.0a2...0.5.0a3)
+
+**Merged pull requests:**
+
+- docs: rewrite README in Simplified Technical English [\#29](https://github.com/TigreGotico/nuvem_de_som/pull/29) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a2](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a2) (2026-06-27)
 
 [Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.5.0a1...0.5.0a2)
