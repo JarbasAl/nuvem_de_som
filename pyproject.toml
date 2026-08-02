@@ -21,7 +21,7 @@ test = ["pytest", "vcrpy", "pytest-vcr", "click"]
 nds = "nuvem_de_som.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/OpenJarbas/nuvem_de_som"
+Homepage = "https://github.com/LeMetadatarr/nuvem_de_som"
 
 [tool.setuptools.dynamic]
 version = { attr = "nuvem_de_som.version.__version__" }

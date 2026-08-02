@@ -13,7 +13,7 @@
 
 ## SoundCloudAPI
 
-`nuvem_de_som.__init__.SoundCloudAPI`: `nuvem_de_som/__init__.py:457`
+`nuvem_de_som.__init__.SoundCloudAPI`: `nuvem_de_som/__init__.py:521`
 
 Uses the SoundCloud internal API v2. It fetches a `client_id` from
 SoundCloud's bundled JS on first use, caches it globally, and refreshes it
@@ -63,7 +63,7 @@ resume a crawl without visiting the same profile twice.
 
 ## SoundCloudHTML
 
-`nuvem_de_som.__init__.SoundCloudHTML`: `nuvem_de_som/__init__.py:758`
+`nuvem_de_som.__init__.SoundCloudHTML`: `nuvem_de_som/__init__.py:980`
 
 Scrapes SoundCloud's public HTML. It needs no API key.
 
@@ -87,7 +87,7 @@ sc = SoundCloudHTML(session=my_session)
 
 ## SoundCloudYTDLP
 
-`nuvem_de_som.__init__.SoundCloudYTDLP`: `nuvem_de_som/__init__.py:1044`
+`nuvem_de_som.__init__.SoundCloudYTDLP`: `nuvem_de_som/__init__.py:1266`
 
 Needs `pip install nuvem_de_som[yt-dlp]`.
 
@@ -107,7 +107,7 @@ Does not accept a `session=` keyword argument. yt-dlp manages its own HTTP.
 
 ## SoundCloud (orchestrator)
 
-`nuvem_de_som.__init__.SoundCloud`: `nuvem_de_som/__init__.py:1250`
+`nuvem_de_som.__init__.SoundCloud`: `nuvem_de_som/__init__.py:1472`
 
 A subclass of `SoundCloudBase`. It holds a chain of
 `[SoundCloudAPI, SoundCloudYTDLP, SoundCloudHTML]`.
