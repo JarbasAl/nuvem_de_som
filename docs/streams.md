@@ -15,7 +15,7 @@ resolution fails.
 
 ### SoundCloudAPI path
 
-`SoundCloudAPI.resolve_stream`: `nuvem_de_som/__init__.py:603`
+`SoundCloudAPI.resolve_stream`: `nuvem_de_som/__init__.py:660`
 
 1. Calls `GET /resolve?url=<track_url>` to get the track JSON.
 2. Reads `media.transcodings[]`, and sorts by preferred protocol first, then any.
@@ -26,7 +26,7 @@ No yt-dlp is involved at any point.
 
 ### SoundCloudYTDLP path
 
-`SoundCloudYTDLP.resolve_stream`: `nuvem_de_som/__init__.py:1108`
+`SoundCloudYTDLP.resolve_stream`: `nuvem_de_som/__init__.py:1330`
 
 Runs `yt_dlp.YoutubeDL.extract_info(track_url)` without downloading, then
 walks `info["formats"]` in reverse (highest quality last). It maps:

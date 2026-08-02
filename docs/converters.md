@@ -6,7 +6,7 @@ conversion step is needed.
 ## Release (tracks and sets)
 
 `_track_dict_to_release`: `nuvem_de_som/__init__.py:250`
-`_set_dict_to_release`: `nuvem_de_som/__init__.py:330`
+`_set_dict_to_release`: `nuvem_de_som/__init__.py:357`
 
 `search_tracks`, `get_tracks`, `resolve_track`, and `search_sets` return this type.
 
@@ -42,7 +42,7 @@ expose them.
 
 ## Entity (artists / users)
 
-`_user_dict_to_entity`: `nuvem_de_som/__init__.py:305`
+`_user_dict_to_entity`: `nuvem_de_som/__init__.py:326`
 
 `search_people` and `resolve_user` return this type.
 
