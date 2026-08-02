@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0a5](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a5) (2026-08-02)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a4...0.5.0a5)
+
+**Merged pull requests:**
+
+- fix: pin mediavocab\>=2.0.0a0 \(2.x prerelease has the API nuvem\_de\_som targets\) [\#32](https://github.com/LeMetadatarr/nuvem_de_som/pull/32) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a4](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a4) (2026-08-02)
 
 [Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a3...0.5.0a4)
