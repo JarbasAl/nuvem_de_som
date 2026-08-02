@@ -1,76 +1,84 @@
 # Changelog
 
-## [0.5.0a3](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a3) (2026-07-30)
+## [0.5.0a4](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a4) (2026-08-02)
 
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.5.0a2...0.5.0a3)
-
-**Merged pull requests:**
-
-- docs: rewrite README in Simplified Technical English [\#29](https://github.com/TigreGotico/nuvem_de_som/pull/29) ([JarbasAl](https://github.com/JarbasAl))
-
-## [0.5.0a2](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a2) (2026-06-27)
-
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.5.0a1...0.5.0a2)
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a3...0.5.0a4)
 
 **Merged pull requests:**
 
-- docs: SoundCloudAPI.crawl\(\), followers/social metadata — docs, examples, tests [\#26](https://github.com/TigreGotico/nuvem_de_som/pull/26) ([JarbasAl](https://github.com/JarbasAl))
+- docs: QA pass — accuracy, org-move URLs, related projects [\#31](https://github.com/LeMetadatarr/nuvem_de_som/pull/31) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.5.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.5.0a1) (2026-06-26)
+## [0.5.0a3](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a3) (2026-07-30)
 
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a3...0.5.0a1)
-
-**Merged pull requests:**
-
-- feat: expose followers\_count, followings\_count, verified, track\_count on SoundCloud entities [\#24](https://github.com/TigreGotico/nuvem_de_som/pull/24) ([JarbasAl](https://github.com/JarbasAl))
-
-## [0.4.0a3](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a3) (2026-06-23)
-
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a2...0.4.0a3)
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a2...0.5.0a3)
 
 **Merged pull requests:**
 
-- chore: migrate to mediavocab 1.0 [\#19](https://github.com/TigreGotico/nuvem_de_som/pull/19) ([JarbasAl](https://github.com/JarbasAl))
+- docs: rewrite README in Simplified Technical English [\#29](https://github.com/LeMetadatarr/nuvem_de_som/pull/29) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.4.0a2](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a2) (2026-05-13)
+## [0.5.0a2](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a2) (2026-06-27)
 
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.4.0a1...0.4.0a2)
-
-**Merged pull requests:**
-
-- Update actions/checkout action to v6 [\#17](https://github.com/TigreGotico/nuvem_de_som/pull/17) ([renovate[bot]](https://github.com/apps/renovate))
-
-## [0.4.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.4.0a1) (2026-05-07)
-
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.3.0a1...0.4.0a1)
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a1...0.5.0a2)
 
 **Merged pull requests:**
 
-- feat: emit mediavocab Release / Entity from SoundCloud [\#15](https://github.com/TigreGotico/nuvem_de_som/pull/15) ([JarbasAl](https://github.com/JarbasAl))
+- docs: SoundCloudAPI.crawl\(\), followers/social metadata — docs, examples, tests [\#26](https://github.com/LeMetadatarr/nuvem_de_som/pull/26) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.3.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.3.0a1) (2026-04-30)
+## [0.5.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a1) (2026-06-26)
 
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.2.0a1...0.3.0a1)
-
-**Merged pull requests:**
-
-- feat: surface user\_id from resolve\_user; add resolve\_track\(url\) [\#13](https://github.com/TigreGotico/nuvem_de_som/pull/13) ([JarbasAl](https://github.com/JarbasAl))
-
-## [0.2.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.2.0a1) (2026-04-30)
-
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.1.0a1...0.2.0a1)
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.4.0a3...0.5.0a1)
 
 **Merged pull requests:**
 
-- feat: surface canonical SoundCloud IDs in all results [\#11](https://github.com/TigreGotico/nuvem_de_som/pull/11) ([JarbasAl](https://github.com/JarbasAl))
+- feat: expose followers\_count, followings\_count, verified, track\_count on SoundCloud entities [\#24](https://github.com/LeMetadatarr/nuvem_de_som/pull/24) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.1.0a1](https://github.com/TigreGotico/nuvem_de_som/tree/0.1.0a1) (2026-04-28)
+## [0.4.0a3](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.4.0a3) (2026-06-23)
 
-[Full Changelog](https://github.com/TigreGotico/nuvem_de_som/compare/0.0.2...0.1.0a1)
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.4.0a2...0.4.0a3)
 
 **Merged pull requests:**
 
-- feat: nds terminal client — search, browse, play, download [\#9](https://github.com/TigreGotico/nuvem_de_som/pull/9) ([JarbasAl](https://github.com/JarbasAl))
+- chore: migrate to mediavocab 1.0 [\#19](https://github.com/LeMetadatarr/nuvem_de_som/pull/19) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.4.0a2](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.4.0a2) (2026-05-13)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.4.0a1...0.4.0a2)
+
+**Merged pull requests:**
+
+- Update actions/checkout action to v6 [\#17](https://github.com/LeMetadatarr/nuvem_de_som/pull/17) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.4.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.4.0a1) (2026-05-07)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.3.0a1...0.4.0a1)
+
+**Merged pull requests:**
+
+- feat: emit mediavocab Release / Entity from SoundCloud [\#15](https://github.com/LeMetadatarr/nuvem_de_som/pull/15) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.3.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.3.0a1) (2026-04-30)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.2.0a1...0.3.0a1)
+
+**Merged pull requests:**
+
+- feat: surface user\_id from resolve\_user; add resolve\_track\(url\) [\#13](https://github.com/LeMetadatarr/nuvem_de_som/pull/13) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.2.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.2.0a1) (2026-04-30)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.1.0a1...0.2.0a1)
+
+**Merged pull requests:**
+
+- feat: surface canonical SoundCloud IDs in all results [\#11](https://github.com/LeMetadatarr/nuvem_de_som/pull/11) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.1.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.1.0a1) (2026-04-28)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.0.2...0.1.0a1)
+
+**Merged pull requests:**
+
+- feat: nds terminal client — search, browse, play, download [\#9](https://github.com/LeMetadatarr/nuvem_de_som/pull/9) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
