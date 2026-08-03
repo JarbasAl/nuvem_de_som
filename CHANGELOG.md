@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.1a1) (2026-08-03)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a6...0.5.1a1)
+
+**Merged pull requests:**
+
+- fix: migrate to mediavocab 2.x license\_model overlay [\#34](https://github.com/LeMetadatarr/nuvem_de_som/pull/34) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a6](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a6) (2026-08-03)
 
 [Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a5...0.5.0a6)
