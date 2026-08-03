@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0a6](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a6) (2026-08-03)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a5...0.5.0a6)
+
+**Merged pull requests:**
+
+- ci: grant conventional-label workflow write permissions [\#33](https://github.com/LeMetadatarr/nuvem_de_som/pull/33) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a5](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.0a5) (2026-08-02)
 
 [Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.0a4...0.5.0a5)
