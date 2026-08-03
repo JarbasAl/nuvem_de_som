@@ -128,4 +128,57 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api-v2.soundcloud.com/search/users?client_id=sUn5toeW5d8MC2jOLpE2yAibTG7RRYsA&q=disclosure&limit=3
+  response:
+    body:
+      string: '{"collection":[{"avatar_url":"https://i1.sndcdn.com/avatars-V57b6hERdlsSVzyY-UYlQUQ-large.jpg","city":"","comments_count":0,"country_code":null,"created_at":null,"creator_subscriptions":[{"product":{"id":"creator-pro-unlimited"}}],"creator_subscription":{"product":{"id":"creator-pro-unlimited"}},"description":"","followers_count":1449675,"followings_count":876,"first_name":"","full_name":"","groups_count":0,"id":494163,"kind":"user","last_modified":"2026-07-20T06:41:35Z","last_name":"","likes_count":207,"playlist_likes_count":10,"permalink":"disclosuremusic","permalink_url":"https://soundcloud.com/disclosuremusic","playlist_count":66,"reposts_count":null,"track_count":236,"uri":"https://api.soundcloud.com/users/soundcloud%3Ausers%3A494163","urn":"soundcloud:users:494163","username":"Disclosure","verified":true,"visuals":{"urn":"soundcloud:users:494163","enabled":true,"visuals":[{"urn":"soundcloud:visuals:263312703","entry_time":0,"visual_url":"https://i1.sndcdn.com/visuals-000000494163-jRZGl3-original.jpg"}],"tracking":null},"badges":{"pro":false,"creator_mid_tier":false,"pro_unlimited":true,"verified":true},"station_urn":"soundcloud:system-playlists:artist-stations:494163","station_permalink":"artist-stations:494163","date_of_birth":null},{"avatar_url":"https://i1.sndcdn.com/avatars-WLS5ycQwtqFTykzm-CfbXdg-large.jpg","city":"","comments_count":0,"country_code":null,"created_at":null,"creator_subscriptions":[{"product":{"id":"free"}}],"creator_subscription":{"product":{"id":"free"}},"description":"Im
+        trying''s all","followers_count":5,"followings_count":42,"first_name":"","full_name":"","groups_count":0,"id":933283789,"kind":"user","last_modified":"2024-12-02T23:35:09Z","last_name":"","likes_count":866,"playlist_likes_count":36,"permalink":"user-971630319","permalink_url":"https://soundcloud.com/user-971630319","playlist_count":0,"reposts_count":null,"track_count":0,"uri":"https://api.soundcloud.com/users/soundcloud%3Ausers%3A933283789","urn":"soundcloud:users:933283789","username":"Disclosure","verified":false,"visuals":{"urn":"soundcloud:users:933283789","enabled":true,"visuals":[{"urn":"soundcloud:visuals:200024094","entry_time":0,"visual_url":"https://i1.sndcdn.com/visuals-c8VRH2qoo06fx52Z-vOmXbw-original.jpg"}],"tracking":null},"badges":{"pro":false,"creator_mid_tier":false,"pro_unlimited":false,"verified":false},"station_urn":"soundcloud:system-playlists:artist-stations:933283789","station_permalink":"artist-stations:933283789","date_of_birth":null},{"avatar_url":"https://i1.sndcdn.com/avatars-000102225569-a6pye1-large.jpg","city":"Auckland","comments_count":0,"country_code":"NZ","created_at":null,"creator_subscriptions":[{"product":{"id":"free"}}],"creator_subscription":{"product":{"id":"free"}},"description":null,"followers_count":9,"followings_count":7,"first_name":"Ross","full_name":"Ross
+        Hamblin","groups_count":0,"id":807160,"kind":"user","last_modified":"2016-11-21T18:41:22Z","last_name":"Hamblin","likes_count":0,"playlist_likes_count":0,"permalink":"aural-disclosure","permalink_url":"https://soundcloud.com/aural-disclosure","playlist_count":3,"reposts_count":null,"track_count":17,"uri":"https://api.soundcloud.com/users/soundcloud%3Ausers%3A807160","urn":"soundcloud:users:807160","username":"Aural
+        Disclosure","verified":false,"visuals":null,"badges":{"pro":false,"creator_mid_tier":false,"pro_unlimited":false,"verified":false},"station_urn":"soundcloud:system-playlists:artist-stations:807160","station_permalink":"artist-stations:807160","date_of_birth":null}],"total_results":253,"next_href":"https://api-v2.soundcloud.com/search/users?query_urn=soundcloud%3Asearch%3A3aadc4b38fcd4b9e9dd7c2b02fd12299&limit=3&offset=3&q=disclosure","query_urn":"soundcloud:search:3aadc4b38fcd4b9e9dd7c2b02fd12299"}'
+    headers:
+      Cache-Control:
+      - private, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 03 Aug 2026 01:56:13 GMT
+      Server:
+      - am/2
+      Vary:
+      - Origin
+      Via:
+      - 1.1 8dd6c31efab2c0e3b91356d912029cae.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Fh6ceekC5U3kcONq6ACDRV2cBdszT9xsw-TR_bx9L83xF-pB3HO2Mg==
+      X-Amz-Cf-Pop:
+      - MAD53-P8
+      X-Cache:
+      - Miss from cloudfront
+      content-length:
+      - '3771'
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=63072000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-robots-tag:
+      - noindex
+    status:
+      code: 200
+      message: OK
 version: 1

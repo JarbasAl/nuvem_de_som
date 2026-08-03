@@ -451,6 +451,32 @@ class TestApiResolveStream:
         with patch.object(sc, "_call", side_effect=RuntimeError("boom")):
             assert sc.resolve_stream("https://x") is None
 
+    def test_prefers_hq_over_sq_within_same_protocol(self):
+        """Regression: resolve_stream must pick the same best-quality
+        transcoding that _parse_transcodings/codec+bitrate metadata describes.
+
+        Before the fix, resolve_stream only sorted by protocol match and
+        returned the first entry for a given protocol regardless of quality,
+        so an "sq" listed before "hq" in the API response would be streamed
+        even though the parsed Release metadata (bitrate="256") advertised hq.
+        """
+        sc = SoundCloudAPI()
+        resource = {"media": {"transcodings": [
+            {"url": "https://api/sq", "format": {"protocol": "progressive"},
+             "quality": "sq"},
+            {"url": "https://api/hq", "format": {"protocol": "progressive"},
+             "quality": "hq"},
+        ]}}
+
+        def fake_call(endpoint, **kw):
+            if "resolve" in endpoint:
+                return resource
+            return {"url": f"stream-for-{endpoint.rsplit('/', 1)[-1]}"}
+
+        with patch.object(sc, "_call", side_effect=fake_call):
+            url = sc.resolve_stream("https://x")
+        assert url == "stream-for-hq"
+
 
 # ---------------------------------------------------------------------------
 # SoundCloudAPI.resolve_user / resolve_track exception + non-user path
