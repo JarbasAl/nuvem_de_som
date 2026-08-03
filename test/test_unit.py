@@ -85,6 +85,13 @@ class TestParseTrack:
         result = SoundCloudAPI._parse_track(self._track(duration=None))
         assert result["duration"] is None
 
+    def test_zero_duration_is_zero_not_none(self):
+        """Regression: `if t.get("duration")` treats 0 as falsy and used to
+        collapse a real (if degenerate) zero-length duration into None,
+        indistinguishable from a track with no duration field at all."""
+        result = SoundCloudAPI._parse_track(self._track(duration=0))
+        assert result["duration"] == 0
+
     def test_artwork_falls_back_to_avatar(self):
         t = self._track()
         t["artwork_url"] = None
@@ -420,6 +427,34 @@ class TestSetTracklist:
             "title": "Set", "url": "u", "artist": "", "playlist_id": 1,
         })
         assert rel.work.tracklist == []
+
+
+class TestCreditRoleConsistency:
+    """Regression: mediavocab.Credit warns when `role` doesn't "obviously
+    match" `relation_role` (see mediavocab.models.entity.Credit._check_role_
+    consistency). Every track/set built here used to set role="artist" next
+    to relation_role=PERFORMER/CREATOR, which never matches and fired a
+    mediavocab WARNING on every single Release built by this package."""
+
+    def test_track_credit_role_matches_relation_role(self):
+        rel = _track_dict_to_release({
+            "title": "T", "url": "u", "artist": "A", "user_id": 1,
+        })
+        credit = rel.work.credits[0]
+        assert credit.relation_role.value in credit.role.lower()
+
+    def test_set_credit_role_matches_relation_role(self):
+        rel = _set_dict_to_release({
+            "title": "S", "url": "u", "artist": "A", "user_id": 1,
+        })
+        credit = rel.work.credits[0]
+        assert credit.relation_role.value in credit.role.lower()
+
+    def test_track_credit_role_logs_no_warning(self, caplog):
+        import logging
+        with caplog.at_level(logging.WARNING, logger="mediavocab.models.entity"):
+            _track_dict_to_release({"title": "T", "url": "u", "artist": "A"})
+        assert not any("Credit role mismatch" in r.message for r in caplog.records)
 
 
 class TestTrackEnrichmentRoundtrip:

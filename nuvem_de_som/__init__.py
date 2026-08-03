@@ -272,7 +272,7 @@ def _track_dict_to_release(d: dict) -> Release:
         )
         credits.append(Credit(
             entity=artist_ref,
-            role="artist",
+            role="Performer",
             relation_role=RelationRole.PERFORMER,
             section=CreditSection.PRINCIPAL,
         ))
@@ -376,7 +376,7 @@ def _set_dict_to_release(d: dict) -> Release:
         )
         credits.append(Credit(
             entity=artist_ref,
-            role="artist",
+            role="Creator",
             relation_role=RelationRole.CREATOR,
             section=CreditSection.PRINCIPAL,
         ))
@@ -555,7 +555,7 @@ class SoundCloudAPI(SoundCloudBase):
     def _parse_track(t: dict, artist_url: str | None = None) -> dict:
         user = t.get("user") or {}
         image = t.get("artwork_url") or user.get("avatar_url") or ""
-        duration = (t["duration"] // 1000) if t.get("duration") else None
+        duration = (t["duration"] // 1000) if t.get("duration") is not None else None
         codec, bitrate = _parse_transcodings(
             ((t.get("media") or {}).get("transcodings") or [])
         )
@@ -670,9 +670,16 @@ class SoundCloudAPI(SoundCloudBase):
         try:
             resource = self._call("https://api-v2.soundcloud.com/resolve", url=track_url)
             transcodings = resource.get("media", {}).get("transcodings") or []
+            # Prefer the requested protocol, then the highest quality within it
+            # (mirrors _parse_transcodings so resolve_stream/download_track pick
+            # the same best-quality entry that codec/bitrate metadata describes).
+            quality_rank = {"hq": 0, "sq": 1}
             ordered = sorted(
                 transcodings,
-                key=lambda t: 0 if t.get("format", {}).get("protocol") == prefer else 1,
+                key=lambda t: (
+                    0 if t.get("format", {}).get("protocol") == prefer else 1,
+                    quality_rank.get((t.get("quality") or "").lower(), 9),
+                ),
             )
             for tc in ordered:
                 stream_url = tc.get("url")
@@ -1240,7 +1247,7 @@ class SoundCloudHTML(SoundCloudBase):
                 updates: dict = {}
                 if artist and not release.work.credits:
                     artist_ref = EntityRef(name=artist, kind=EntityKind.PERSON)
-                    new_credits = [Credit(entity=artist_ref, role="artist",
+                    new_credits = [Credit(entity=artist_ref, role="Performer",
                                          relation_role=RelationRole.PERFORMER,
                                          section=CreditSection.PRINCIPAL)]
                     updates["work"] = release.work.model_copy(
