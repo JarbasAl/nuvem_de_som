@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.6.0a1) (2026-08-14)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.1a2...0.6.0a1)
+
+**Merged pull requests:**
+
+- feat: JSONL dataset dumper [\#36](https://github.com/LeMetadatarr/nuvem_de_som/pull/36) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.1a2](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.5.1a2) (2026-08-03)
 
 [Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.5.1a1...0.5.1a2)
