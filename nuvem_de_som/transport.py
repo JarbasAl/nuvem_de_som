@@ -2,15 +2,19 @@
 
 SoundCloud increasingly fingerprints HTTP clients (TLS/JA3, HTTP/2 frames,
 header order) to gate API and HTML responses.  This module returns a session
-object compatible with ``requests.Session`` — either the stdlib ``requests``
-session or a ``curl_cffi`` session that impersonates a real browser.
+object compatible with ``requests.Session`` — one of three implementations,
+selected in this order:
 
 Selection
 ---------
-- If the environment variable ``NUVEM_TRANSPORT=curl_cffi`` is set AND
-  ``curl_cffi`` is importable, ``default_session()`` returns
-  ``curl_cffi.requests.Session(impersonate="chrome")``.
-- Otherwise it returns ``requests.Session()``.
+1. ``NUVEM_TRANSPORT=curl_cffi`` set AND ``curl_cffi`` importable →
+   ``curl_cffi.requests.Session(impersonate="chrome")``.
+2. Otherwise, if ``unblock_requests`` is importable → its
+   ``CloudflareSession`` (a drop-in ``requests.Session`` with anti-bot
+   handling, an escalation ladder, and Wayback fallback). This is the
+   default when the ``stealth`` extra is installed and no transport is
+   forced via the environment.
+3. Otherwise → plain ``requests.Session()``.
 
 Users can also pass any compatible session directly via the ``session=`` kwarg
 on :class:`nuvem_de_som.SoundCloudAPI`, :class:`nuvem_de_som.SoundCloudHTML`,
@@ -36,9 +40,17 @@ def default_session():
     """Return a session object based on env config.
 
     Returns ``curl_cffi.requests.Session(impersonate="chrome")`` when
-    ``NUVEM_TRANSPORT=curl_cffi`` is set and the package is importable;
-    otherwise returns a plain ``requests.Session()``.
+    ``NUVEM_TRANSPORT=curl_cffi`` is set and that package is importable.
+    Otherwise prefers ``unblock_requests.CloudflareSession`` (a drop-in
+    ``requests.Session`` with anti-bot and Wayback fallback) when the package
+    is importable, falling back to a plain ``requests.Session()``.
     """
+    if os.environ.get(ENV_VAR) != CURL_CFFI:
+        try:
+            from unblock_requests import CloudflareSession  # noqa: PLC0415
+            return CloudflareSession(env_prefix="NUVEM", wayback_fallback=True)
+        except Exception:
+            pass
     if os.environ.get(ENV_VAR) == CURL_CFFI:
         try:
             from curl_cffi import requests as cffi_requests  # noqa: PLC0415
