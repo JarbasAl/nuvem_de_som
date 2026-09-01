@@ -9,7 +9,7 @@ description = "SoundCloud search and stream extractor"
 license = { text = "Apache-2.0" }
 authors = [{ name = "JarbasAi" }]
 requires-python = ">=3.8"
-dependencies = ["bs4", "requests", "mediavocab>=0.1.0,<0.2"]
+dependencies = ["bs4", "requests", "mediavocab>=2.0.0a2"]
 
 [project.optional-dependencies]
 anon = ["anon_requests"]
@@ -22,7 +22,7 @@ test = ["pytest", "vcrpy", "pytest-vcr", "click", "unblock_requests>=0.2.0a3"]
 nds = "nuvem_de_som.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/OpenJarbas/nuvem_de_som"
+Homepage = "https://github.com/LeMetadatarr/nuvem_de_som"
 
 [tool.setuptools.dynamic]
 version = { attr = "nuvem_de_som.version.__version__" }

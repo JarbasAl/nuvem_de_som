@@ -23,12 +23,106 @@ from nuvem_de_som import (
     _get_client_id,
     _invalidate_client_id,
     _parse_transcodings,
+    _sc_user_to_dict,
     _set_dict_to_release,
     _track_dict_to_release,
     _user_dict_to_entity,
     _ydl_import,
 )
 from nuvem_de_som import transport as nds_transport
+
+
+# ---------------------------------------------------------------------------
+# _sc_user_to_dict — field mapping
+# ---------------------------------------------------------------------------
+
+class TestScUserToDict:
+    def _raw(self, **overrides):
+        base = {
+            "username": "Noisia",
+            "permalink_url": "https://soundcloud.com/noisia",
+            "avatar_url": "https://img/noisia.jpg",
+            "id": 42,
+            "country_code": "NL",
+            "permalink": "noisia",
+            "verified": True,
+            "followers_count": 500000,
+            "followings_count": 120,
+            "track_count": 88,
+        }
+        base.update(overrides)
+        return base
+
+    def test_maps_verified(self):
+        d = _sc_user_to_dict(self._raw(verified=True))
+        assert d["verified"] is True
+
+    def test_verified_false(self):
+        d = _sc_user_to_dict(self._raw(verified=False))
+        assert d["verified"] is False
+
+    def test_maps_followers_count(self):
+        d = _sc_user_to_dict(self._raw(followers_count=12345))
+        assert d["followers_count"] == 12345
+
+    def test_maps_followings_count(self):
+        d = _sc_user_to_dict(self._raw(followings_count=99))
+        assert d["followings_count"] == 99
+
+    def test_maps_track_count(self):
+        d = _sc_user_to_dict(self._raw(track_count=55))
+        assert d["track_count"] == 55
+
+    def test_missing_counts_are_none(self):
+        raw = {"username": "X"}
+        d = _sc_user_to_dict(raw)
+        assert d["followers_count"] is None
+        assert d["followings_count"] is None
+        assert d["track_count"] is None
+
+    def test_artist_url_override(self):
+        d = _sc_user_to_dict(self._raw(), artist_url="https://override")
+        assert d["artist_url"] == "https://override"
+
+
+class TestUserDictToEntityExtra:
+    def test_verified_surfaces_in_extra(self):
+        d = {"artist": "X", "verified": True, "followers_count": 100}
+        ent = _user_dict_to_entity(d)
+        assert ent.extra.get("verified") == "1"
+
+    def test_unverified_absent_from_extra(self):
+        d = {"artist": "X", "verified": False}
+        ent = _user_dict_to_entity(d)
+        assert "verified" not in ent.extra
+
+    def test_followers_count_in_extra(self):
+        d = {"artist": "X", "followers_count": 9999}
+        ent = _user_dict_to_entity(d)
+        assert ent.extra.get("followers_count") == "9999"
+
+    def test_followings_count_in_extra(self):
+        d = {"artist": "X", "followings_count": 77}
+        ent = _user_dict_to_entity(d)
+        assert ent.extra.get("followings_count") == "77"
+
+    def test_track_count_in_extra(self):
+        d = {"artist": "X", "track_count": 33}
+        ent = _user_dict_to_entity(d)
+        assert ent.extra.get("track_count") == "33"
+
+    def test_none_counts_absent_from_extra(self):
+        d = {"artist": "X", "followers_count": None,
+             "followings_count": None, "track_count": None}
+        ent = _user_dict_to_entity(d)
+        assert "followers_count" not in ent.extra
+        assert "followings_count" not in ent.extra
+        assert "track_count" not in ent.extra
+
+    def test_zero_count_present_in_extra(self):
+        d = {"artist": "X", "followers_count": 0}
+        ent = _user_dict_to_entity(d)
+        assert ent.extra.get("followers_count") == "0"
 
 
 # ---------------------------------------------------------------------------
@@ -356,6 +450,32 @@ class TestApiResolveStream:
         sc = SoundCloudAPI()
         with patch.object(sc, "_call", side_effect=RuntimeError("boom")):
             assert sc.resolve_stream("https://x") is None
+
+    def test_prefers_hq_over_sq_within_same_protocol(self):
+        """Regression: resolve_stream must pick the same best-quality
+        transcoding that _parse_transcodings/codec+bitrate metadata describes.
+
+        Before the fix, resolve_stream only sorted by protocol match and
+        returned the first entry for a given protocol regardless of quality,
+        so an "sq" listed before "hq" in the API response would be streamed
+        even though the parsed Release metadata (bitrate="256") advertised hq.
+        """
+        sc = SoundCloudAPI()
+        resource = {"media": {"transcodings": [
+            {"url": "https://api/sq", "format": {"protocol": "progressive"},
+             "quality": "sq"},
+            {"url": "https://api/hq", "format": {"protocol": "progressive"},
+             "quality": "hq"},
+        ]}}
+
+        def fake_call(endpoint, **kw):
+            if "resolve" in endpoint:
+                return resource
+            return {"url": f"stream-for-{endpoint.rsplit('/', 1)[-1]}"}
+
+        with patch.object(sc, "_call", side_effect=fake_call):
+            url = sc.resolve_stream("https://x")
+        assert url == "stream-for-hq"
 
 
 # ---------------------------------------------------------------------------
