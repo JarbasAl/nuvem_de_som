@@ -22,6 +22,36 @@ def test_default_session_no_env_returns_requests_session(monkeypatch):
     assert isinstance(s, requests.Session)
 
 
+def test_default_session_prefers_cloudflaresession_when_importable(monkeypatch):
+    """Default branch (no env override): unblock_requests importable →
+    CloudflareSession, not a bare requests.Session."""
+    monkeypatch.delenv(transport_mod.ENV_VAR, raising=False)
+    from unblock_requests import CloudflareSession
+
+    s = transport_mod.default_session()
+    assert isinstance(s, CloudflareSession)
+    assert type(s) is not requests.Session
+
+
+def test_default_session_env_curl_cffi_skips_cloudflaresession(monkeypatch):
+    """NUVEM_TRANSPORT=curl_cffi bypasses CloudflareSession entirely, even
+    though unblock_requests is importable."""
+    monkeypatch.setenv(transport_mod.ENV_VAR, transport_mod.CURL_CFFI)
+    from curl_cffi import requests as cffi_requests
+
+    s = transport_mod.default_session()
+    assert isinstance(s, cffi_requests.Session)
+
+
+def test_default_session_falls_back_to_requests_when_unblock_requests_missing(monkeypatch):
+    """unblock_requests present in the env but failing to import → plain
+    requests.Session, not CloudflareSession."""
+    monkeypatch.delenv(transport_mod.ENV_VAR, raising=False)
+    monkeypatch.setitem(sys.modules, "unblock_requests", None)
+    s = transport_mod.default_session()
+    assert type(s) is requests.Session
+
+
 def test_default_session_env_falls_back_when_curl_cffi_missing(monkeypatch):
     """When NUVEM_TRANSPORT=curl_cffi but the package is absent, fall back."""
     monkeypatch.setenv(transport_mod.ENV_VAR, transport_mod.CURL_CFFI)
@@ -113,3 +143,52 @@ def test_default_constructors_pick_up_default_session(monkeypatch):
     html = SoundCloudHTML()
     assert isinstance(api.session, requests.Session)
     assert isinstance(html.session, requests.Session)
+
+
+# ---------------------------------------------------------------------------
+# _call under a CloudflareSession-shaped session: challenge → refresh + retry
+# ---------------------------------------------------------------------------
+
+def test_call_refreshes_client_id_on_cloudflare_challenge():
+    """A session that raises RuntimeError("Cloudflare challenge served") on
+    the first GET (as unblock_requests.CloudflareSession does for a blocked
+    GET) must be treated like a 401/403 client_id rejection: invalidate and
+    retry once, succeeding on the second attempt."""
+    import nuvem_de_som as nds
+
+    calls = []
+
+    def fake_get(endpoint, **kwargs):
+        calls.append(kwargs["params"]["client_id"])
+        if len(calls) == 1:
+            raise RuntimeError("Cloudflare challenge served")
+        return _mk_session_response(json_data={"collection": []})
+
+    sess = MagicMock()
+    sess.get.side_effect = fake_get
+
+    api = SoundCloudAPI(session=sess)
+    nds._CLIENT_ID = None
+    try:
+        with patch("nuvem_de_som._fetch_client_id",
+                   side_effect=["stale-id-" + "x" * 23, "fresh-id-" + "x" * 23]):
+            result = api._call("https://api-v2.soundcloud.com/search/tracks", q="foo")
+    finally:
+        nds._CLIENT_ID = None
+
+    assert result == {"collection": []}
+    assert len(calls) == 2
+    assert calls[0] != calls[1]  # client_id was actually refreshed between attempts
+
+
+def test_call_reraises_challenge_on_second_attempt():
+    """If the challenge persists after the refresh+retry, the RuntimeError
+    propagates instead of being swallowed."""
+    sess = MagicMock()
+    sess.get.side_effect = RuntimeError("Cloudflare challenge served")
+
+    api = SoundCloudAPI(session=sess)
+    with patch("nuvem_de_som._get_client_id", return_value="x" * 32):
+        with pytest.raises(RuntimeError, match="Cloudflare challenge served"):
+            api._call("https://api-v2.soundcloud.com/search/tracks", q="foo")
+    assert sess.get.call_count == 2

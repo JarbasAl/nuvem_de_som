@@ -520,54 +520,54 @@ class TestApiDownload:
 
     def test_download_track_writes_file(self, tmp_path):
         sc = SoundCloudAPI()
-        sc.session = MagicMock()
-        # Streamed response context manager
+        # download_track streams via a plain requests.get (see the comment at
+        # the call site: the CDN stream URL isn't Cloudflare-gated, and the
+        # stealth sessions drop stream=True), not sc.session.
         cm = MagicMock()
         cm.__enter__ = MagicMock(return_value=cm)
         cm.__exit__ = MagicMock(return_value=False)
         cm.iter_content.return_value = [b"abc", b"def"]
         cm.raise_for_status.return_value = None
-        sc.session.get.return_value = cm
 
-        with patch.object(sc, "resolve_stream", return_value="https://stream"):
-            with patch.object(sc, "_call",
-                              return_value={"title": "Song",
-                                            "user": {"username": "Artist"}}):
-                p = sc.download_track("https://x/a/b", output_dir=str(tmp_path))
+        with patch("nuvem_de_som.requests.get", return_value=cm) as get:
+            with patch.object(sc, "resolve_stream", return_value="https://stream"):
+                with patch.object(sc, "_call",
+                                  return_value={"title": "Song",
+                                                "user": {"username": "Artist"}}):
+                    p = sc.download_track("https://x/a/b", output_dir=str(tmp_path))
+        assert get.call_args.kwargs.get("stream") is True
         assert p.exists()
         assert p.read_bytes() == b"abcdef"
         assert "Artist" in p.name and "Song" in p.name
 
     def test_download_track_metadata_failure_uses_url_basename(self, tmp_path):
         sc = SoundCloudAPI()
-        sc.session = MagicMock()
         cm = MagicMock()
         cm.__enter__ = MagicMock(return_value=cm)
         cm.__exit__ = MagicMock(return_value=False)
         cm.iter_content.return_value = [b"x"]
         cm.raise_for_status.return_value = None
-        sc.session.get.return_value = cm
-        with patch.object(sc, "resolve_stream", return_value="https://s"):
-            with patch.object(sc, "_call", side_effect=RuntimeError):
-                p = sc.download_track("https://x/a/myslug",
-                                      output_dir=str(tmp_path))
+        with patch("nuvem_de_som.requests.get", return_value=cm):
+            with patch.object(sc, "resolve_stream", return_value="https://s"):
+                with patch.object(sc, "_call", side_effect=RuntimeError):
+                    p = sc.download_track("https://x/a/myslug",
+                                          output_dir=str(tmp_path))
         assert "myslug" in p.name
 
     def test_download_track_artist_in_title_no_double(self, tmp_path):
         sc = SoundCloudAPI()
-        sc.session = MagicMock()
         cm = MagicMock()
         cm.__enter__ = MagicMock(return_value=cm)
         cm.__exit__ = MagicMock(return_value=False)
         cm.iter_content.return_value = [b"x"]
         cm.raise_for_status.return_value = None
-        sc.session.get.return_value = cm
-        with patch.object(sc, "resolve_stream", return_value="https://s"):
-            with patch.object(sc, "_call",
-                              return_value={"title": "Artist - Song",
-                                            "user": {"username": "Artist"}}):
-                p = sc.download_track("https://x/a/b",
-                                      output_dir=str(tmp_path))
+        with patch("nuvem_de_som.requests.get", return_value=cm):
+            with patch.object(sc, "resolve_stream", return_value="https://s"):
+                with patch.object(sc, "_call",
+                                  return_value={"title": "Artist - Song",
+                                                "user": {"username": "Artist"}}):
+                    p = sc.download_track("https://x/a/b",
+                                          output_dir=str(tmp_path))
         assert p.name == "Artist - Song.mp3"
 
     def test_download_tracks_handles_failures(self, tmp_path):

@@ -197,8 +197,18 @@ _SC_HEADERS = {
 def _fetch_client_id(session=None) -> str:
     """Extract SoundCloud API client_id from their bundled JS files."""
     s = session if session is not None else requests
-    resp = s.get("https://soundcloud.com/", timeout=10, headers=_SC_HEADERS)
-    resp.raise_for_status()
+    try:
+        resp = s.get("https://soundcloud.com/", timeout=10, headers=_SC_HEADERS)
+        resp.raise_for_status()
+    except RuntimeError as exc:
+        # unblock_requests.CloudflareSession raises RuntimeError instead of
+        # returning a Response when a GET is served a Cloudflare challenge it
+        # can't clear. There is no client_id to invalidate/retry here (this is
+        # the bootstrap fetch _call's 401/403 refresh loop depends on), so
+        # surface it as the same failure mode as a JS-bundle parse miss.
+        raise RuntimeError(
+            f"Could not extract SoundCloud client_id from JS bundles: {exc}"
+        ) from exc
     script_urls = re.findall(r'<script[^>]+src="(https://[^"]+\.js[^"]*)"', resp.text)
     for src in reversed(script_urls):  # last bundles contain app config
         try:
@@ -536,12 +546,27 @@ class SoundCloudAPI(SoundCloudBase):
         """Call an API v2 endpoint; refresh client_id automatically on 401/403."""
         for attempt in range(2):
             cid = _get_client_id(session=self.session)
-            resp = self.session.get(
-                endpoint,
-                params={"client_id": cid, **params},
-                timeout=10,
-                headers=_SC_HEADERS,
-            )
+            try:
+                resp = self.session.get(
+                    endpoint,
+                    params={"client_id": cid, **params},
+                    timeout=10,
+                    headers=_SC_HEADERS,
+                )
+            except RuntimeError as exc:
+                # unblock_requests.CloudflareSession raises RuntimeError
+                # instead of returning a Response when a GET is served a
+                # Cloudflare challenge it can't clear on its own. We can't
+                # tell from the exception alone whether that challenge was
+                # triggered by a stale client_id, but refreshing it is a
+                # cheap, safe thing to try before giving up — it is exactly
+                # what the 401/403 branch below already does for a rejected
+                # id, so treat "challenge served" the same way once.
+                if attempt == 0:
+                    log.debug("challenge served (%s), refreshing client_id", exc)
+                    _invalidate_client_id()
+                    continue
+                raise
             if resp.status_code in (401, 403) and attempt == 0:
                 log.debug("client_id rejected (%s), refreshing", resp.status_code)
                 _invalidate_client_id()
@@ -937,8 +962,16 @@ class SoundCloudAPI(SoundCloudBase):
         dest = out / fname
 
         log.debug("Downloading %s → %s", track_url, dest)
-        with self.session.get(stream_url, stream=True, timeout=60,
-                              headers=_SC_HEADERS) as r:
+        # stream_url is a pre-signed CDN edge URL (CloudFront/Akamai), not a
+        # soundcloud.com endpoint — it isn't Cloudflare-gated, so it doesn't
+        # need CloudflareSession/curl_cffi impersonation. Both of those
+        # backends buffer the full body regardless of stream=True (curl_cffi
+        # has no true streaming mode here, and CloudflareSession._via_curl's
+        # kwarg allowlist drops "stream" before it reaches curl_cffi), which
+        # would defeat chunked writing for large tracks. Use a plain
+        # requests session for this one call so stream=True is honoured.
+        with requests.get(stream_url, stream=True, timeout=60,
+                          headers=_SC_HEADERS) as r:
             r.raise_for_status()
             with open(dest, "wb") as f:
                 for chunk in r.iter_content(chunk_size=65536):
