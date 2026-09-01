@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.7.0a1) (2026-09-01)
+
+[Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.6.1a1...0.7.0a1)
+
+**Merged pull requests:**
+
+- feat: route HTTP through unblock\_requests \(pre-emptive anti-bot\) [\#21](https://github.com/LeMetadatarr/nuvem_de_som/pull/21) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.6.1a1](https://github.com/LeMetadatarr/nuvem_de_som/tree/0.6.1a1) (2026-09-01)
 
 [Full Changelog](https://github.com/LeMetadatarr/nuvem_de_som/compare/0.6.0a1...0.6.1a1)
